@@ -17,9 +17,9 @@
 
 ## Tech Stack
 - C++
-- Framework待訂
-- DB待訂
-- 前端待訂
+- Framework: Drogon
+- DB: MongoDB
+- 前端：V
 
 ## 開會討論紀錄
 https://hackmd.io/team/GaaS-MachiKoro-Cpp?nav=overview
