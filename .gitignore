@@ -1,10 +1,9 @@
-# Created by https://www.toptal.com/developers/gitignore/api/ninja,cmake,c++
-# Edit at https://www.toptal.com/developers/gitignore?templates=ninja,cmake,c++
+# Created by https://www.toptal.com/developers/gitignore/api/cmake,c++,ninja,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=cmake,c++,ninja,visualstudiocode
 
-### MachiKoro Project ###
-bin/
-build/
-*.asta.lock
+### Project ###
+/bin
+/build
 
 ### C++ ###
 # Prerequisites
@@ -58,8 +57,26 @@ _deps
 *-prefix/
 
 ### Ninja ###
-*.ninja_deps
-*.ninja_log
-*.ninja
+.ninja_deps
+.ninja_log
 
-# End of https://www.toptal.com/developers/gitignore/api/ninja,cmake,c++
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
+# End of https://www.toptal.com/developers/gitignore/api/cmake,c++,ninja,visualstudiocode
