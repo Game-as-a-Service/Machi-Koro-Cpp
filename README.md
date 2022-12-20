@@ -22,4 +22,4 @@
 - 前端：V
 
 ## 開會討論紀錄
-https://hackmd.io/team/GaaS-MachiKoro-Cpp?nav=overview
+https://hackmd.io/@GaaS-MachiKoro-Cpp
