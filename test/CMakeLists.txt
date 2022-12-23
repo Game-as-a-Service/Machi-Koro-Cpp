@@ -15,5 +15,6 @@ add_executable(${PROJECT_NAME} test_main.cc)
 #
 # and comment out the following lines
 target_link_libraries(${PROJECT_NAME} PRIVATE Drogon::Drogon)
+target_link_libraries(${PROJECT_NAME} PRIVATE models)
 
 ParseAndAddDrogonTests(${PROJECT_NAME})

@@ -1,10 +1,12 @@
 #define DROGON_TEST_MAIN
 #include <drogon/drogon_test.h>
 #include <drogon/drogon.h>
+#include "machikoro_game.h"
 
 DROGON_TEST(BasicTest)
 {
     // Add your tests here
+    MachiKoroGame g;
 }
 
 int main(int argc, char** argv) 

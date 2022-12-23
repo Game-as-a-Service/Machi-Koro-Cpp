@@ -26,20 +26,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
 # Target
-add_executable(${PROJECT_NAME} 
-    models/src/main.cpp
-    models/src/machikoro_game.cpp
-    models/src/player.cpp
-    models/src/bank.cpp
-    models/src/architecture_market.cpp
-    models/src/card.cpp
-    models/src/hand.cpp
-    models/src/landmark.cpp
-    models/src/building.cpp
-    models/src/initial_building.cpp
-    models/src/general_building.cpp
-    models/src/important_building.cpp
-)
+add_executable(${PROJECT_NAME} models/src/main.cpp)
 
 # ##############################################################################
 # If you include the drogon source code locally in your project, use this method
@@ -50,6 +37,7 @@ add_executable(${PROJECT_NAME}
 # and comment out the following lines
 find_package(Drogon CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE Drogon::Drogon)
+target_link_libraries(${PROJECT_NAME} PRIVATE models)
 
 # ##############################################################################
 
@@ -102,4 +90,5 @@ target_sources(${PROJECT_NAME}
 
 # ##############################################################################
 
+add_subdirectory(models)
 add_subdirectory(test)
