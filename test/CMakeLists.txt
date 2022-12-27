@@ -16,4 +16,9 @@ add_executable(${PROJECT_NAME} test_main.cc)
 # and comment out the following lines
 target_link_libraries(${PROJECT_NAME} PRIVATE Drogon::Drogon)
 
+target_include_directories(${PROJECT_NAME}
+    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/../models/include
+)
+
 ParseAndAddDrogonTests(${PROJECT_NAME})
