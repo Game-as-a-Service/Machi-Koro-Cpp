@@ -2,7 +2,7 @@
 #include <drogon/drogon_test.h>
 #include <drogon/drogon.h>
 
-#include "machikoro_game.h"
+#include "../models/machikoro_game.h"
 
 DROGON_TEST(BasicTest)
 {

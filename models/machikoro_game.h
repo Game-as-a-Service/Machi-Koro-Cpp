@@ -10,11 +10,9 @@ public:
     MachiKoroGame();
     ~MachiKoroGame();
     
-    bool DummyTest()
-    {
-        std::cout << "MachiKoroGame::DummyTest()" << std::endl;
-        return true;
-    }
+    void GameStart();
+
+    bool DummyTest();
 
 };
 
