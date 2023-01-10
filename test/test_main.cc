@@ -2,9 +2,13 @@
 #include <drogon/drogon_test.h>
 #include <drogon/drogon.h>
 
+#include "../models/machikoro_game.h"
+
 DROGON_TEST(BasicTest)
 {
     // Add your tests here
+    MachiKoroGame game;
+    CHECK(game.DummyTest() == true);
 }
 
 int main(int argc, char** argv) 

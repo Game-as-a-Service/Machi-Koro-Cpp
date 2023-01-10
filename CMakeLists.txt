@@ -1,16 +1,11 @@
-cmake_minimum_required(VERSION 3.10.0)
-
-project(MachiKoroCPP
-    VERSION 1.0.0
-    LANGUAGES CXX
-)
+cmake_minimum_required(VERSION 3.5)
+project(MachiKoroCPP CXX)
 
 include(CheckIncludeFileCXX)
 
 check_include_file_cxx(any HAS_ANY)
 check_include_file_cxx(string_view HAS_STRING_VIEW)
 check_include_file_cxx(coroutine HAS_COROUTINE)
-
 if (NOT "${CMAKE_CXX_STANDARD}" STREQUAL "")
     # Do nothing
 elseif (HAS_ANY AND HAS_STRING_VIEW AND HAS_COROUTINE)
@@ -23,23 +18,8 @@ endif ()
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
-# Target
-add_executable(${PROJECT_NAME} 
-    models/src/main.cpp
-    models/src/machikoro_game.cpp
-    models/src/player.cpp
-    models/src/bank.cpp
-    models/src/architecture_market.cpp
-    models/src/card.cpp
-    models/src/hand.cpp
-    models/src/landmark.cpp
-    models/src/building.cpp
-    models/src/initial_building.cpp
-    models/src/general_building.cpp
-    models/src/important_building.cpp
-)
+add_executable(${PROJECT_NAME} main.cc)
 
 # ##############################################################################
 # If you include the drogon source code locally in your project, use this method
@@ -69,11 +49,8 @@ aux_source_directory(filters FILTER_SRC)
 aux_source_directory(plugins PLUGIN_SRC)
 aux_source_directory(models MODEL_SRC)
 
-drogon_create_views(${PROJECT_NAME} 
-                    ${CMAKE_CURRENT_SOURCE_DIR}/views
-                    ${CMAKE_CURRENT_BINARY_DIR}
-)
-
+drogon_create_views(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/views
+                    ${CMAKE_CURRENT_BINARY_DIR})
 # use the following line to create views with namespaces.
 # drogon_create_views(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/views
 #                     ${CMAKE_CURRENT_BINARY_DIR} TRUE)
@@ -82,20 +59,16 @@ drogon_create_views(${PROJECT_NAME}
 # drogon_create_views(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/views
 #                     ${CMAKE_CURRENT_BINARY_DIR} TRUE CHANGE_ME)
 
-target_include_directories(${PROJECT_NAME} 
-    PRIVATE 
-    ${CMAKE_CURRENT_SOURCE_DIR}/models/include
-)
-
+target_include_directories(${PROJECT_NAME}
+                           PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
+                                   ${CMAKE_CURRENT_SOURCE_DIR}/models)
 target_sources(${PROJECT_NAME}
-    PRIVATE
-    ${SRC_DIR}
-    ${CTL_SRC}
-    ${FILTER_SRC}
-    ${PLUGIN_SRC}
-    ${MODEL_SRC}
-)
-
+               PRIVATE
+               ${SRC_DIR}
+               ${CTL_SRC}
+               ${FILTER_SRC}
+               ${PLUGIN_SRC}
+               ${MODEL_SRC})
 # ##############################################################################
 # uncomment the following line for dynamically loading views 
 # set_property(TARGET ${PROJECT_NAME} PROPERTY ENABLE_EXPORTS ON)

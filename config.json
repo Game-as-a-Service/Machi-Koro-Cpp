@@ -107,7 +107,7 @@
         //valid value is either 'Null' (default), 'Lax', 'Strict' or 'None'
         "session_same_site" : "Null",
         //document_root: Root path of HTTP document, defaut path is ./
-        "document_root": "../views",
+        "document_root": "./",
         //home_page: Set the HTML file of the home page, the default value is "index.html"
         //If there isn't any handler registered to the path "/", the home page file in the "document_root" is send to clients as a response
         //to the request for "/".
