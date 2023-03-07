@@ -1,15 +1,16 @@
 #define DROGON_TEST_MAIN
 #include <drogon/drogon_test.h>
 #include <drogon/drogon.h>
+#include <drogon/HttpTypes.h>
 
 #include "../models/machikoro_game.h"
 
+/*
 DROGON_TEST(BasicTest)
 {
     // Add your tests here
-    MachiKoroGame game;
-    CHECK(game.DummyTest() == true);
 }
+*/
 
 int main(int argc, char** argv) 
 {
@@ -22,6 +23,7 @@ int main(int argc, char** argv)
     std::thread thr([&]() {
         // Queues the promise to be fulfilled after starting the loop
         app().getLoop()->queueInLoop([&p1]() { p1.set_value(); });
+        app().addListener("127.0.0.1", 8080);
         app().run();
     });
 
