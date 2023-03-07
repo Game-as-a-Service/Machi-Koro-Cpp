@@ -1,5 +1,5 @@
 #include <drogon/drogon.h>
-#include "machikoro_game.h"
+#include "models/machikoro_game.h"
 
 int main() {
     //Set HTTP listener address and port

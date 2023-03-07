@@ -3,9 +3,9 @@
 Building::Building()
 {
 
-}
+};
 
 Building::~Building()
 {
 
-}
+};

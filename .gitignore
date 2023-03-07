@@ -4,6 +4,7 @@
 ### Project ###
 /bin
 /build
+/.vscode
 
 ### C++ ###
 # Prerequisites

@@ -1,10 +1,18 @@
 cmake_minimum_required(VERSION 3.5)
 project(MachiKoroCPPTest CXX)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
 add_executable(${PROJECT_NAME}
-    ${CMAKE_CURRENT_SOURCE_DIR}/../models/machikoro_game.cpp
+    #${CMAKE_CURRENT_SOURCE_DIR}/../models/machikoro_game.cpp
     test_main.cc
     machikoro_game_test.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../controllers/startGameController.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../controllers/addPlayerController.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../controllers/createGameController.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../models/game_repository.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../models/machikoro_game.cpp
+
 )
 
 # ##############################################################################
