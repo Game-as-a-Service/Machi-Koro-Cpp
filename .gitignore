@@ -5,6 +5,7 @@
 /bin
 /build
 /.vscode
+/uploads
 
 ### C++ ###
 # Prerequisites

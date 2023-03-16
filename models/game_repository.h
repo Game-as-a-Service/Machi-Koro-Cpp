@@ -21,6 +21,8 @@ public:
 
     std::shared_ptr<MachiKoroGame> FindGameByID(const std::string& id);
 
+    void ClearAllGames();
+
 private:
     GameRepository() = default;
 

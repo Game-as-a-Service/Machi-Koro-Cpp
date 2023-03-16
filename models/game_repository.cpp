@@ -33,6 +33,13 @@ std::shared_ptr<MachiKoroGame> GameRepository::FindGameByID(const std::string& i
     return games_[id];
 }
 
+void GameRepository::ClearAllGames()
+{
+    for (auto& game : games_)
+        game.second.reset();
+    games_.clear();
+}
+
 bool GameRepository::IsGameExist(const std::string& id)
 {
     return (games_.find(id) != games_.end());
