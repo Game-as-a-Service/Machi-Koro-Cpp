@@ -2,6 +2,7 @@
 
 #include <map>
 #include <string>
+#include <vector>
 #include <memory>
 
 #include "machikoro_game.h"
@@ -17,9 +18,11 @@ public:
 
     static GameRepository& self();
 
-    std::shared_ptr<MachiKoroGame> CreateGame(std::string& id);
+    std::shared_ptr<MachiKoroGame> CreateGame(const std::vector<std::string>& names);
 
     std::shared_ptr<MachiKoroGame> FindGameByID(const std::string& id);
+
+    void ClearAllGames();
 
 private:
     GameRepository() = default;

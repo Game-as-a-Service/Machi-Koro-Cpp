@@ -4,6 +4,7 @@
 #include <random>
 #include <climits>
 #include <algorithm>
+#include <iostream>
 
 std::shared_ptr<GameRepository> GameRepository::self_ = nullptr;
 
@@ -18,12 +19,19 @@ GameRepository& GameRepository::self()
     return repo;
 }
 
-std::shared_ptr<MachiKoroGame> GameRepository::CreateGame(std::string& id)
+std::shared_ptr<MachiKoroGame> GameRepository::CreateGame(const std::vector<std::string>& names)
 {
-    if (this->IsGameExist(id)) return nullptr;
-    while (id.empty() || this->IsGameExist(id)) id = this->RandomID(); 
-    std::shared_ptr<MachiKoroGame> game = std::make_shared<MachiKoroGame>();
-    games_.insert(std::make_pair(id, game));
+    std::string id = this->RandomID();
+    while (this->IsGameExist(id)) id = this->RandomID();
+    std::shared_ptr<MachiKoroGame> game = std::make_shared<MachiKoroGame>();//Create a new game instance.
+    game->set_game_id(id);
+    // TODO: Decide the way to new the game.
+    for (const auto& name : names)
+    {
+        auto player = std::make_shared<Player>(name);
+        if (!game->AddPlayer(player))
+            std::cout << "Add player, " << name << ", failed !!" << std::endl;
+    }
     return game;
 }
 
@@ -31,6 +39,13 @@ std::shared_ptr<MachiKoroGame> GameRepository::FindGameByID(const std::string& i
 {
     if (!this->IsGameExist(id)) return nullptr;
     return games_[id];
+}
+
+void GameRepository::ClearAllGames()
+{
+    for (auto& game : games_)
+        game.second.reset();
+    games_.clear();
 }
 
 bool GameRepository::IsGameExist(const std::string& id)
