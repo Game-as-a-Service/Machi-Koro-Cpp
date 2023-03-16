@@ -5,11 +5,17 @@
 #include <climits>
 #include <algorithm>
 
+<<<<<<< HEAD
+=======
+std::shared_ptr<GameRepository> GameRepository::self_ = nullptr;
+
+>>>>>>> origin/test/startGame
 GameRepository::~GameRepository()
 {
     games_.clear();
 }
 
+<<<<<<< HEAD
 GameRepository& GameRepository::self()
 {
     static GameRepository repo;
@@ -20,6 +26,29 @@ std::shared_ptr<MachiKoroGame> GameRepository::CreateGame(std::string& id)
 {
     if (this->IsGameExist(id)) return nullptr;
     while (id.empty() || this->IsGameExist(id)) id = this->RandomID(); 
+=======
+std::shared_ptr<GameRepository> GameRepository::self()
+{
+    if (!self_)
+        self_ = std::shared_ptr<GameRepository>(new GameRepository());
+    return self_;
+}
+
+std::shared_ptr<MachiKoroGame> GameRepository::CreateGame()
+{
+    std::string id;
+    while (id.empty() || this->IsGameExist(id))
+        id = this->RandomID();
+    std::shared_ptr<MachiKoroGame> game = std::make_shared<MachiKoroGame>();
+    games_.insert(std::make_pair(id, game));
+    return game;
+}
+
+std::shared_ptr<MachiKoroGame> GameRepository::CreateGame(const std::string& id)
+{
+    if (id.empty()) return nullptr;
+    if (this->IsGameExist(id)) return this->FindGameByID(id);
+>>>>>>> origin/test/startGame
     std::shared_ptr<MachiKoroGame> game = std::make_shared<MachiKoroGame>();
     games_.insert(std::make_pair(id, game));
     return game;

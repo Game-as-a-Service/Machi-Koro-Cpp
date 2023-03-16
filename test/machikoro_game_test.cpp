@@ -15,20 +15,6 @@ public:
 // TODO: maybe move this to other place, so that other files can use the same address
 static const std::string HTTP_ADDRESS = "http://127.0.0.1:8080";
 
-/*
-void assertOk(const drogon::HttpResponsePtr& resp) 
-{
-    CHECK(resp->getStatusCode() == 200);
-    // CHECK(resp->contentType() == drogon::CT_APPLICATION_JSON);
-}
-
-void assertBadRequest(const drogon::HttpResponsePtr& resp)
-{
-    CHECK(resp->getStatusCode() == 400);
-    // CHECK(resp->contentType() == drogon::CT_APPLICATION_JSON);
-}
-*/
-
 drogon::HttpRequestPtr getRequestObj(const std::string jsonKeyName, 
                 const std::string jsonValueName, drogon::HttpMethod method, const std::string path)
 { 
