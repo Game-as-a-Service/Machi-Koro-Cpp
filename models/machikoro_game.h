@@ -7,6 +7,7 @@
 
 #include "bank.h"
 #include "player.h"
+#include "architecture_market.h"
 
 class MachiKoroGame {
 public:
@@ -35,6 +36,7 @@ private:
     std::string game_id_;
     std::shared_ptr<Bank> bank_ = nullptr;
     std::vector<std::shared_ptr<Player>> players_;
+    std::shared_ptr<ArchitectureMarket> market_ = nullptr;
 };
 
 #endif

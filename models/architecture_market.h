@@ -23,7 +23,8 @@ public:
     
 private:
     std::vector<Card> cards_;
-
+    std::vector<Landmark>
+    std::vevtor<ImportantBuilding>
 };
 
 #endif
