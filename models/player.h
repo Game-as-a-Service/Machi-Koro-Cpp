@@ -13,12 +13,12 @@ class Player {
 public:
     Player();
     Player(const std::string& name);
-    Player(const Player& player);
-    Player(Player&& player);
+    Player(const Player& player) = delete;
+    Player(Player&& player) = delete;
     ~Player();
     
-    Player& operator = (const Player& rhs);
-    Player& operator = (Player&& rhs);
+    Player& operator = (const Player& rhs) = delete;
+    Player& operator = (Player&& rhs) = delete;
     
     int RollDice();
 

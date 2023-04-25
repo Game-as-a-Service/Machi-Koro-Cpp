@@ -7,7 +7,7 @@
 
 class Output {
 public:
-    void BuildGameStatus(std::shared_ptr<Game> game);
+    void BuildGameStatus(std::shared_ptr<MachiKoroGame> game);
     std::string toJson();
 
 private:

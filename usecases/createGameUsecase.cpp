@@ -1,5 +1,7 @@
 #include "createGameUsecase.h"
 
+#include <iostream>
+
 #include "../models/game_repository.h"
 
 CreateGameUsecaseRequest::CreateGameUsecaseRequest(const std::vector<std::string>& names)
@@ -7,9 +9,9 @@ CreateGameUsecaseRequest::CreateGameUsecaseRequest(const std::vector<std::string
 {
 }
 
-CreateGameUsecase::CreateGameExecute(const CreateGameUsecaseRequest &input, Output &output)
+void CreateGameUsecase::CreateGameExecute(const CreateGameUsecaseRequest &input, Output &output)
 {
-    auto game = GameRepository::self()->CreateGame(input.get_player_names());
+    auto game = GameRepository::self().CreateGame(input.get_player_names());
     std::cout << "Create game for id: " << game->get_game_id() << std::endl;
-    output.buildGameStatus(game);
+    output.BuildGameStatus(game);
 }

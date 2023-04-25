@@ -10,20 +10,26 @@
 
 class MachiKoroGame {
 public:
-    MachiKoroGame();
-    MachiKoroGame(const MachiKoroGame& game);
-    MachiKoroGame(MachiKoroGame&& game);
+    MachiKoroGame() = default;
+    MachiKoroGame(const std::vector<std::string>& player_names);
+    MachiKoroGame(const MachiKoroGame& game) = delete;
+    MachiKoroGame(MachiKoroGame&& game) = delete;
     ~MachiKoroGame();
     
-    MachiKoroGame& operator = (const MachiKoroGame& rhs);
-    MachiKoroGame& operator = (MachiKoroGame&& rhs);
-
-    bool AddPlayer(const std::shared_ptr<Player>& player);
+    MachiKoroGame& operator = (const MachiKoroGame& rhs) = delete;
+    MachiKoroGame& operator = (MachiKoroGame&& rhs) = delete;
 
     void GameStart();
 
     void set_game_id(const std::string& id) { game_id_ = id; }
     std::string get_game_id() const { return game_id_; }
+
+    void set_bank(const std::shared_ptr<Bank>& bank) { bank_ = bank; }
+    std::shared_ptr<Bank> get_bank() const { return bank_; }
+
+    void set_players(const std::vector<std::shared_ptr<Player>>& players) 
+    { players_ = players; }
+    std::vector<std::shared_ptr<Player>> get_players() const { return players_; }
 
 private:
     std::string game_id_;

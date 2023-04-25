@@ -2,10 +2,10 @@
 #include <json/json.h>
 
 // TODO: Discuss the output detail.
-void Output::BuildGameStatus(std::shared_ptr<Game> game) 
+void Output::BuildGameStatus(std::shared_ptr<MachiKoroGame> game) 
 {
     Json::Value status;
-    status["game_id"] = game->getId();
+    status["game_id"] = game->get_game_id();
     //status["player_name"] = game->playerName;
     //status["winner"] = game->winner;
 

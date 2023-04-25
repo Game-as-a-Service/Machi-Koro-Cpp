@@ -18,7 +18,7 @@ public:
     std::vector<std::string> get_player_names() const { return player_names_; }
 
 private:
-    std::vector<string> player_names_;
+    std::vector<std::string> player_names_;
 };
 
 class CreateGameUsecase {
@@ -26,8 +26,8 @@ public:
     CreateGameUsecase() = default;
     CreateGameUsecase(const CreateGameUsecase& uc) = delete;
     CreateGameUsecase(CreateGameUsecase&& uc) = delete;
-    ~CreateGameUsecase();
+    ~CreateGameUsecase() = default;
 
-    CreateGameExecute(const CreateGameUsecaseRequest& input, Output& output);
+    void CreateGameExecute(const CreateGameUsecaseRequest& input, Output& output);
 
 };

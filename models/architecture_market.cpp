@@ -9,3 +9,19 @@ ArchitectureMarket::~ArchitectureMarket()
 {
     
 }
+
+Card ArchitectureMarket::DrawInitialBuilding()
+{
+
+}
+
+Card ArchitectureMarket::DrawLandmark()
+{
+
+}
+
+Card ArchitectureMarket::DrawBuilding()
+{
+    
+}
+    

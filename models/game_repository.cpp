@@ -23,15 +23,9 @@ std::shared_ptr<MachiKoroGame> GameRepository::CreateGame(const std::vector<std:
 {
     std::string id = this->RandomID();
     while (this->IsGameExist(id)) id = this->RandomID();
-    std::shared_ptr<MachiKoroGame> game = std::make_shared<MachiKoroGame>();//Create a new game instance.
+    // Create a new game instance.
+    auto game = std::make_shared<MachiKoroGame>(names);
     game->set_game_id(id);
-    // TODO: Decide the way to new the game.
-    for (const auto& name : names)
-    {
-        auto player = std::make_shared<Player>(name);
-        if (!game->AddPlayer(player))
-            std::cout << "Add player, " << name << ", failed !!" << std::endl;
-    }
     return game;
 }
 
