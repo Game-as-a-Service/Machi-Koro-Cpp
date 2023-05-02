@@ -25,6 +25,13 @@ public:
     Card();
     ~Card();
     
+    virtual void OperateEffect() = 0;
+
+    void set_name(const std::string& name) { name_ = name; }
+    std::string get_name() const { return name_; }
+
+    void set_card_type(const CardType& type) { card_type_ = type; }
+    CardType get_card_type() const { return card_type_; }
 
 private:
     std::string name_;

@@ -1,9 +1,12 @@
 #ifndef ARCHITECTURE_MARKET_H
 #define ARCHITECTURE_MARKET_H
 
+#include <map>
 #include <vector>
 
 #include "card.h"
+#include "landmark.h"
+#include "initial_building.h"
 
 class ArchitectureMarket {
 public:
@@ -15,16 +18,16 @@ public:
     ArchitectureMarket& operator = (const ArchitectureMarket& rhs) = delete;
     ArchitectureMarket& operator = (ArchitectureMarket&& rhs) = delete;
 
-    Card DrawInitialBuilding();
+    Card DrawBuilding();
 
     Card DrawLandmark();
 
-    Card DrawBuilding();
+    Card DrawInitialBuilding();
     
 private:
-    std::vector<Card> cards_;
-    std::vector<Landmark>
-    std::vevtor<ImportantBuilding>
+    std::map<int, Card> buildings_;
+    std::vector<Landmark> landmarks_;
+    std::vector<InitialBuilding> important_buildings_;
 };
 
 #endif

@@ -8,6 +8,9 @@ public:
     InitialBuilding();
     ~InitialBuilding();
 
+    virtual void OperateEffect() = 0;
+
+private:
     
 };
 

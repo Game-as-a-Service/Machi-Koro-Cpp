@@ -15,9 +15,9 @@ MachiKoroGame::MachiKoroGame(const std::vector<std::string>& player_names)
         bank_->PayCoin2Player(3, player);
 
     market_ = std::make_shared<ArchitectureMarket>();
-    // Create 84 Architecture Cards.(12 important _building, 72 building)
+    // Create 84 Architecture Cards.(12 important _buildings, 72 general buildings)
     // 8 initial_buildings, 16 landmarks
-
+    
     // Player draw cards.
     // market_ gives 2 initial buildings to each player
     // market_ gives 4 landmarks to each player(backside)
@@ -29,6 +29,7 @@ MachiKoroGame::MachiKoroGame(const std::vector<std::string>& player_names)
 MachiKoroGame::~MachiKoroGame()
 {
     bank_ = nullptr;
+    market_ = nullptr;
     for (auto& p : players_) 
         p = nullptr;
     players_.clear();
