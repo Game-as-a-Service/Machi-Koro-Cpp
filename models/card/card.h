@@ -23,6 +23,7 @@ enum class CardType {
 class Card {
 public:
     Card();
+    Card(const std::string& name, int price, const CardType& type);
     ~Card();
     
     virtual void OperateEffect() = 0;
@@ -32,8 +33,11 @@ public:
 
     void set_card_type(const CardType& type) { card_type_ = type; }
     CardType get_card_type() const { return card_type_; }
+    
+    int get_price() const { return price_; }
 
 private:
+    int price_;
     std::string name_;
     CardType card_type_;
 };
