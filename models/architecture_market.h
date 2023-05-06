@@ -4,9 +4,9 @@
 #include <map>
 #include <vector>
 
-#include "card.h"
-#include "landmark.h"
-#include "initial_building.h"
+#include "./card/card.h"
+#include "./card/landmark.h"
+#include "./card/initial_building.h"
 
 class ArchitectureMarket {
 public:
