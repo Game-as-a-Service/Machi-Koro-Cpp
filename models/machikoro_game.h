@@ -25,11 +25,8 @@ public:
     void set_game_id(const std::string& id) { game_id_ = id; }
     std::string get_game_id() const { return game_id_; }
 
-    void set_bank(const std::shared_ptr<Bank>& bank) { bank_ = bank; }
     std::shared_ptr<Bank> get_bank() const { return bank_; }
 
-    void set_players(const std::vector<std::shared_ptr<Player>>& players) 
-    { players_ = players; }
     std::vector<std::shared_ptr<Player>> get_players() const { return players_; }
 
 private:

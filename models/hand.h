@@ -2,6 +2,7 @@
 #define HAND_H
 
 #include <vector>
+#include <memory>
 
 #include "./card/card.h"
 
@@ -10,13 +11,17 @@ public:
     Hand();
     ~Hand();
     
-    void AddCard(const Card& card) { cards_.push_back(card); }
+    void AddCard(const std::shared_ptr<Card>& card) { cards_.push_back(card); }
 
-    void set_cards(const std::vector<Card>& cards) { cards_ = cards; }
-    std::vector<Card> get_cards() const { return cards_; }
+    void AddLandmark(const std::shared_ptr<Card>& card) { landmarks_.push_back(card); }
+
+    std::vector<std::shared_ptr<Card>> get_cards() const { return cards_; }
+
+    std::vector<std::shared_ptr<Card>> get_landmarks() const { return landmarks_; }
 
 private:
-    std::vector<Card> cards_;
+    std::vector<std::shared_ptr<Card>> cards_;
+    std::vector<std::shared_ptr<Card>> landmarks_;
 };
 
 #endif

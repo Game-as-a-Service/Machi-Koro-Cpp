@@ -2,13 +2,10 @@
 #define CARD_H
 
 #include <string>
+#include <vector>
 
-enum class IndustryType {
-    RESTAURANT,
-    SECONDARY_INDUSTRY,
-    PRIMARY_INDUSTRY,
-    IMPORTANT_BUILDING
-};
+#include "../bank.h"
+#include "../player.h"
 
 enum class CardType {
     CROP,
@@ -22,22 +19,22 @@ enum class CardType {
 
 class Card {
 public:
-    Card();
+    Card() = delete;
     Card(const std::string& name, int price, const CardType& type);
-    ~Card();
+    ~Card() = default;
     
-    virtual void OperateEffect() = 0;
+    virtual void OperateEffect(std::shared_ptr<Player>& owner,
+        std::vector<std::shared_ptr<Player>>& players,
+        std::shared_ptr<Bank>& bank) = 0;
 
-    void set_name(const std::string& name) { name_ = name; }
     std::string get_name() const { return name_; }
 
-    void set_card_type(const CardType& type) { card_type_ = type; }
     CardType get_card_type() const { return card_type_; }
     
     int get_price() const { return price_; }
 
 private:
-    int price_;
+    int price_ = 0;
     std::string name_;
     CardType card_type_;
 };

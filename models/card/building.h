@@ -5,16 +5,26 @@
 
 #include "card.h"
 
+enum class IndustryType {
+    RESTAURANT,
+    SECONDARY_INDUSTRY,
+    PRIMARY_INDUSTRY,
+    IMPORTANT_BUILDING
+};
+
 class Building : public Card {
 public:
-    Building();
+    Building() = delete;
     Building(const std::string& name, int price, const CardType& card_type, 
-        std::vector<int> points, const IndustryType& ind_type);
-    ~Building();
+        const std::vector<int>& points, const IndustryType& ind_type);
+    ~Building() = default;
 
-    virtual void OperateEffect() = 0;
+    virtual void OperateEffect(std::shared_ptr<Player>& owner,
+        std::vector<std::shared_ptr<Player>>& players,
+        std::shared_ptr<Bank>& bank) = 0;
 
     std::vector<int> get_points() const { return points_; }
+    IndustryType get_industry_type() const { return industry_type_; }
 
 private:
     std::vector<int> points_;

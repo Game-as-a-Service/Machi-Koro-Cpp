@@ -5,22 +5,20 @@
 
 class Landmark: public Card {
 public:
-    Landmark();
-    ~Landmark();
+    Landmark() = delete;
+    Landmark(const std::string& name, int price, const CardType& type);
+    ~Landmark() = default;
 
-    virtual void OperateEffect() = 0;
+    virtual void OperateEffect(std::shared_ptr<Player>& owner,
+        std::vector<std::shared_ptr<Player>>& players,
+        std::shared_ptr<Bank>& bank) = 0;
 
-    bool IsActivate();
-    void Activate();
-
-    void set_price(int price) { price_ = price; }
-    int get_price() const { return price_; }
+    bool IsActivate() const { return is_activated_; };
+    void Activate() { is_activated_ = true; }
 
 private:
     // False: 背面, True: 正面。
-    bool isActivated_ = false;
-
-    int price_ = 0;
+    bool is_activated_ = false;
 };
 
 #endif

@@ -3,9 +3,12 @@
 
 #include <map>
 #include <vector>
+#include <string>
+#include <memory>
 
 #include "./card/card.h"
 #include "./card/landmark.h"
+#include "./card/building.h"
 
 class ArchitectureMarket {
 public:
@@ -17,16 +20,16 @@ public:
     ArchitectureMarket& operator = (const ArchitectureMarket& rhs) = delete;
     ArchitectureMarket& operator = (ArchitectureMarket&& rhs) = delete;
 
-    Card DrawBuilding();
+    //Card DrawBuilding();
 
-    Card DrawLandmark();
+    //Card DrawLandmark();
 
-    Card DrawInitialBuilding();
+    //Card DrawInitialBuilding();
     
 private:
-    std::map<int, Card> buildings_;
-    std::vector<Landmark> landmarks_;
-    std::vector<InitialBuilding> important_buildings_;
+    std::vector<std::shared_ptr<Card>> landmarks_;
+    std::vector<std::shared_ptr<Card>> initial_buildings_;
+    std::map<std::string, std::vector<std::shared_ptr<Card>>> buildings_;
 };
 
 #endif
