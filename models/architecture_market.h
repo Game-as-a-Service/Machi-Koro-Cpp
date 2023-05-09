@@ -6,7 +6,6 @@
 
 #include "./card/card.h"
 #include "./card/landmark.h"
-#include "./card/initial_building.h"
 
 class ArchitectureMarket {
 public:

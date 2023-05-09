@@ -8,7 +8,6 @@ add_executable(${PROJECT_NAME}
     test_main.cc
     machikoro_game_test.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../controllers/startGameController.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../controllers/addPlayerController.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../controllers/createGameController.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../models/game_repository.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../models/machikoro_game.cpp
