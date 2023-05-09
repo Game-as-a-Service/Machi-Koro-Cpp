@@ -3,6 +3,7 @@
 ArchitectureMarket::ArchitectureMarket()
 {
     // Create 84 Architecture Cards.(12 important _buildings, 72 general buildings)
+    // 8 initial_buildings, 16 landmarks
     // 8 initial_buildings, 16 landmarks.
     
 }
