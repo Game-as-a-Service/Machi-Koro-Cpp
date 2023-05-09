@@ -7,7 +7,6 @@
 
 #include "dice.h"
 #include "hand.h"
-#include "./card/card.h"
 
 class Player {
 public:
