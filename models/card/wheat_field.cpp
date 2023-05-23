@@ -1,7 +1,7 @@
 #include "wheat_field.h"
 
 WheatField::WheatField() : 
-    Building("Wheat Field", 1, CardType::CROP, {1}, IndustryType::PRIMARY_INDUSTRY)
+    Building(CardName::WHEAT_FIELD, 1, CardType::CROP, {1}, IndustryType::PRIMARY_INDUSTRY)
 {
 }
 

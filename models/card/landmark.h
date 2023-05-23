@@ -6,7 +6,7 @@
 class Landmark: public Card {
 public:
     Landmark() = delete;
-    Landmark(const std::string& name, int price, const CardType& type);
+    Landmark(const CardName& name, int price, const CardType& type);
     ~Landmark() = default;
 
     virtual void OperateEffect(std::shared_ptr<Player>& owner,

@@ -15,6 +15,11 @@ MachiKoroGame::MachiKoroGame(const std::vector<std::string>& player_names)
         bank_->PayCoin2Player(3, player);
 
     market_ = std::make_shared<ArchitectureMarket>();
+    
+    for (auto& player : players_) {
+        player->GainInitialBuildings(market_->GetInitialBuildingsForOnePlayer());
+        player->GainLandmarks(market_->GetLandmarksForOnePlayer());
+    }
 
     // Player draw cards.
     // market_ gives 2 initial buildings to each player

@@ -2,6 +2,8 @@
 #include <json/json.h>
 
 // TODO: Discuss the output detail.
+// TODO: domain layer actually depends on this
+// dependency inversion
 void Output::BuildGameStatus(std::shared_ptr<MachiKoroGame> game) 
 {
     Json::Value status;

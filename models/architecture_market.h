@@ -9,25 +9,27 @@
 
 #include "./card/card.h"
 #include "./card/landmark.h"
+#include "./card/building.h"
 
 class ArchitectureMarket {
-#include "./card/building.h"
+public:
+    ArchitectureMarket();
     ~ArchitectureMarket();
 
     ArchitectureMarket& operator = (const ArchitectureMarket& rhs) = delete;
     ArchitectureMarket& operator = (ArchitectureMarket&& rhs) = delete;
 
+    std::vector<std::shared_ptr<Card>> GetInitialBuildingsForOnePlayer();
+    std::vector<std::shared_ptr<Card>> GetLandmarksForOnePlayer();
+     
     //Card DrawBuilding();
-
     //Card DrawLandmark();
-
     //Card DrawInitialBuilding();
     
 private:
-    std::vector<std::shared_ptr<Card>> landmarks_;
-    std::vector<std::shared_ptr<Card>> initial_buildings_;
     // key: Card name; Value : Cards.
-    std::map<std::string, std::deque<std::shared_ptr<Card>>> buildings_;
+    std::map<CardName, std::deque<std::shared_ptr<Card>>> buildings_;
+
 };
 
 #endif

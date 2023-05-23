@@ -17,10 +17,32 @@ enum class CardType {
     MAJOR_ESTABLISHMENT
 };
 
+enum class CardName {
+    APPLE_ORCHARD,
+    BAKERY,
+    BUSINESS_CENTER,
+    CAFE,
+    CHEESE_FACTORY,
+    CONVENIENCE_STORE,
+    FAMILY_RESTAURANT,
+    FOREST,
+    FRUIT_AND_VEGETABLE_MARKET,
+    FURNITURE_FACTORY,
+    MINE,
+    RANCH,
+    STADIUM,
+    TV_STATION,
+    WHEAT_FIELD,
+    TRAIN_STATION,
+    SHOPPING_MALL,
+    AMUSEMENT_PARK,
+    RADIO_TOWER
+};
+
 class Card {
 public:
     Card() = delete;
-    Card(const std::string& name, int price, const CardType& type);
+    Card(const CardName& name, int price, const CardType& type);
     ~Card() = default;
     
     // TODO: Resolve this dependency relationship.
@@ -28,7 +50,7 @@ public:
         std::vector<std::shared_ptr<Player>>& players,
         std::shared_ptr<Bank>& bank) = 0;
 
-    std::string get_name() const { return name_; }
+    CardName get_name() const { return name_; }
 
     CardType get_card_type() const { return card_type_; }
     
@@ -36,7 +58,7 @@ public:
 
 private:
     int price_ = 0;
-    std::string name_;
+    CardName name_;
     CardType card_type_;
 };
 

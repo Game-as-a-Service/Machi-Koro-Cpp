@@ -15,7 +15,7 @@ enum class IndustryType {
 class Building : public Card {
 public:
     Building() = delete;
-    Building(const std::string& name, int price, const CardType& card_type, 
+    Building(const CardName& name, int price, const CardType& card_type, 
         const std::vector<int>& points, const IndustryType& ind_type);
     ~Building() = default;
 
