@@ -2,41 +2,60 @@
 #include <drogon/drogon.h>
 #include <drogon/HttpTypes.h>
 
+#include "../controllers/utils.h"
 #include "../models/game_repository.h"
 
 #include <iostream>
 #include <string>
+#include <utility>
+#include <vector>
 
 // TODO: maybe move this to other place, so that other files can use the same address
 static const std::string HTTP_ADDRESS = "http://127.0.0.1:8080";
 
-drogon::HttpRequestPtr getRequestObj(const std::string jsonKeyName, 
-                const std::string jsonValueName, drogon::HttpMethod method, const std::string path)
+drogon::HttpRequestPtr GetRequestObj(const std::string json_key_name, 
+                const std::string json_value_name, drogon::HttpMethod method, const std::string path)
 { 
-    Json::Value requestJson;
-    requestJson[jsonKeyName] = jsonValueName; 
-    auto req = drogon::HttpRequest::newHttpJsonRequest(requestJson);
+    Json::Value request_json;
+    requestJson[json_key_name] = json_value_name; 
+    return GetRequestObj(requestJson, method, path);
+}
+
+drogon::HttpRequestPtr GetRequestObj(const Json::Value& request_json,
+                                     drogon::HttpMethod method, const std::string path)
+{ 
+    auto req = drogon::HttpRequest::newHttpJsonRequest(request_json);
     req->setMethod(method);
     req->setPath(path);
-    LOG_INFO << "sendRequest: json" << jsonKeyName << "] = " << jsonValueName << ". Path = " << path;
     return req;
 }
+
 
 DROGON_TEST(GIVEN_empty_WHEN_createGame_THEN_success)
 {
     auto client = drogon::HttpClient::newHttpClient(HTTP_ADDRESS);
-    std::string gameName1 = "Game1";
-    drogon::HttpRequestPtr req1 = getRequestObj("gameName", gameName1, drogon::Post, "/CreateGame/createGame");
-    client->sendRequest(req1, [TEST_CTX](drogon::ReqResult res, const drogon::HttpResponsePtr& resp) 
+
+    Json::Value create_game_request_json;
+    create_game_request_json[controllers::utils::player_names] = {"player0", "player1", "player2", "player3"};
+
+    drogon::HttpRequestPtr create_game_req = GetRequestObj(create_game_request_json, drogon::Post, "/CreateGame/createGame");
+    
+    std::string game_id;
+    client->sendRequest(create_game_req, [TEST_CTX](drogon::ReqResult res, const drogon::HttpResponsePtr& resp) 
     {
         REQUIRE(res == drogon::ReqResult::Ok);
         REQUIRE(resp != nullptr);
         CHECK(resp->getStatusCode() == 200);
+        game_id = resp->getJsonObject()[controllers::utils::game_id].asString();
         LOG_INFO << resp->getBody();
     });
+    
+    // Get the game instance and check
+
     GameRepository::self().ClearAllGames();
 }
 
+/*
 // TODO(issue #9): Fix the asynchronous problem so that different test cases won't interfere with each other.
 DROGON_TEST(GIVEN_gameExists_WHEN_createGameWithSameName_THEN_reject)
 {
@@ -59,6 +78,7 @@ DROGON_TEST(GIVEN_gameExists_WHEN_createGameWithSameName_THEN_reject)
     });
     GameRepository::self().ClearAllGames();
 }
+*/
 
 
 DROGON_TEST(StartGame)
