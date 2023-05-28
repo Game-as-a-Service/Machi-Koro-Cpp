@@ -2,11 +2,56 @@
 
 #include <cassert>
 
+#include "wheat_field.h"
+#include "ranch.h"
+#include "bakery.h"
+#include "cafe.h"
+#include "convenient_store.h"
+#include "forest.h"
+#include "stadium.h"
+#include "tv_station.h"
+#include "business_center.h"
+#include "cheese_factory.h"
+#include "furniture_factory.h"
+#include "mine.h"
+#include "family_restaurant.h"
+#include "apple_orchard.h"
+#include "fruit_and_vegetable_market.h"
+#include "amusement_park.h"
+#include "radio_tower.h"
+#include "shopping_mall.h"
+#include "train_station.h"
+
 ArchitectureMarket::ArchitectureMarket()
 {
-    // Create 84 Architecture Cards.(12 important _buildings, 72 general buildings)
-    // 8 initial_buildings, 16 landmarks
+    auto addBuildings = [&](const CardName& name, auto building, const int count) {
+        for (int i = 0; i < count; ++i) {
+            buildings_[name].push_back(std::make_shared<decltype(building)>());
+        }
+    };
     
+    // Buildings.
+    addBuildings(CardName::WHEAT_FIELD, WheatField{}, 10);
+    addBuildings(CardName::RANCH, Ranch{}, 6);
+    addBuildings(CardName::BAKERY, Bakery{}, 10);
+    addBuildings(CardName::CAFE, Cafe{}, 6);
+    addBuildings(CardName::CONVENIENCE_STORE, ConvenientStore{}, 6);
+    addBuildings(CardName::FOREST, Forest{}, 6);
+    addBuildings(CardName::STADIUM, Stadium{}, 4);
+    addBuildings(CardName::TV_STATION, TvStation{}, 4);
+    addBuildings(CardName::BUSINESS_CENTER, BusinessCenter{}, 4);
+    addBuildings(CardName::CHEESE_FACTORY, CheeseFactory{}, 6);
+    addBuildings(CardName::FURNITURE_FACTORY, FurnitureFactory{}, 6);
+    addBuildings(CardName::MINE, Mine{}, 6);
+    addBuildings(CardName::FAMILY_RESTAURANT, FamilyRestaurant{}, 6);
+    addBuildings(CardName::APPLE_ORCHARD, AppleOrchard{}, 6);
+    addBuildings(CardName::FRUIT_AND_VEGETABLE_MARKET, FruitAndVegetableMarket{}, 6);
+
+    // Landmarks.
+    addBuildings(CardName::AMUSEMENT_PARK, AmusementPark{}, 4);
+    addBuildings(CardName::RADIO_TOWER, RadioTower{}, 4);
+    addBuildings(CardName::SHOPPING_MALL, ShoppingMall{}, 4);
+    addBuildings(CardName::TRAIN_STATION, TrainStation{}, 4);
     
 }
 
@@ -22,11 +67,11 @@ std::vector<std::shared_ptr<Card>> ArchitectureMarket::GetInitialBuildingsForOne
     // 每個玩家一開始都各持有一張小麥田和麵包店。
     std::vector<std::shared_ptr<Card>> cards;
     assert(buildings_[CardName::WHEAT_FIELD].size() > 0 && "There is no wheat field card in the market.");   
-    assert(buildings_[CardName::RANCH].size() > 0 && "There is no ranch card in the market.");   
+    assert(buildings_[CardName::BAKERY].size() > 0 && "There is no bakery card in the market.");   
     cards.push_back(buildings_[CardName::WHEAT_FIELD].back());
-    cards.push_back(buildings_[CardName::RANCH].back());
+    cards.push_back(buildings_[CardName::BAKERY].back());
     buildings_[CardName::WHEAT_FIELD].pop_back();
-    buildings_[CardName::RANCH].pop_back();
+    buildings_[CardName::BAKERY].pop_back();
     return cards;
 }
 

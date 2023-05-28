@@ -21,11 +21,8 @@ MachiKoroGame::MachiKoroGame(const std::vector<std::string>& player_names)
         player->GainLandmarks(market_->GetLandmarksForOnePlayer());
     }
 
-    // Player draw cards.
-    // market_ gives 2 initial buildings to each player
-    // market_ gives 4 landmarks to each player(backside)
-    
     // Choose one player as starter
+    
 }
 
 MachiKoroGame::~MachiKoroGame()
