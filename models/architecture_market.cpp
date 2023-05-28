@@ -52,7 +52,6 @@ ArchitectureMarket::ArchitectureMarket()
     addBuildings(CardName::RADIO_TOWER, RadioTower{}, 4);
     addBuildings(CardName::SHOPPING_MALL, ShoppingMall{}, 4);
     addBuildings(CardName::TRAIN_STATION, TrainStation{}, 4);
-    
 }
 
 ArchitectureMarket::~ArchitectureMarket()
