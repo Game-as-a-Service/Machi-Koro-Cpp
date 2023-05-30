@@ -1,3 +1,4 @@
+// TODO(issue#13): Maybe move repository to usecase layer from model
 #include "game_repository.h"
 
 #include <ctime>

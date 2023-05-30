@@ -29,7 +29,7 @@ ArchitectureMarket::ArchitectureMarket()
             buildings_[name].push_back(std::make_shared<decltype(building)>());
         }
     };
-    
+
     // Buildings.
     addBuildings(CardName::WHEAT_FIELD, WheatField{}, 10);
     addBuildings(CardName::RANCH, Ranch{}, 6);

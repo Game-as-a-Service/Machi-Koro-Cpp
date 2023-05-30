@@ -3,9 +3,10 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
-#include "../bank.h"
-#include "../player.h"
+#include "bank.h"
+#include "player.h"
 
 enum class CardType {
     CROP,
@@ -38,6 +39,9 @@ enum class CardName {
     AMUSEMENT_PARK,
     RADIO_TOWER
 };
+
+class Bank;
+class Player;
 
 class Card {
 public:
