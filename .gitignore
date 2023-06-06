@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/cmake,c++,ninja,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=cmake,c++,ninja,visualstudiocode
 
+### Database ###
+mongodb/
+
 ### Project ###
 /bin
 /build
