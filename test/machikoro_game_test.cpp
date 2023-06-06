@@ -13,14 +13,6 @@
 // TODO: maybe move this to other place, so that other files can use the same address
 static const std::string HTTP_ADDRESS = "http://127.0.0.1:8080";
 
-drogon::HttpRequestPtr GetRequestObj(const std::string json_key_name, 
-                const std::string json_value_name, drogon::HttpMethod method, const std::string path)
-{ 
-    Json::Value request_json;
-    requestJson[json_key_name] = json_value_name; 
-    return GetRequestObj(requestJson, method, path);
-}
-
 drogon::HttpRequestPtr GetRequestObj(const Json::Value& request_json,
                                      drogon::HttpMethod method, const std::string path)
 { 
@@ -30,29 +22,40 @@ drogon::HttpRequestPtr GetRequestObj(const Json::Value& request_json,
     return req;
 }
 
+drogon::HttpRequestPtr GetRequestObj(const std::string json_key_name, 
+                const std::string json_value_name, drogon::HttpMethod method, const std::string path)
+{ 
+    Json::Value request_json;
+    request_json[json_key_name] = json_value_name; 
+    return GetRequestObj(request_json, method, path);
+}
 
 DROGON_TEST(GIVEN_empty_WHEN_createGame_THEN_success)
 {
     auto client = drogon::HttpClient::newHttpClient(HTTP_ADDRESS);
 
     Json::Value create_game_request_json;
-    create_game_request_json[controllers::utils::player_names] = {"player0", "player1", "player2", "player3"};
+    Json::Value player_list(Json::arrayValue);
+    player_list.append("player0");
+    player_list.append("player1");
+    player_list.append("player2");
+    player_list.append("player3");
+    create_game_request_json[controllers::utils::player_names] = player_list;
 
     drogon::HttpRequestPtr create_game_req = GetRequestObj(create_game_request_json, drogon::Post, "/CreateGame/createGame");
     
     std::string game_id;
-    client->sendRequest(create_game_req, [TEST_CTX](drogon::ReqResult res, const drogon::HttpResponsePtr& resp) 
+    client->sendRequest(create_game_req, [&game_id, TEST_CTX](drogon::ReqResult res, const drogon::HttpResponsePtr& resp) 
     {
         REQUIRE(res == drogon::ReqResult::Ok);
         REQUIRE(resp != nullptr);
         CHECK(resp->getStatusCode() == 200);
-        game_id = resp->getJsonObject()[controllers::utils::game_id].asString();
+        game_id = (*(resp->getJsonObject()))[controllers::utils::game_id].asString();
         LOG_INFO << resp->getBody();
     });
     
     // Get the game instance and check
 
-    GameRepository::self().ClearAllGames();
 }
 
 /*

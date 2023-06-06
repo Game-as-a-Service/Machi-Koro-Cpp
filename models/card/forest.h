@@ -6,7 +6,7 @@
 class Forest : public Building {
 public:
     Forest();
-    ~Forest();
+    ~Forest() = default;
 
     void OperateEffect(std::shared_ptr<Player>& owner,
         std::vector<std::shared_ptr<Player>>& players,

@@ -4,13 +4,8 @@ project(MachiKoroCPPTest CXX)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 add_executable(${PROJECT_NAME}
-    #${CMAKE_CURRENT_SOURCE_DIR}/../models/machikoro_game.cpp
-    test_main.cc
     machikoro_game_test.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../controllers/create_game_controller.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../models/game_repository.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../models/machikoro_game.cpp
-
+    test_main.cc
 )
 
 # ##############################################################################
@@ -20,5 +15,18 @@ add_executable(${PROJECT_NAME}
 #
 # and comment out the following lines
 target_link_libraries(${PROJECT_NAME} PRIVATE Drogon::Drogon)
+
+target_include_directories(${PROJECT_NAME}
+                           PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_sources(${PROJECT_NAME}
+                PRIVATE
+               ${MachiKoroCPP_SRC_DIR}
+               ${MachiKoroCPP_CTL_SRC}
+               ${MachiKoroCPP_FILTER_SRC}
+               ${MachiKoroCPP_PLUGIN_SRC}
+               ${MachiKoroCPP_USECASES_SRC}
+               ${MachiKoroCPP_MODEL_SRC}
+               ${MachiKoroCPP_CARDS_SRC})
 
 ParseAndAddDrogonTests(${PROJECT_NAME})

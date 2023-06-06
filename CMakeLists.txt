@@ -48,7 +48,9 @@ endif ()
 aux_source_directory(controllers CTL_SRC)
 aux_source_directory(filters FILTER_SRC)
 aux_source_directory(plugins PLUGIN_SRC)
+aux_source_directory(usecases USECASES_SRC)
 aux_source_directory(models MODEL_SRC)
+aux_source_directory(models/card CARDS_SRC)
 
 drogon_create_views(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/views
                     ${CMAKE_CURRENT_BINARY_DIR})
@@ -65,14 +67,17 @@ drogon_create_views(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/views
 target_include_directories(${PROJECT_NAME}
                            PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
                                    ${CMAKE_CURRENT_SOURCE_DIR}/models
-                                   ${CMAKE_CURRENT_SOURCE_DIR}/contollers)
+                                   ${CMAKE_CURRENT_SOURCE_DIR}/usecases
+                                   ${CMAKE_CURRENT_SOURCE_DIR}/controllers)
 target_sources(${PROJECT_NAME}
                PRIVATE
                ${SRC_DIR}
                ${CTL_SRC}
                ${FILTER_SRC}
                ${PLUGIN_SRC}
-               ${MODEL_SRC})
+               ${USECASES_SRC}
+               ${MODEL_SRC}
+               ${CARDS_SRC})
 #################################
 
 # ##############################################################################

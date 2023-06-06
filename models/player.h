@@ -8,6 +8,9 @@
 #include "dice.h"
 #include "hand.h"
 
+class Card;
+class Hand;
+
 class Player {
 public:
     Player();

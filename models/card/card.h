@@ -5,8 +5,8 @@
 #include <vector>
 #include <memory>
 
-#include "bank.h"
-#include "player.h"
+#include "../bank.h"
+#include "../player.h"
 
 enum class CardType {
     CROP,

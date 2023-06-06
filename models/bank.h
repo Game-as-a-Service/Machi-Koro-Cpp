@@ -3,6 +3,8 @@
 
 #include "player.h"
 
+class Player;
+
 class Bank {
 public:
     Bank();

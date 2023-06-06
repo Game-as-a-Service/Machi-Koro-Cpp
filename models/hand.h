@@ -4,7 +4,9 @@
 #include <vector>
 #include <memory>
 
-#include "./card/card.h"
+#include "card/card.h"
+
+class Card;
 
 class Hand {
 public:
