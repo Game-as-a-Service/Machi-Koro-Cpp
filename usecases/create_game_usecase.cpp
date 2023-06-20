@@ -12,6 +12,5 @@ CreateGameUsecaseRequest::CreateGameUsecaseRequest(const std::vector<std::string
 void CreateGameUsecase::CreateGameExecute(const CreateGameUsecaseRequest &input, Output &output)
 {
     auto game = GameRepository::self().CreateGame(input.get_player_names());
-    std::cout << "Create game for id: " << game->get_game_id() << std::endl;
     output.BuildGameStatus(game);
 }

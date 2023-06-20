@@ -32,8 +32,6 @@ drogon::HttpRequestPtr GetRequestObj(const std::string json_key_name,
 
 DROGON_TEST(GIVEN_empty_WHEN_createGame_THEN_success)
 {
-    auto client = drogon::HttpClient::newHttpClient(HTTP_ADDRESS);
-
     Json::Value create_game_request_json;
     Json::Value player_list(Json::arrayValue);
     player_list.append("player0");
@@ -41,21 +39,15 @@ DROGON_TEST(GIVEN_empty_WHEN_createGame_THEN_success)
     player_list.append("player2");
     player_list.append("player3");
     create_game_request_json[controllers::utils::player_names] = player_list;
+    drogon::HttpRequestPtr create_game_req = 
+        GetRequestObj(create_game_request_json, drogon::Post, "/CreateGame/createGame");
 
-    drogon::HttpRequestPtr create_game_req = GetRequestObj(create_game_request_json, drogon::Post, "/CreateGame/createGame");
-    
-    std::string game_id;
-    client->sendRequest(create_game_req, [&game_id, TEST_CTX](drogon::ReqResult res, const drogon::HttpResponsePtr& resp) 
-    {
-        REQUIRE(res == drogon::ReqResult::Ok);
-        REQUIRE(resp != nullptr);
-        CHECK(resp->getStatusCode() == 200);
-        game_id = (*(resp->getJsonObject()))[controllers::utils::game_id].asString();
-        LOG_INFO << resp->getBody();
-    });
-    
-    // Get the game instance and check
-
+    auto client = drogon::HttpClient::newHttpClient(HTTP_ADDRESS);
+    auto resp = client->sendRequest(create_game_req);
+    REQUIRE(resp.first == drogon::ReqResult::Ok);
+    REQUIRE(resp.second != nullptr);
+    CHECK(resp.second->getStatusCode() == 200);
+    CHECK((*resp.second->getJsonObject())[controllers::utils::game_id].asString().empty() == false);
 }
 
 /*

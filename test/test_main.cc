@@ -5,13 +5,6 @@
 
 #include "../models/machikoro_game.h"
 
-/*
-DROGON_TEST(BasicTest)
-{
-    // Add your tests here
-}
-*/
-
 int main(int argc, char** argv) 
 {
     using namespace drogon;
@@ -23,7 +16,7 @@ int main(int argc, char** argv)
     std::thread thr([&]() {
         // Queues the promise to be fulfilled after starting the loop
         app().getLoop()->queueInLoop([&p1]() { p1.set_value(); });
-        app().addListener("127.0.0.1", 8080);
+        //app().addListener("127.0.0.1", 8086);
         app().run();
     });
 

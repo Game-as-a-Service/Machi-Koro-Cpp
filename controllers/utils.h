@@ -6,7 +6,7 @@ namespace controllers {
 namespace utils {
 
 const std::string game_id = "Game ID";
-const std::string player_names = "Player Names";
+const std::string player_names = "playerNames";
 
 std::vector<std::string> JsonValueToVectorOfString(const Json::Value& json_value);
 
