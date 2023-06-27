@@ -27,6 +27,7 @@ std::shared_ptr<MachiKoroGame> GameRepository::CreateGame(const std::vector<std:
     // Create a new game instance.
     auto game = std::make_shared<MachiKoroGame>(names);
     game->set_game_id(id);
+    games_[id] = game;
     return game;
 }
 

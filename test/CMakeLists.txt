@@ -3,10 +3,9 @@ project(MachiKoroCPPTest CXX)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-add_executable(${PROJECT_NAME}
-    machikoro_game_test.cpp
-    test_main.cc
-)
+add_executable(${PROJECT_NAME} 
+               test_main.cc 
+               machikoro_game_test.cpp )
 
 # ##############################################################################
 # If you include the drogon source code locally in your project, use this method
@@ -19,14 +18,30 @@ target_link_libraries(${PROJECT_NAME} PRIVATE Drogon::Drogon)
 target_include_directories(${PROJECT_NAME}
                            PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
+aux_source_directory(../controllers CTL_SRC_TEST)
+aux_source_directory(../filters FILTER_SRC_TEST)
+aux_source_directory(../plugins PLUGIN_SRC_TEST)
+aux_source_directory(../usecases USECASES_SRC_TEST)
+aux_source_directory(../models MODEL_SRC_TEST)
+aux_source_directory(../models/card CARDS_SRC_TEST)
+
 target_sources(${PROJECT_NAME}
-                PRIVATE
-               ${MachiKoroCPP_SRC_DIR}
-               ${MachiKoroCPP_CTL_SRC}
-               ${MachiKoroCPP_FILTER_SRC}
-               ${MachiKoroCPP_PLUGIN_SRC}
-               ${MachiKoroCPP_USECASES_SRC}
-               ${MachiKoroCPP_MODEL_SRC}
-               ${MachiKoroCPP_CARDS_SRC})
+               PRIVATE
+               ${CTL_SRC_TEST}
+               ${FILTER_SRC_TEST}
+               ${PLUGIN_SRC_TEST}
+               ${USECASES_SRC_TEST}
+               ${MODEL_SRC_TEST}
+               ${CARDS_SRC_TEST})
+
+# target_sources(${PROJECT_NAME}
+#                 PRIVATE
+#                ${MachiKoroCPP_SRC_DIR}
+#                ${MachiKoroCPP_CTL_SRC}
+#                ${MachiKoroCPP_FILTER_SRC}
+#                ${MachiKoroCPP_PLUGIN_SRC}
+#                ${MachiKoroCPP_USECASES_SRC}
+#                ${MachiKoroCPP_MODEL_SRC}
+#                ${MachiKoroCPP_CARDS_SRC})
 
 ParseAndAddDrogonTests(${PROJECT_NAME})

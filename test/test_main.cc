@@ -5,6 +5,8 @@
 
 #include "../models/machikoro_game.h"
 
+#include <unistd.h> // For Linux, sleep
+
 int main(int argc, char** argv) 
 {
     using namespace drogon;
@@ -16,12 +18,13 @@ int main(int argc, char** argv)
     std::thread thr([&]() {
         // Queues the promise to be fulfilled after starting the loop
         app().getLoop()->queueInLoop([&p1]() { p1.set_value(); });
-        //app().addListener("127.0.0.1", 8086);
+        app().addListener("127.0.0.1", 8086);
         app().run();
     });
 
     // The future is only satisfied after the event loop started
     f1.get();
+    
     int status = test::run(argc, argv);
 
     // Ask the event loop to shutdown and wait

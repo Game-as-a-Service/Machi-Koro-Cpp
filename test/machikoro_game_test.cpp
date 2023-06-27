@@ -11,7 +11,7 @@
 #include <vector>
 
 // TODO: maybe move this to other place, so that other files can use the same address
-static const std::string HTTP_ADDRESS = "http://127.0.0.1:8080";
+static const std::string HTTP_ADDRESS = "http://127.0.0.1:8086";
 
 drogon::HttpRequestPtr GetRequestObj(const Json::Value& request_json,
                                      drogon::HttpMethod method, const std::string path)
@@ -48,6 +48,12 @@ DROGON_TEST(GIVEN_empty_WHEN_createGame_THEN_success)
     REQUIRE(resp.second != nullptr);
     CHECK(resp.second->getStatusCode() == 200);
     CHECK((*resp.second->getJsonObject())[controllers::utils::game_id].asString().empty() == false);
+    
+    std::cout << "HHHIII123, Game ID = " << (*resp.second->getJsonObject())[controllers::utils::game_id].asString() << std::endl;
+    auto game = GameRepository::self().FindGameByID((*resp.second->getJsonObject())[controllers::utils::game_id].asString());
+
+    std::cout << "HHHIII, Game == NULL? " << (game == nullptr) << std::endl;
+    std::cout << "HHHIII, Game ID = " << game->get_game_id() << std::endl;
 }
 
 /*
