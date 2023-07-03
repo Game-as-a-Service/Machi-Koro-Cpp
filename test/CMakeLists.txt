@@ -34,14 +34,4 @@ target_sources(${PROJECT_NAME}
                ${MODEL_SRC_TEST}
                ${CARDS_SRC_TEST})
 
-# target_sources(${PROJECT_NAME}
-#                 PRIVATE
-#                ${MachiKoroCPP_SRC_DIR}
-#                ${MachiKoroCPP_CTL_SRC}
-#                ${MachiKoroCPP_FILTER_SRC}
-#                ${MachiKoroCPP_PLUGIN_SRC}
-#                ${MachiKoroCPP_USECASES_SRC}
-#                ${MachiKoroCPP_MODEL_SRC}
-#                ${MachiKoroCPP_CARDS_SRC})
-
 ParseAndAddDrogonTests(${PROJECT_NAME})
