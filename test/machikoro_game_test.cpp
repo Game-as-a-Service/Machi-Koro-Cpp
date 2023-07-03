@@ -49,11 +49,11 @@ DROGON_TEST(GIVEN_empty_WHEN_createGame_THEN_success)
     CHECK(resp.second->getStatusCode() == 200);
     CHECK((*resp.second->getJsonObject())[controllers::utils::game_id].asString().empty() == false);
     
-    std::cout << "HHHIII123, Game ID = " << (*resp.second->getJsonObject())[controllers::utils::game_id].asString() << std::endl;
     auto game = GameRepository::self().FindGameByID((*resp.second->getJsonObject())[controllers::utils::game_id].asString());
+    
+    REQUIRE(game != nullptr);
+    CHECK(game->get_game_id() == (*resp.second->getJsonObject())[controllers::utils::game_id].asString());
 
-    std::cout << "HHHIII, Game == NULL? " << (game == nullptr) << std::endl;
-    std::cout << "HHHIII, Game ID = " << game->get_game_id() << std::endl;
 }
 
 /*
