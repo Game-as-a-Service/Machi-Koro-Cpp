@@ -86,8 +86,8 @@ target_sources(${PROJECT_NAME}
 
 # ##############################################################################
 
-add_subdirectory(test)
+add_subdirectory(test/e2e_test)
 
 # For Google test
 enable_testing()
-add_subdirectory(test/game_unittest)
+add_subdirectory(test/unittest)

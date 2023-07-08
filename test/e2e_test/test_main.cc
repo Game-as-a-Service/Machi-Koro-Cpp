@@ -3,7 +3,7 @@
 #include <drogon/drogon.h>
 #include <drogon/HttpTypes.h>
 
-#include "../models/machikoro_game.h"
+#include "../../models/machikoro_game.h"
 
 #include <unistd.h> // For Linux, sleep
 

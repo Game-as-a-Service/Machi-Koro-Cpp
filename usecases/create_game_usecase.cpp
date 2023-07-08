@@ -11,6 +11,14 @@ CreateGameUsecaseRequest::CreateGameUsecaseRequest(const std::vector<std::string
 
 void CreateGameUsecase::CreateGameExecute(const CreateGameUsecaseRequest &input, Output &output)
 {
+    // Should create game first, and then store it into repository
+    //TODO: add this
+    /*
+    auto game = Game(input);
+    GameRepository::self().AddGame(game); // similar to presenter, but for different target
+    presenter.present(game); // similar to repository
+    */
+
     auto game = GameRepository::self().CreateGame(input.get_player_names());
     output.BuildGameStatus(game);
 }

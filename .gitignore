@@ -3,9 +3,10 @@
 
 ### Project ###
 /bin
-/build
+/build*
 /.vscode
 /uploads
+/mongodb
 
 ### C++ ###
 # Prerequisites

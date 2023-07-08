@@ -18,12 +18,12 @@ target_link_libraries(${PROJECT_NAME} PRIVATE Drogon::Drogon)
 target_include_directories(${PROJECT_NAME}
                            PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
-aux_source_directory(../controllers CTL_SRC_TEST)
-aux_source_directory(../filters FILTER_SRC_TEST)
-aux_source_directory(../plugins PLUGIN_SRC_TEST)
-aux_source_directory(../usecases USECASES_SRC_TEST)
-aux_source_directory(../models MODEL_SRC_TEST)
-aux_source_directory(../models/card CARDS_SRC_TEST)
+aux_source_directory(../../controllers CTL_SRC_TEST)
+aux_source_directory(../../filters FILTER_SRC_TEST)
+aux_source_directory(../../plugins PLUGIN_SRC_TEST)
+aux_source_directory(../../usecases USECASES_SRC_TEST)
+aux_source_directory(../../models MODEL_SRC_TEST)
+aux_source_directory(../../models/card CARDS_SRC_TEST)
 
 target_sources(${PROJECT_NAME}
                PRIVATE

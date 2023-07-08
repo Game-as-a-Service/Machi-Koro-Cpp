@@ -2,8 +2,8 @@
 #include <drogon/drogon.h>
 #include <drogon/HttpTypes.h>
 
-#include "../controllers/utils.h"
-#include "../models/game_repository.h"
+#include "../../controllers/utils.h"
+#include "../../models/game_repository.h"
 
 #include <iostream>
 #include <string>
