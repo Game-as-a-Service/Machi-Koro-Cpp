@@ -21,6 +21,8 @@ public:
 
     std::vector<std::shared_ptr<Card>> GetInitialBuildingsForOnePlayer();
     std::vector<std::shared_ptr<Card>> GetLandmarksForOnePlayer();
+    
+    const std::map<CardName, std::deque<std::shared_ptr<Card>>>& get_buildings() const { return buildings_; }
      
     //Card DrawBuilding();
     //Card DrawLandmark();

@@ -27,6 +27,8 @@ public:
 
     std::shared_ptr<Bank> get_bank() const { return bank_; }
 
+    std::shared_ptr<ArchitectureMarket> get_market() const { return market_; }
+
     std::vector<std::shared_ptr<Player>> get_players() const { return players_; }
 
 private:

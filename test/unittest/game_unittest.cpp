@@ -23,4 +23,12 @@ protected:
 TEST_F(GameTest, GameInit) {
     ASSERT_TRUE(game_ != nullptr);
     ASSERT_EQ(game_->get_players().size(), 4);
+    EXPECT_EQ(game_->get_bank()->get_coin(), 282 - 3 * 4);
+    for (auto player: game_->get_players()) {
+        EXPECT_EQ(player->get_hand()->get_cards().size(), 2);
+        EXPECT_EQ(player->get_hand()->get_landmarks().size(), 4);
+        EXPECT_EQ(player->get_coin(), 3);
+    }
+    // 19 types of cards
+    EXPECT_EQ(game_->get_market()->get_buildings().size(), 19);
 }
