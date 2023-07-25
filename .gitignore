@@ -4,6 +4,7 @@
 ### Project ###
 /bin
 /build
+/mongodb
 
 ### C++ ###
 # Prerequisites
@@ -61,6 +62,7 @@ _deps
 .ninja_log
 
 ### VisualStudioCode ###
+.vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
