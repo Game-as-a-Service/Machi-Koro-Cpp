@@ -9,7 +9,7 @@ CreateGameUsecaseRequest::CreateGameUsecaseRequest(const std::vector<std::string
 {
 }
 
-void CreateGameUsecase::CreateGameExecute(const CreateGameUsecaseRequest &input, Output &output)
+void CreateGameUsecase::CreateGameExecute(const CreateGameUsecaseRequest &input, CreateGameUsecase::Presenter &presenter)
 {
     // Should create game first, and then store it into repository
     //TODO: add this
@@ -20,5 +20,5 @@ void CreateGameUsecase::CreateGameExecute(const CreateGameUsecaseRequest &input,
     */
 
     auto game = GameRepository::self().CreateGame(input.get_player_names());
-    output.BuildGameStatus(game);
+    presenter.Present(*game.get());
 }
