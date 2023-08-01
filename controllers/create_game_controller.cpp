@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "utils.h"
-#include "../usecases/create_game_usecase.h"
 #include "../usecases/common.h"
 
 // Add definition of your processing function here
@@ -26,15 +25,25 @@ void CreateGame::createGame(const HttpRequestPtr &req,
     
     std::vector<std::string> player_names = controllers::utils::JsonValueToVectorOfString((*json)["playerNames"]);
     
+    CreateGamePresenter presenter;
+    
     CreateGameUsecase uc;
-    Output output;
     uc.CreateGameExecute(
-        CreateGameUsecaseRequest(player_names), output);
+        CreateGameUsecaseRequest(player_names), presenter);
         
     Json::Value ret;
     ret["result"] = "ok";
-    ret[controllers::utils::game_id] = output.get_game_id();
+    ret[controllers::utils::game_id] = presenter.GetViewModel();
     auto resp = HttpResponse::newHttpJsonResponse(ret);
     callback(resp);
 }
 
+void CreateGamePresenter::Present(const MachiKoroGame& game)
+{
+    game_id_ = game.get_game_id();
+}
+
+std::string CreateGamePresenter::GetViewModel() const
+{
+    return game_id_;
+}

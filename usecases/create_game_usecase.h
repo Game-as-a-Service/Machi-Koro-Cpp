@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "common.h"
+#include "../models/machikoro_game.h"
 
 // An input for CreateGameUsecase.
 class CreateGameUsecaseRequest {
@@ -23,11 +24,15 @@ private:
 
 class CreateGameUsecase {
 public:
+    class Presenter {
+    public:
+        virtual void Present(const MachiKoroGame& game) = 0;
+    };
+
     CreateGameUsecase() = default;
     CreateGameUsecase(const CreateGameUsecase& uc) = delete;
     CreateGameUsecase(CreateGameUsecase&& uc) = delete;
     ~CreateGameUsecase() = default;
 
-    void CreateGameExecute(const CreateGameUsecaseRequest& input, Output& output);
-
+    void CreateGameExecute(const CreateGameUsecaseRequest& input, Presenter& presenter);
 };
