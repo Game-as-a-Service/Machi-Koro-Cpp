@@ -16,10 +16,12 @@
 - Clean Architecture
 
 ## Tech Stack
-- C++
-- Framework: Drogon
-- DB: MongoDB
-- 前端：V
+- Language: Modern C++ (20+)
+- Back-End: [Drogon](https://github.com/drogonframework/drogon)
+- Front-End: 未定
+- Database: 未定
+- ORM: 未定
 
 ## 開會討論紀錄
-https://hackmd.io/@GaaS-MachiKoro-Cpp
+- [Notion](https://www.notion.so/GaaS-Machi-Koro-CPP-73ed9010f1394a20857c47cd57341aef?pvs=4)
+- [HackMD](https://hackmd.io/@GaaS-MachiKoro-Cpp) (Deprecated)

@@ -1,5 +1,4 @@
 #include <drogon/drogon.h>
-#include "machikoro_game.h"
 
 int main() {
     //Set HTTP listener address and port
@@ -7,9 +6,6 @@ int main() {
 
     //Load config file
     //drogon::app().loadConfigFile("../config.json");
-
-    MachiKoroGame game;
-    game.GameStart();
 
     //Run HTTP framework,the method will block in the internal event loop
     drogon::app().run();
