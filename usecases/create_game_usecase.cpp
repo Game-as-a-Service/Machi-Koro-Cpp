@@ -20,5 +20,5 @@ void CreateGameUsecase::CreateGameExecute(const CreateGameUsecaseRequest &input,
     */
 
     auto game = GameRepository::self().CreateGame(input.get_player_names());
-    presenter.Present(*game.get());
+    presenter.Present(*game);
 }
