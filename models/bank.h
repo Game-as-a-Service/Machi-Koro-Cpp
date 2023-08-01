@@ -15,7 +15,7 @@ public:
     Bank& operator = (const Bank& rhs);
     Bank& operator = (Bank&& rhs);
 
-    void PayCoin2Player(int coin, const std::shared_ptr<Player>& player);
+    void PayCoin2Player(int coin, Player* player);
 
     int get_coin() const { return coin_; } 
     

@@ -5,9 +5,9 @@ Mine::Mine() :
 {
 }
 
-void Mine::OperateEffect(std::shared_ptr<Player>& owner,
-    std::vector<std::shared_ptr<Player>>& players,
-    std::shared_ptr<Bank>& bank)
+void Mine::OperateEffect(Player* owner,
+    std::vector<Player*> players,
+    Bank* bank)
 {
     
 }

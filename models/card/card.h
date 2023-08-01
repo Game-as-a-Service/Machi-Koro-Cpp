@@ -50,9 +50,9 @@ public:
     ~Card() = default;
     
     // TODO: Resolve this dependency relationship.
-    virtual void OperateEffect(std::shared_ptr<Player>& owner,
-        std::vector<std::shared_ptr<Player>>& players,
-        std::shared_ptr<Bank>& bank) = 0;
+    virtual void OperateEffect(Player* owner,
+        std::vector<Player*> players,
+        Bank* bank) = 0;
 
     CardName get_name() const { return name_; }
 

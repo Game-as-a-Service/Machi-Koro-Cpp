@@ -5,9 +5,9 @@ FurnitureFactory::FurnitureFactory() :
 {
 }
 
-void FurnitureFactory::OperateEffect(std::shared_ptr<Player>& owner,
-    std::vector<std::shared_ptr<Player>>& players,
-    std::shared_ptr<Bank>& bank)
+void FurnitureFactory::OperateEffect(Player* owner,
+    std::vector<Player*> players,
+    Bank* bank)
 {
     
 }

@@ -5,9 +5,9 @@ AppleOrchard::AppleOrchard() :
 {
 }
 
-void AppleOrchard::OperateEffect(std::shared_ptr<Player>& owner,
-    std::vector<std::shared_ptr<Player>>& players,
-    std::shared_ptr<Bank>& bank)
+void AppleOrchard::OperateEffect(Player* owner,
+    std::vector<Player*> players,
+    Bank* bank)
 {
     
 }

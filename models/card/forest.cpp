@@ -5,9 +5,9 @@ Forest::Forest() :
 {
 }
 
-void Forest::OperateEffect(std::shared_ptr<Player>& owner,
-    std::vector<std::shared_ptr<Player>>& players,
-    std::shared_ptr<Bank>& bank)
+void Forest::OperateEffect(Player* owner,
+    std::vector<Player*> players,
+    Bank* bank)
 {
 
 }

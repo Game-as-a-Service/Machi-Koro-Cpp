@@ -1,7 +1,7 @@
 #include "player.h"
 
 Player::Player()
-    : hand_(std::make_shared<Hand>())
+    : hand_(std::make_unique<Hand>())
 {
     dices_.reserve(2);
     for (int i = 0; i < 2; ++i)
@@ -10,7 +10,7 @@ Player::Player()
 
 Player::Player(const std::string& name)
     : name_(name)
-    , hand_(std::make_shared<Hand>())
+    , hand_(std::make_unique<Hand>())
 {
     dices_.reserve(2);
     for (int i = 0; i < 2; ++i)

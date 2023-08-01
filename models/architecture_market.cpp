@@ -26,7 +26,7 @@ ArchitectureMarket::ArchitectureMarket()
 {
     auto addBuildings = [&](const CardName& name, auto building, const int count) {
         for (int i = 0; i < count; ++i) {
-            buildings_[name].push_back(std::make_shared<decltype(building)>());
+            buildings_[name].push_back(std::make_unique<decltype(building)>());
         }
     };
 
@@ -61,10 +61,10 @@ ArchitectureMarket::~ArchitectureMarket()
     buildings_.clear();
 }
 
-std::vector<std::shared_ptr<Card>> ArchitectureMarket::GetInitialBuildingsForOnePlayer()
+std::vector<std::unique_ptr<Card>> ArchitectureMarket::GetInitialBuildingsForOnePlayer()
 {
     // 每個玩家一開始都各持有一張小麥田和麵包店。
-    std::vector<std::shared_ptr<Card>> cards;
+    std::vector<std::unique_ptr<Card>> cards;
     assert(buildings_[CardName::WHEAT_FIELD].size() > 0 && "There is no wheat field card in the market.");   
     assert(buildings_[CardName::BAKERY].size() > 0 && "There is no bakery card in the market.");   
     cards.push_back(buildings_[CardName::WHEAT_FIELD].back());
@@ -74,10 +74,10 @@ std::vector<std::shared_ptr<Card>> ArchitectureMarket::GetInitialBuildingsForOne
     return cards;
 }
 
-std::vector<std::shared_ptr<Card>> ArchitectureMarket::GetLandmarksForOnePlayer()
+std::vector<std::unique_ptr<Card>> ArchitectureMarket::GetLandmarksForOnePlayer()
 {
     // 每個玩家一開始各分到一張主題樂園、一張廣播電台、一張購物中心，以及一張火車站。
-    std::vector<std::shared_ptr<Card>> cards;
+    std::vector<std::unique_ptr<Card>> cards;
     assert(buildings_[CardName::AMUSEMENT_PARK].size() > 0 && "There is no amusement park card in the market.");
     assert(buildings_[CardName::SHOPPING_MALL].size() > 0 && "There is no shopping mall card in the market.");
     assert(buildings_[CardName::TRAIN_STATION].size() > 0 && "There is no train station card in the market.");

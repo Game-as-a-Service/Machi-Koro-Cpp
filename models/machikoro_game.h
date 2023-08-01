@@ -25,17 +25,18 @@ public:
     void set_game_id(const std::string& id) { game_id_ = id; }
     std::string get_game_id() const { return game_id_; }
 
-    std::shared_ptr<Bank> get_bank() const { return bank_; }
+    const Bank* get_bank() const { return bank_.get(); }
 
-    std::shared_ptr<ArchitectureMarket> get_market() const { return market_; }
+    const ArchitectureMarket* get_market() const { return market_.get(); }
 
-    std::vector<std::shared_ptr<Player>> get_players() const { return players_; }
+    // TODO(smart pointer): implement this function. 
+    std::vector<const Player*> get_players() const;
 
 private:
     std::string game_id_;
-    std::shared_ptr<Bank> bank_ = nullptr;
-    std::vector<std::shared_ptr<Player>> players_;
-    std::shared_ptr<ArchitectureMarket> market_ = nullptr;
+    std::unique_ptr<Bank> bank_ = nullptr;
+    std::vector<std::unique_ptr<Player>> players_;
+    std::unique_ptr<ArchitectureMarket> market_ = nullptr;
 };
 
 #endif
