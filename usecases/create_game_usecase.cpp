@@ -18,7 +18,6 @@ void CreateGameUsecase::CreateGameExecute(const CreateGameUsecaseRequest &input,
     GameRepository::self().AddGame(game); // similar to presenter, but for different target
     presenter.present(game); // similar to repository
     */
-
     auto game = GameRepository::self().CreateGame(input.get_player_names());
     presenter.Present(*game);
 }

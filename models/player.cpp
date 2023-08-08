@@ -38,20 +38,20 @@ void Player::GainCoin(int coin)
     coin_ += coin;
 }
 
-void Player::PayCoin2AnotherPlayer(int coin, const std::shared_ptr<Player>& other)
+void Player::PayCoin2AnotherPlayer(int coin, Player* other)
 {
     this->PayCoin(coin);
     other->GainCoin(coin);
 }
 
-void Player::GainLandmarks(const std::vector<std::shared_ptr<Card>>& cards)
+void Player::GainLandmarks(std::vector<std::unique_ptr<Card>>&& cards)
 {
-    for (const auto& card : cards)
-        hand_->AddLandmark(card);
+    for (auto& card : cards)
+        hand_->AddLandmark(std::move(card));
 }
 
-void Player::GainInitialBuildings(const std::vector<std::shared_ptr<Card>>& cards)
+void Player::GainInitialBuildings(std::vector<std::unique_ptr<Card>>&& cards)
 {
-    for (const auto& card : cards)
-        hand_->AddCard(card);
+    for (auto& card : cards)
+        hand_->AddCard(std::move(card));
 }

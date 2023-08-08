@@ -26,7 +26,7 @@ MachiKoroGame* GameRepository::CreateGame(const std::vector<std::string>& names)
     auto game = std::make_unique<MachiKoroGame>(names);
     game->set_game_id(id);
     games_[id] = std::move(game);
-    return game.get();
+    return games_[id].get();
 }
 
 MachiKoroGame* GameRepository::FindGameByID(const std::string& id)

@@ -18,7 +18,8 @@ public:
 
     static GameRepository& self();
 
-    // TODO: Maybe remove this function. We need to create game first, and then store it into repository.
+    // TODO: Maybe remove this function. We need to create game first, 
+    // and then store it into repository.
     MachiKoroGame* CreateGame(const std::vector<std::string>& names);
 
     MachiKoroGame* FindGameByID(const std::string& id);
