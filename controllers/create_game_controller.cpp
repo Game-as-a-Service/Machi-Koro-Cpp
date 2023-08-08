@@ -31,11 +31,7 @@ void CreateGame::createGame(const HttpRequestPtr &req,
     uc.CreateGameExecute(
         CreateGameUsecaseRequest(player_names), presenter);
     
-    Json::Value ret;
-    ret["result"] = "ok";
-    ret[controllers::utils::game_id] = presenter.GetViewModel();
-
-    auto resp = HttpResponse::newHttpJsonResponse(ret);
+    auto resp = HttpResponse::newHttpJsonResponse(presenter.GetViewModel());
     callback(resp);
 }
 
@@ -44,8 +40,10 @@ void CreateGamePresenter::Present(const MachiKoroGame& game)
     game_id_ = game.get_game_id();
 }
 
-//TODO: return Json instead
-std::string CreateGamePresenter::GetViewModel() const
+Json::Value CreateGamePresenter::GetViewModel() const
 {
-    return game_id_;
+    Json::Value res;
+    res["result"] = "ok";
+    res[controllers::utils::game_id] = game_id_; 
+    return res;
 }

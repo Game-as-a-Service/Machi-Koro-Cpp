@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "../models/game_repository.h"
+#include "game_repository.h"
 
 CreateGameUsecaseRequest::CreateGameUsecaseRequest(const std::vector<std::string>& names)
     : player_names_(names)

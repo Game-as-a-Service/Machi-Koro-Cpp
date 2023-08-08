@@ -3,7 +3,7 @@
 #include <drogon/HttpTypes.h>
 
 #include "../../controllers/utils.h"
-#include "../../models/game_repository.h"
+#include "../../usecases/game_repository.h"
 
 #include <iostream>
 #include <string>

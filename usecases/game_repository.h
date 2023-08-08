@@ -5,7 +5,7 @@
 #include <vector>
 #include <memory>
 
-#include "machikoro_game.h"
+#include "../models/machikoro_game.h"
 
 class GameRepository {
 public:
