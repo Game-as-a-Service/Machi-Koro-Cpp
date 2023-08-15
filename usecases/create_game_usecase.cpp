@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "game_repository.h"
+#include "../models/machikoro_game.h"
 
 CreateGameUsecaseRequest::CreateGameUsecaseRequest(const std::vector<std::string>& names)
     : player_names_(names)
@@ -11,13 +12,9 @@ CreateGameUsecaseRequest::CreateGameUsecaseRequest(const std::vector<std::string
 
 void CreateGameUsecase::CreateGameExecute(const CreateGameUsecaseRequest &input, CreateGameUsecase::Presenter &presenter)
 {
-    // Should create game first, and then store it into repository
-    //TODO: add this
-    /*
-    auto game = Game(input);
+    auto game = std::make_shared<MachiKoroGame>(input.get_player_names());
     GameRepository::self().AddGame(game); // similar to presenter, but for different target
-    presenter.present(game); // similar to repository
-    */
-    auto game = GameRepository::self().CreateGame(input.get_player_names());
-    presenter.Present(*game);
+    presenter.Present(*game); // similar to repository
+    // auto game = GameRepository::self().CreateGame(input.get_player_names());
+    // presenter.Present(*game);
 }

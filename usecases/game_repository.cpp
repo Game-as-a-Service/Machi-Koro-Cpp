@@ -18,15 +18,13 @@ GameRepository& GameRepository::self()
     return repo;
 }
 
-MachiKoroGame* GameRepository::CreateGame(const std::vector<std::string>& names)
+void GameRepository::AddGame(std::shared_ptr<MachiKoroGame> game)
 {
     std::string id = this->RandomID();
-    while (this->IsGameExist(id)) id = this->RandomID();
-    // Create a new game instance.
-    auto game = std::make_unique<MachiKoroGame>(names);
+    while (this->IsGameExist(id)) 
+        id = this->RandomID();
     game->set_game_id(id);
-    games_[id] = std::move(game);
-    return games_[id].get();
+    games_[id] = game;
 }
 
 MachiKoroGame* GameRepository::FindGameByID(const std::string& id)
