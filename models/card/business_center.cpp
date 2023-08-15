@@ -5,9 +5,9 @@ BusinessCenter::BusinessCenter() :
 {
 }
 
-void BusinessCenter::OperateEffect(std::shared_ptr<Player>& owner,
-    std::vector<std::shared_ptr<Player>>& players,
-    std::shared_ptr<Bank>& bank)
+void BusinessCenter::OperateEffect(Player* owner,
+    std::vector<Player*> players,
+    Bank* bank)
 {
     
 }

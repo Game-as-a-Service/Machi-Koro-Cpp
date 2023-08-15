@@ -6,19 +6,19 @@ MachiKoroGame::MachiKoroGame(const std::vector<std::string>& player_names)
 {
     for (const auto& name : player_names)
     {
-        auto player = std::make_shared<Player>(name);
-        players_.push_back(player);
+        auto player = std::make_unique<Player>(name);
+        players_.push_back(std::move(player));
     }
     
-    bank_ = std::make_shared<Bank>();
+    bank_ = std::make_unique<Bank>();
     for (auto& player : players_)
-        bank_->PayCoin2Player(3, player);
+        bank_->PayCoin2Player(3, player.get());
 
-    market_ = std::make_shared<ArchitectureMarket>();
+    market_ = std::make_unique<ArchitectureMarket>();
     
     for (auto& player : players_) {
-        player->GainInitialBuildings(market_->GetInitialBuildingsForOnePlayer());
-        player->GainLandmarks(market_->GetLandmarksForOnePlayer());
+        player->GainInitialBuildings(std::move(market_->GetInitialBuildingsForOnePlayer()));
+        player->GainLandmarks(std::move(market_->GetLandmarksForOnePlayer()));
     }
 
     // Choose one player as starter
@@ -37,4 +37,12 @@ MachiKoroGame::~MachiKoroGame()
 void MachiKoroGame::GameStart()
 {
     std::cout << "Game Start !!" << std::endl;
+}
+
+std::vector<const Player*> MachiKoroGame::get_players() const
+{
+    std::vector<const Player*> players;
+    for (const auto& player: players_)
+        players.push_back(player.get());
+    return players;
 }

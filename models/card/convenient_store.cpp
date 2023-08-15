@@ -5,9 +5,9 @@ ConvenientStore::ConvenientStore() :
 {
 }
 
-void ConvenientStore::OperateEffect(std::shared_ptr<Player>& owner,
-    std::vector<std::shared_ptr<Player>>& players,
-    std::shared_ptr<Bank>& bank)
+void ConvenientStore::OperateEffect(Player* owner,
+    std::vector<Player*> players,
+    Bank* bank)
 {
     
 }

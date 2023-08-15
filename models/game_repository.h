@@ -18,9 +18,11 @@ public:
 
     static GameRepository& self();
 
-    std::shared_ptr<MachiKoroGame> CreateGame(const std::vector<std::string>& names);
+    // TODO: Maybe remove this function. We need to create game first, 
+    // and then store it into repository.
+    MachiKoroGame* CreateGame(const std::vector<std::string>& names);
 
-    std::shared_ptr<MachiKoroGame> FindGameByID(const std::string& id);
+    MachiKoroGame* FindGameByID(const std::string& id);
 
     void ClearAllGames();
 
@@ -32,6 +34,5 @@ private:
     bool IsGameExist(const std::string& id);
 
 private:
-    static std::shared_ptr<GameRepository> self_;
-    std::map<std::string, std::shared_ptr<MachiKoroGame>> games_;
+    std::map<std::string, std::unique_ptr<MachiKoroGame>> games_;
 };

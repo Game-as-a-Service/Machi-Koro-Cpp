@@ -7,8 +7,6 @@
 #include <algorithm>
 #include <iostream>
 
-std::shared_ptr<GameRepository> GameRepository::self_ = nullptr;
-
 GameRepository::~GameRepository()
 {
     games_.clear();
@@ -20,21 +18,21 @@ GameRepository& GameRepository::self()
     return repo;
 }
 
-std::shared_ptr<MachiKoroGame> GameRepository::CreateGame(const std::vector<std::string>& names)
+MachiKoroGame* GameRepository::CreateGame(const std::vector<std::string>& names)
 {
     std::string id = this->RandomID();
     while (this->IsGameExist(id)) id = this->RandomID();
     // Create a new game instance.
-    auto game = std::make_shared<MachiKoroGame>(names);
+    auto game = std::make_unique<MachiKoroGame>(names);
     game->set_game_id(id);
-    games_[id] = game;
-    return game;
+    games_[id] = std::move(game);
+    return games_[id].get();
 }
 
-std::shared_ptr<MachiKoroGame> GameRepository::FindGameByID(const std::string& id)
+MachiKoroGame* GameRepository::FindGameByID(const std::string& id)
 {
     if (!this->IsGameExist(id)) return nullptr;
-    return games_[id];
+    return games_[id].get();
 }
 
 void GameRepository::ClearAllGames()

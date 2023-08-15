@@ -13,17 +13,17 @@ public:
     Hand();
     ~Hand();
     
-    void AddCard(const std::shared_ptr<Card>& card) { cards_.push_back(card); }
+    void AddCard(std::unique_ptr<Card> card) { cards_.push_back(std::move(card)); }
 
-    void AddLandmark(const std::shared_ptr<Card>& card) { landmarks_.push_back(card); }
+    void AddLandmark(std::unique_ptr<Card> card) { landmarks_.push_back(std::move(card)); }
 
-    std::vector<std::shared_ptr<Card>> get_cards() const { return cards_; }
+    std::vector<Card*> get_cards() const;
 
-    std::vector<std::shared_ptr<Card>> get_landmarks() const { return landmarks_; }
+    std::vector<Card*> get_landmarks() const;
 
 private:
-    std::vector<std::shared_ptr<Card>> cards_;
-    std::vector<std::shared_ptr<Card>> landmarks_;
+    std::vector<std::unique_ptr<Card>> cards_;
+    std::vector<std::unique_ptr<Card>> landmarks_;
 };
 
 #endif

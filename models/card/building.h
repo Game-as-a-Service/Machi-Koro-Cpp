@@ -19,9 +19,9 @@ public:
         const std::vector<int>& points, const IndustryType& ind_type);
     ~Building() = default;
 
-    virtual void OperateEffect(std::shared_ptr<Player>& owner,
-        std::vector<std::shared_ptr<Player>>& players,
-        std::shared_ptr<Bank>& bank) = 0;
+    virtual void OperateEffect(Player* owner,
+        std::vector<Player*> players,
+        Bank* bank) = 0;
 
     std::vector<int> get_points() const { return points_; }
     IndustryType get_industry_type() const { return industry_type_; }

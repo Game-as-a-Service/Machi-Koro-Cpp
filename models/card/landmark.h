@@ -9,9 +9,9 @@ public:
     Landmark(const CardName& name, int price, const CardType& type);
     ~Landmark() = default;
 
-    virtual void OperateEffect(std::shared_ptr<Player>& owner,
-        std::vector<std::shared_ptr<Player>>& players,
-        std::shared_ptr<Bank>& bank) = 0;
+    virtual void OperateEffect(Player* owner,
+        std::vector<Player*> players,
+        Bank* bank) = 0;
 
     bool IsActivate() const { return is_activated_; };
     void Activate() { is_activated_ = true; }

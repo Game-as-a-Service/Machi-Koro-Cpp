@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 
-#include "common.h"
 #include "../models/machikoro_game.h"
 
 // An input for CreateGameUsecase.
