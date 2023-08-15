@@ -1,5 +1,4 @@
-// TODO(issue#13): Maybe move repository to usecase layer from model
-#include "game_repository.h"
+#include "in_memory_repository.h"
 
 #include <ctime>
 #include <random>
@@ -7,18 +6,18 @@
 #include <algorithm>
 #include <iostream>
 
-GameRepository::~GameRepository()
+InMemoryRepository::~InMemoryRepository()
 {
     games_.clear();
 }
 
-GameRepository& GameRepository::self()
+InMemoryRepository& InMemoryRepository::self()
 {
-    static GameRepository repo;
+    static InMemoryRepository repo;
     return repo;
 }
 
-void GameRepository::AddGame(std::shared_ptr<MachiKoroGame> game)
+void InMemoryRepository::AddGame(std::shared_ptr<MachiKoroGame> game)
 {
     std::string id = this->RandomID();
     while (this->IsGameExist(id)) 
@@ -27,25 +26,30 @@ void GameRepository::AddGame(std::shared_ptr<MachiKoroGame> game)
     games_[id] = game;
 }
 
-MachiKoroGame* GameRepository::FindGameByID(const std::string& id)
+void InMemoryRepository::SaveGame(std::shared_ptr<MachiKoroGame> game)
+{
+    return;
+}
+
+MachiKoroGame* InMemoryRepository::FindGameByID(const std::string& id)
 {
     if (!this->IsGameExist(id)) return nullptr;
     return games_[id].get();
 }
 
-void GameRepository::ClearAllGames()
+void InMemoryRepository::ClearAllGames()
 {
     for (auto& game : games_)
         game.second.reset();
     games_.clear();
 }
 
-bool GameRepository::IsGameExist(const std::string& id)
+bool InMemoryRepository::IsGameExist(const std::string& id)
 {
     return (games_.find(id) != games_.end());
 }
 
-std::string GameRepository::RandomID()
+std::string InMemoryRepository::RandomID()
 {
     std::uniform_int_distribution<int> u(0, INT_MAX);
     std::default_random_engine e(time(0));

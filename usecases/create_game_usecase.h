@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "../models/machikoro_game.h"
+#include "game_repository.h"
 
 // An input for CreateGameUsecase.
 class CreateGameUsecaseRequest {
@@ -33,5 +34,7 @@ public:
     CreateGameUsecase(CreateGameUsecase&& uc) = delete;
     ~CreateGameUsecase() = default;
 
-    void CreateGameExecute(const CreateGameUsecaseRequest& input, Presenter& presenter);
+    void CreateGameExecute(const CreateGameUsecaseRequest& input, 
+        GameRepository& repo, 
+        Presenter& presenter);
 };

@@ -9,28 +9,15 @@
 
 class GameRepository {
 public:
-    GameRepository(const GameRepository& repo) = delete;
-    GameRepository(GameRepository&& repo) = delete;
-    ~GameRepository();
+    virtual ~GameRepository() = default;
 
-    GameRepository& operator=(const GameRepository& repo) = delete;
-    GameRepository& operator=(GameRepository&& repo) = delete;
+    // TODO(#issue 17): use raw pointer instead.
+    virtual void AddGame(std::shared_ptr<MachiKoroGame> game) = 0;
+    
+    // TODO(#issue 17): use raw pointer instead.
+    virtual void SaveGame(std::shared_ptr<MachiKoroGame> game) = 0;
 
-    static GameRepository& self();
+    virtual MachiKoroGame* FindGameByID(const std::string& id) = 0;
 
-    void AddGame(std::shared_ptr<MachiKoroGame> game);
-
-    MachiKoroGame* FindGameByID(const std::string& id);
-
-    void ClearAllGames();
-
-private:
-    GameRepository() = default;
-
-    std::string RandomID();
-
-    bool IsGameExist(const std::string& id);
-
-private:
-    std::map<std::string, std::shared_ptr<MachiKoroGame>> games_;
+    virtual void ClearAllGames() = 0;
 };

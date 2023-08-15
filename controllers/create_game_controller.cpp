@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "utils.h"
+#include "in_memory_repository.h"
 
 // Add definition of your processing function here
 // TODO: deal with same gameName
@@ -29,7 +30,7 @@ void CreateGame::createGame(const HttpRequestPtr &req,
     
     CreateGameUsecase uc;
     uc.CreateGameExecute(
-        CreateGameUsecaseRequest(player_names), presenter);
+        CreateGameUsecaseRequest(player_names), InMemoryRepository::self(), presenter);
     
     auto resp = HttpResponse::newHttpJsonResponse(presenter.GetViewModel());
     callback(resp);

@@ -3,7 +3,7 @@
 #include <drogon/HttpTypes.h>
 
 #include "../../controllers/utils.h"
-#include "../../usecases/game_repository.h"
+#include "../../controllers/in_memory_repository.h"
 
 #include <iostream>
 #include <string>
@@ -49,7 +49,7 @@ DROGON_TEST(GIVEN_empty_WHEN_createGame_THEN_success)
     CHECK(resp.second->getStatusCode() == 200);
     CHECK((*resp.second->getJsonObject())[controllers::utils::game_id].asString().empty() == false);
     
-    auto game = GameRepository::self().FindGameByID((*resp.second->getJsonObject())[controllers::utils::game_id].asString());
+    auto game = InMemoryRepository::self().FindGameByID((*resp.second->getJsonObject())[controllers::utils::game_id].asString());
 
     REQUIRE(game != nullptr);
     CHECK(game->get_game_id() == (*resp.second->getJsonObject())[controllers::utils::game_id].asString());
