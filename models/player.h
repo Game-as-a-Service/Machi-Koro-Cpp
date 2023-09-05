@@ -7,8 +7,12 @@
 
 #include "dice.h"
 #include "hand.h"
+#include "card/landmark.h"
+#include "card/building.h"
 
 class Card;
+class Landmark;
+class Building;
 class Hand;
 
 class Player {
@@ -18,10 +22,10 @@ public:
     Player(const Player& player) = delete;
     Player(Player&& player) = delete;
     ~Player();
-    
+
     Player& operator = (const Player& rhs) = delete;
     Player& operator = (Player&& rhs) = delete;
-    
+
     int RollDice();
 
     void PayCoin(int coin);
@@ -30,12 +34,14 @@ public:
 
     void PayCoin2AnotherPlayer(int coin, Player* other);
 
-    void GainLandmarks(std::vector<std::unique_ptr<Card>>&& cards);
+    void GainLandmarks(std::vector<std::unique_ptr<Landmark>>&& cards);
 
-    void GainInitialBuildings(std::vector<std::unique_ptr<Card>>&& cards);
-    
+    void GainInitialBuildings(std::vector<std::unique_ptr<Building>>&& cards);
+
+    void GainBuildingCard(std::unique_ptr<Building>&& card);
+
     int get_coin() const { return coin_; }
-    
+
     void set_name(const std::string& name) { name_ = name; }
     std::string get_name() const { return name_; }
 

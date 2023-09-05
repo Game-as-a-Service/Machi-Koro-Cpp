@@ -16,7 +16,7 @@ public:
     MachiKoroGame(const MachiKoroGame& game) = delete;
     MachiKoroGame(MachiKoroGame&& game) = delete;
     ~MachiKoroGame();
-    
+
     MachiKoroGame& operator = (const MachiKoroGame& rhs) = delete;
     MachiKoroGame& operator = (MachiKoroGame&& rhs) = delete;
 
@@ -29,8 +29,8 @@ public:
 
     const ArchitectureMarket* get_market() const { return market_.get(); }
 
-    // TODO(smart pointer): implement this function. 
-    std::vector<const Player*> get_players() const;
+    // TODO(smart pointer): implement this function.
+    std::vector<Player*> get_players();
 
 private:
     std::string game_id_;

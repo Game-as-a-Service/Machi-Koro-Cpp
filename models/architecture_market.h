@@ -19,20 +19,16 @@ public:
     ArchitectureMarket& operator = (const ArchitectureMarket& rhs) = delete;
     ArchitectureMarket& operator = (ArchitectureMarket&& rhs) = delete;
 
-    std::vector<std::unique_ptr<Card>> GetInitialBuildingsForOnePlayer();
-    std::vector<std::unique_ptr<Card>> GetLandmarksForOnePlayer();
-    
-    const std::map<CardName, std::deque<std::unique_ptr<Card>>>& 
+    std::vector<std::unique_ptr<Building>> GetInitialBuildingsForOnePlayer();
+    std::vector<std::unique_ptr<Landmarks>> GetLandmarksForOnePlayer();
+
+    const std::map<CardName, std::deque<std::unique_ptr<Building>>>&
     get_buildings() const { return buildings_; }
-     
-    //Card DrawBuilding();
-    //Card DrawLandmark();
-    //Card DrawInitialBuilding();
-    
+
 private:
     // key: Card name; Value : Cards.
-    std::map<CardName, std::deque<std::unique_ptr<Card>>> buildings_;
-
+    std::map<CardName, std::deque<std::unique_ptr<Building>>> buildings_;
+    std::map<CardName, std::deque<std::unique_ptr<Landmark>>> landmarks_;
 };
 
 #endif

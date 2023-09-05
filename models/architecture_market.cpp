@@ -29,6 +29,11 @@ ArchitectureMarket::ArchitectureMarket()
             buildings_[name].push_back(std::make_unique<decltype(building)>());
         }
     };
+    auto addLandmarks= [&](const CardName& name, auto building, const int count) {
+        for (int i = 0; i < count; ++i) {
+            landmarks_[name].push_back(std::make_unique<decltype(building)>());
+        }
+    };
 
     // Buildings.
     addBuildings(CardName::WHEAT_FIELD, WheatField{}, 10);
@@ -48,10 +53,10 @@ ArchitectureMarket::ArchitectureMarket()
     addBuildings(CardName::FRUIT_AND_VEGETABLE_MARKET, FruitAndVegetableMarket{}, 6);
 
     // Landmarks.
-    addBuildings(CardName::AMUSEMENT_PARK, AmusementPark{}, 4);
-    addBuildings(CardName::RADIO_TOWER, RadioTower{}, 4);
-    addBuildings(CardName::SHOPPING_MALL, ShoppingMall{}, 4);
-    addBuildings(CardName::TRAIN_STATION, TrainStation{}, 4);
+    addLandmarks(CardName::AMUSEMENT_PARK, AmusementPark{}, 4);
+    addLandmarks(CardName::RADIO_TOWER, RadioTower{}, 4);
+    addLandmarks(CardName::SHOPPING_MALL, ShoppingMall{}, 4);
+    addLandmarks(CardName::TRAIN_STATION, TrainStation{}, 4);
 }
 
 ArchitectureMarket::~ArchitectureMarket()
@@ -59,14 +64,18 @@ ArchitectureMarket::~ArchitectureMarket()
     for (auto& cards : buildings_)
         for (auto& c : cards.second) c = nullptr;
     buildings_.clear();
+
+    for (auto& cards : landmarks_)
+        for (auto& c : cards.second) c = nullptr;
+    landmarks_.clear();
 }
 
-std::vector<std::unique_ptr<Card>> ArchitectureMarket::GetInitialBuildingsForOnePlayer()
+std::vector<std::unique_ptr<Building>> ArchitectureMarket::GetInitialBuildingsForOnePlayer()
 {
     // 每個玩家一開始都各持有一張小麥田和麵包店。
-    std::vector<std::unique_ptr<Card>> cards;
-    assert(buildings_[CardName::WHEAT_FIELD].size() > 0 && "There is no wheat field card in the market.");   
-    assert(buildings_[CardName::BAKERY].size() > 0 && "There is no bakery card in the market.");   
+    std::vector<std::unique_ptr<Building>> cards;
+    assert(buildings_[CardName::WHEAT_FIELD].size() > 0 && "There is no wheat field card in the market.");
+    assert(buildings_[CardName::BAKERY].size() > 0 && "There is no bakery card in the market.");
     cards.push_back(std::move(buildings_[CardName::WHEAT_FIELD].back()));
     cards.push_back(std::move(buildings_[CardName::BAKERY].back()));
     buildings_[CardName::WHEAT_FIELD].pop_back();
@@ -74,25 +83,25 @@ std::vector<std::unique_ptr<Card>> ArchitectureMarket::GetInitialBuildingsForOne
     return cards;
 }
 
-std::vector<std::unique_ptr<Card>> ArchitectureMarket::GetLandmarksForOnePlayer()
+std::vector<std::unique_ptr<Landmark>> ArchitectureMarket::GetLandmarksForOnePlayer()
 {
     // 每個玩家一開始各分到一張主題樂園、一張廣播電台、一張購物中心，以及一張火車站。
-    std::vector<std::unique_ptr<Card>> cards;
-    assert(buildings_[CardName::AMUSEMENT_PARK].size() > 0 && 
+    std::vector<std::unique_ptr<Landmark>> cards;
+    assert(landmarks_[CardName::AMUSEMENT_PARK].size() > 0 &&
         "There is no amusement park card in the market.");
-    assert(buildings_[CardName::SHOPPING_MALL].size() > 0 && 
+    assert(landmarks_[CardName::SHOPPING_MALL].size() > 0 &&
         "There is no shopping mall card in the market.");
-    assert(buildings_[CardName::TRAIN_STATION].size() > 0 && 
+    assert(landmarks_[CardName::TRAIN_STATION].size() > 0 &&
         "There is no train station card in the market.");
-    assert(buildings_[CardName::RADIO_TOWER].size() > 0 && 
+    assert(landmarks_[CardName::RADIO_TOWER].size() > 0 &&
         "There is no radio tower card in the market.");
-    cards.push_back(std::move(buildings_[CardName::AMUSEMENT_PARK].back()));
-    cards.push_back(std::move(buildings_[CardName::SHOPPING_MALL].back()));
-    cards.push_back(std::move(buildings_[CardName::TRAIN_STATION].back()));
-    cards.push_back(std::move(buildings_[CardName::RADIO_TOWER].back()));
-    buildings_[CardName::AMUSEMENT_PARK].pop_back();
-    buildings_[CardName::SHOPPING_MALL].pop_back();
-    buildings_[CardName::TRAIN_STATION].pop_back();
-    buildings_[CardName::RADIO_TOWER].pop_back();
+    cards.push_back(std::move(landmarks_[CardName::AMUSEMENT_PARK].back()));
+    cards.push_back(std::move(landmarks_[CardName::SHOPPING_MALL].back()));
+    cards.push_back(std::move(landmarks_[CardName::TRAIN_STATION].back()));
+    cards.push_back(std::move(landmarks_[CardName::RADIO_TOWER].back()));
+    landmarks_[CardName::AMUSEMENT_PARK].pop_back();
+    landmarks_[CardName::SHOPPING_MALL].pop_back();
+    landmarks_[CardName::TRAIN_STATION].pop_back();
+    landmarks_[CardName::RADIO_TOWER].pop_back();
     return cards;
 }
