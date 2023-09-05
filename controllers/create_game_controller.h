@@ -23,7 +23,7 @@ class CreateGamePresenter : public CreateGameUsecase::Presenter
 {
   public:
     void Present(const MachiKoroGame& game) override;
-    std::string GetViewModel() const;
+    Json::Value GetViewModel() const;
 
   private:
     std::string game_id_;
