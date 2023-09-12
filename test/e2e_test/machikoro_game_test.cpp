@@ -97,19 +97,19 @@ DROGON_TEST(GIVEN_player_has_no_station_WHEN_roll_2_dice_THEN_failed) {
     // send rolldice request (roll 2 dice), then failed
 
     // Given
-    Json::Value req;
+    Json::Value create_json;
     Json::Value players(Json::arrayValue);
     players.append("player_a");
-    req[controllers::utils::player_names] = players;
+    create_json[controllers::utils::player_names] = players;
 
-    drogon::HttpRequestPtr http_req =
-        GetRequestObj(req, drogon::Post, "/CreateGame/createGame");
     auto client = drogon::HttpClient::newHttpClient(HTTP_ADDRESS);
-    auto resp = client->sendRequest(http_req);
+    drogon::HttpRequestPtr create_req =
+        GetRequestObj(req, drogon::Post, "/CreateGame/createGame");
+    auto create_resp = client->sendRequest(create_req);
     auto game = InMemoryRepository::self()
-        .FindGameByID((*resp.second->getJsonObject())[controllers::utils::game_id].asString());
-    auto player = game->get_players()[0];
-    player->GainBuildingCard(std::make_unique<CardName::TRAIN_STATION>());
+        .FindGameByID(
+            (*create_resp.second->getJsonObject())[controllers::utils::game_id].asString()
+        );
 
     // When
     // Roll Dice Controller
@@ -122,4 +122,9 @@ DROGON_TEST(GIVEN_player_has_station_WHEN_rolldice_THEN_success) {
     // give train station to player0
     // send rolldice request (roll 1 dice), then success
     // send rolldice request (roll 2 dice), then success
+
+     //auto player = game->get_players()[0];
+    //player->GainBuildingCard(std::make_unique<CardName::TRAIN_STATION>());
+
+
 }

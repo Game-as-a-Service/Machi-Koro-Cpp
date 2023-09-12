@@ -5,6 +5,7 @@
 
 #include "../models/machikoro_game.h"
 #include "game_repository.h"
+#include "presenter.h"
 
 // An input for CreateGameUsecase.
 class CreateGameUsecaseRequest {
@@ -24,17 +25,12 @@ private:
 
 class CreateGameUsecase {
 public:
-    class Presenter {
-    public:
-        virtual void Present(const MachiKoroGame& game) = 0;
-    };
-
     CreateGameUsecase() = default;
     CreateGameUsecase(const CreateGameUsecase& uc) = delete;
     CreateGameUsecase(CreateGameUsecase&& uc) = delete;
     ~CreateGameUsecase() = default;
 
-    void CreateGameExecute(const CreateGameUsecaseRequest& input, 
-        GameRepository& repo, 
+    void CreateGameExecute(const CreateGameUsecaseRequest& input,
+        GameRepository& repo,
         Presenter& presenter);
 };

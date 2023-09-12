@@ -1,26 +1,25 @@
 #pragma once
 
 #include <drogon/HttpController.h>
-
 #include <string>
 
-#include "../usecases/create_game_usecase.h"
+#include "../usecases/roll_dice_usecase.h"
 #include "../usecases/presenter.h"
 
 using namespace drogon;
 
-class CreateGame : public drogon::HttpController<CreateGame>
+class RollDice : public drogon::HttpController<RollDice>
 {
   public:
     METHOD_LIST_BEGIN
-    METHOD_ADD(CreateGame::createGame, "/createGame", Post);
+    METHOD_ADD(RollDice::rollDice, "/rollDice", Post);
     METHOD_LIST_END
 
-    void createGame(const HttpRequestPtr &req,
+    void rollDice(const HttpRequestPtr &req,
                std::function<void (const HttpResponsePtr &)> &&callback);
 };
 
-class CreateGamePresenter : public Presenter
+class RollDicePresenter : public Presenter
 {
   public:
     void Present(const MachiKoroGame& game) override;
