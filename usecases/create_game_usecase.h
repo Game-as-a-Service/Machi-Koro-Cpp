@@ -31,6 +31,6 @@ public:
     ~CreateGameUsecase() = default;
 
     void CreateGameExecute(const CreateGameUsecaseRequest& input,
-        GameRepository& repo,
-        Presenter& presenter);
+                            GameRepository& repo,
+                            Presenter& presenter);
 };

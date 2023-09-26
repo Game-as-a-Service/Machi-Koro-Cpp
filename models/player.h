@@ -26,7 +26,7 @@ public:
     Player& operator = (const Player& rhs) = delete;
     Player& operator = (Player&& rhs) = delete;
 
-    int RollDice();
+    int RollDice(int dice_count);
 
     void PayCoin(int coin);
 

@@ -22,10 +22,30 @@ Player::~Player()
     hand_ = nullptr;
 }
 
-int Player::RollDice()
+int Player::RollDice(int dice_count)
 {
-    // TODO: modify this
-    return 0;
+    auto it = std::find(
+        hand_->get_landmarks().begin(), 
+        hand_->get_landmarks().end(),
+        [&](const auto& landmark) {
+            return landmark->get_name() == CardName::TRAIN_STATION &&
+                landmark->IsActivate();
+        }
+    );
+
+    // If have TrainStation and want to roll 2 dice,
+    // then let it roll 2 dice.
+    if (it != hand_->get_landmarks().end() && dice_count == 2)
+        dice_count = 2;
+    else
+        dice_count = 1;
+
+    // TODO: 可以擲兩顆且兩顆點數一樣的時候，有權利馬上再進行一回合
+    int res = 0;
+    for (int i = 0; i < dice_count; ++i)
+        res += dices_[i].GeneratePoint();
+
+    return res;
 }
 
 void Player::PayCoin(int coin)

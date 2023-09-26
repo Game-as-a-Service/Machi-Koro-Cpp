@@ -22,7 +22,7 @@ public:
 
     void GameStart();
 
-    void RollDice(std::string player_id, int dice_count);
+    void RollDice(const std::string& player_id, int dice_count);
 
     void set_game_id(const std::string& id) { game_id_ = id; }
     std::string get_game_id() const { return game_id_; }

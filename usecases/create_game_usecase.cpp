@@ -10,7 +10,9 @@ CreateGameUsecaseRequest::CreateGameUsecaseRequest(const std::vector<std::string
 {
 }
 
-void CreateGameUsecase::CreateGameExecute(const CreateGameUsecaseRequest &input, GameRepository& repo, CreateGameUsecase::Presenter &presenter)
+void CreateGameUsecase::CreateGameExecute(const CreateGameUsecaseRequest &input, 
+                                            GameRepository& repo, 
+                                            Presenter &presenter)
 {
     auto game = std::make_shared<MachiKoroGame>(input.get_player_names());
     repo.AddGame(game);

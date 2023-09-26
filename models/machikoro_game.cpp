@@ -39,18 +39,19 @@ void MachiKoroGame::GameStart()
     std::cout << "Game Start !!" << std::endl;
 }
 
-std::vector<const Player*> MachiKoroGame::get_players() const
+std::vector<Player*> MachiKoroGame::get_players()
 {
-    std::vector<const Player*> players;
+    std::vector<Player*> players;
     for (const auto& player: players_)
         players.push_back(player.get());
     return players;
 }
 
-void MachiKoroGame::RollDice(std::string player_id, int dice_count) {
-    check player_id is current player
-    int count = player->RollDice(dice_count);
-    // 發動效果？
-
-    return;
+void MachiKoroGame::RollDice(const std::string& player_id, int dice_count) {
+    // Idnetify current player.
+    auto player = (*std::find_if(players_.begin(), players_.end(),
+        [&](const auto& p) { return p->get_name() == player_id; }
+    )).get();
+    int total_point = player->RollDice(dice_count);
+    // Take effect (?)
 }

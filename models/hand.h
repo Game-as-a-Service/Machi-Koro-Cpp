@@ -16,9 +16,11 @@ public:
     Hand();
     ~Hand();
 
-    void AddBuilding(std::unique_ptr<Building> card) { buildings_.push_back(std::move(card)); }
+    void AddBuilding(std::unique_ptr<Building> card) 
+    { buildings_.push_back(std::move(card)); }
 
-    void AddLandmark(std::unique_ptr<Landmark> card) { landmarks_.push_back(std::move(card)); }
+    void AddLandmark(std::unique_ptr<Landmark> card) 
+    { landmarks_.push_back(std::move(card)); }
 
     std::vector<Building*> get_buildings() const;
 
