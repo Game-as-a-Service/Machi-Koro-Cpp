@@ -9,20 +9,20 @@
 // An input for RollDiceUsecase.
 class RollDiceUsecaseRequest {
 public:
-    RollDiceUsecaseRequest(const std::string& name, int cnt)
-        : player_name_(name)
+    RollDiceUsecaseRequest(const std::string& id,
+                            const std::string& name,
+                            int cnt)
+        : game_id_(id)
+        , player_name_(name)
         , rolled_dice_cnt_(cnt)
-    {
-    }
+    {}
+
+    std::string get_game_id() const { return game_id_; }
 
 private:
+    std::string game_id_;
     std::string player_name_;
     int rolled_dice_cnt_;
-};
-
-class RollDicePresenter : public Presenter {
-public:
-    void Present(const MachiKoroGame& game);
 };
 
 // TODO: 只要RollDice失敗一次，就直接幫他擲骰子。（壞）
