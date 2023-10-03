@@ -3,18 +3,12 @@
 Player::Player()
     : hand_(std::make_unique<Hand>())
 {
-    dices_.reserve(2);
-    for (int i = 0; i < 2; ++i)
-        dices_.push_back(Dice());
 }
 
 Player::Player(const std::string& name)
     : name_(name)
     , hand_(std::make_unique<Hand>())
 {
-    dices_.reserve(2);
-    for (int i = 0; i < 2; ++i)
-        dices_.push_back(Dice());
 }
 
 Player::~Player()
@@ -22,12 +16,12 @@ Player::~Player()
     hand_ = nullptr;
 }
 
-int Player::RollDice(int dice_count)
+std::pair<int, int> Player::RollDice(int dice_count)
 {
     auto it = std::find(
         hand_->get_landmarks().begin(), 
         hand_->get_landmarks().end(),
-        [&](const auto& landmark) {
+        [](const auto& landmark) {
             return landmark->get_name() == CardName::TRAIN_STATION &&
                 landmark->IsActivate();
         }
@@ -40,12 +34,12 @@ int Player::RollDice(int dice_count)
     else
         dice_count = 1;
 
-    // TODO: 可以擲兩顆且兩顆點數一樣的時候，有權利馬上再進行一回合
-    int res = 0;
-    for (int i = 0; i < dice_count; ++i)
-        res += dices_[i].GeneratePoint();
+    int pt1 = 0, pt2 = 0;
+    pt1 = dice_.GeneratePoint();
+    if (dice_count == 2)
+        pt2 = dice_.GeneratePoint();
 
-    return res;
+    return std::make_pair(pt1, pt2); 
 }
 
 void Player::PayCoin(int coin)

@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <utility>
 
 #include "dice.h"
 #include "hand.h"
@@ -26,7 +27,7 @@ public:
     Player& operator = (const Player& rhs) = delete;
     Player& operator = (Player&& rhs) = delete;
 
-    int RollDice(int dice_count);
+    std::pair<int, int> RollDice(int dice_count);
 
     void PayCoin(int coin);
 
@@ -49,8 +50,8 @@ public:
 
 private:
     int coin_ = 0;
+    Dice dice_;
     std::string name_;
-    std::vector<Dice> dices_;
     std::unique_ptr<Hand> hand_ = nullptr;
 };
 

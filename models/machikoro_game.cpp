@@ -47,11 +47,38 @@ std::vector<Player*> MachiKoroGame::get_players()
     return players;
 }
 
-void MachiKoroGame::RollDice(const std::string& player_id, int dice_count) {
+void MachiKoroGame::RollDice(const std::string& player_id, int dice_count) 
+{
+    auto IsLandmarkInHand = 
+        [](const Hand* hand, CardName name) -> bool {
+            auto it = std::find(
+                hand->get_landmarks().begin(),
+                hand->get_landmarks().end(),
+                [](const auto& landmark)  { 
+                    return landmark->get_name() == name &&
+                        landmark->IsActive(); 
+                }
+            );
+            return it != hand->get_landmarks().end();
+        };
+    
     // Idnetify current player.
     auto player = (*std::find_if(players_.begin(), players_.end(),
-        [&](const auto& p) { return p->get_name() == player_id; }
+        [](const auto& p) { return p->get_name() == player_id; }
     )).get();
-    int total_point = player->RollDice(dice_count);
-    // Take effect (?)
+
+    auto [pt1, pt2] = player->RollDice(dice_count);
+    if (IsLandmarkInHand(player->get_hand(), CardName::RADIO_TOWER))
+    {
+        // Can reroll the dice or not.
+    }
+
+    // Operate effect. 
+
+    // If two points are the same, can roll the dice in next round or not.
+    if (pt1 == pt2 &&
+        IsLandmarkInHand(player->get_hand(), CardName::AMUSEMENT_PARK))
+    {
+
+    }
 }
