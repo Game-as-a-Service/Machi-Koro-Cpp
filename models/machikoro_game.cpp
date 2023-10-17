@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "events/roll_dice_event.h"
+
 MachiKoroGame::MachiKoroGame(const std::vector<std::string>& player_names)
 {
     for (const auto& name : player_names)
@@ -47,7 +49,8 @@ std::vector<Player*> MachiKoroGame::get_players()
     return players;
 }
 
-void MachiKoroGame::RollDice(const std::string& player_id, int dice_count) 
+std::unique_ptr<DomainEvent> 
+MachiKoroGame::RollDice(const std::string& player_id, int dice_count) 
 {
     auto IsLandmarkInHand = 
         [](const Hand* hand, CardName name) -> bool {
@@ -68,9 +71,13 @@ void MachiKoroGame::RollDice(const std::string& player_id, int dice_count)
     )).get();
 
     auto [pt1, pt2] = player->RollDice(dice_count);
+    auto event = std::make_unique<RollDiceEvent>(pt1, pt2,
+        !(dice_count == 2 && pt2 == 0));
     if (IsLandmarkInHand(player->get_hand(), CardName::RADIO_TOWER))
     {
         // Can reroll the dice or not.
+        event->set_can_reroll(true);
+        return event;
     }
 
     // Operate effect. 
@@ -81,4 +88,5 @@ void MachiKoroGame::RollDice(const std::string& player_id, int dice_count)
     {
 
     }
+    return event;
 }
