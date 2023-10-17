@@ -17,11 +17,18 @@ public:
 
     bool get_can_reroll() const { return can_reroll_; }
 
+    void set_can_roll_next(bool res) {
+        can_roll_next_ = res;
+    }
+
+    bool get_can_roll_next() const { return can_roll_next_; }
+
 private:
     int point_1_ = 0;
     int point_2_ = 0;
     bool is_roll_success_ = true;
     bool can_reroll_ = false;
+    bool can_roll_next_ = false;
 };
 
 #endif

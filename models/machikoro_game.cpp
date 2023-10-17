@@ -85,8 +85,6 @@ MachiKoroGame::RollDice(const std::string& player_id, int dice_count)
     // If two points are the same, can roll the dice in next round or not.
     if (pt1 == pt2 &&
         IsLandmarkInHand(player->get_hand(), CardName::AMUSEMENT_PARK))
-    {
-
-    }
+        event->set_can_roll_next(true);
     return event;
 }
