@@ -11,17 +11,17 @@ public:
         , is_roll_success_(res)
     {}
 
-    void set_can_reroll(bool res) {
-        can_reroll_ = res;
-    }
+    void set_can_reroll(bool res) 
+    { can_reroll_ = res; }
 
-    bool get_can_reroll() const { return can_reroll_; }
+    bool get_can_reroll() const 
+    { return can_reroll_; }
 
-    void set_can_roll_next(bool res) {
-        can_roll_next_ = res;
-    }
+    void set_can_roll_next(bool res) 
+    { can_roll_next_ = res; }
 
-    bool get_can_roll_next() const { return can_roll_next_; }
+    bool get_can_roll_next() const 
+    { return can_roll_next_; }
 
 private:
     int point_1_ = 0;
