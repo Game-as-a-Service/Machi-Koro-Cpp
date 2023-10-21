@@ -8,12 +8,9 @@
 
 #include "dice.h"
 #include "hand.h"
-#include "card/landmark.h"
 #include "card/building.h"
 
 class Card;
-class Landmark;
-class Building;
 class Hand;
 
 class Player {
@@ -35,11 +32,9 @@ public:
 
     void PayCoin2AnotherPlayer(int coin, Player* other);
 
-    void GainLandmarks(std::vector<std::unique_ptr<Landmark>>&& cards);
+    void GainLandmarks(std::vector<std::unique_ptr<Card>>&& cards);
 
-    void GainInitialBuildings(std::vector<std::unique_ptr<Building>>&& cards);
-
-    void GainBuildingCard(std::unique_ptr<Building>&& card);
+    void GainInitialBuildings(std::vector<std::unique_ptr<Card>>&& cards);
 
     int get_coin() const { return coin_; }
 

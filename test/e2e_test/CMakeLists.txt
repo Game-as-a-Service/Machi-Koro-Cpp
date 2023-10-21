@@ -24,6 +24,7 @@ aux_source_directory(../../plugins PLUGIN_SRC_TEST)
 aux_source_directory(../../usecases USECASES_SRC_TEST)
 aux_source_directory(../../models MODEL_SRC_TEST)
 aux_source_directory(../../models/card CARDS_SRC_TEST)
+aux_source_directory(../../models/events EVENTS_SRC_TEST)
 
 target_sources(${PROJECT_NAME}
                PRIVATE
@@ -32,6 +33,7 @@ target_sources(${PROJECT_NAME}
                ${PLUGIN_SRC_TEST}
                ${USECASES_SRC_TEST}
                ${MODEL_SRC_TEST}
-               ${CARDS_SRC_TEST})
+               ${CARDS_SRC_TEST}
+               ${EVENTS_SRC_TEST})
 
 ParseAndAddDrogonTests(${PROJECT_NAME})

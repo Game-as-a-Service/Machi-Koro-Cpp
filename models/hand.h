@@ -5,30 +5,27 @@
 #include <memory>
 
 #include "card/card.h"
-#include "card/building.h"
-#include "card/landmark.h"
 
-class Building;
-class Landmark;
+class Card;
 
 class Hand {
 public:
     Hand();
     ~Hand();
 
-    void AddBuilding(std::unique_ptr<Building> card) 
+    void AddBuilding(std::unique_ptr<Card> card) 
     { buildings_.push_back(std::move(card)); }
 
-    void AddLandmark(std::unique_ptr<Landmark> card) 
+    void AddLandmark(std::unique_ptr<Card> card) 
     { landmarks_.push_back(std::move(card)); }
 
-    std::vector<Building*> get_buildings() const;
+    std::vector<Card*> get_buildings() const;
 
-    std::vector<Landmark*> get_landmarks() const;
+    std::vector<Card*> get_landmarks() const;
 
 private:
-    std::vector<std::unique_ptr<Building>> buildings_;
-    std::vector<std::unique_ptr<Landmark>> landmarks_;
+    std::vector<std::unique_ptr<Card>> buildings_;
+    std::vector<std::unique_ptr<Card>> landmarks_;
 };
 
 #endif

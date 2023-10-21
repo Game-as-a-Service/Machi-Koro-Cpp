@@ -58,19 +58,14 @@ void Player::PayCoin2AnotherPlayer(int coin, Player* other)
     other->GainCoin(coin);
 }
 
-void Player::GainLandmarks(std::vector<std::unique_ptr<Landmark>>&& cards)
+void Player::GainLandmarks(std::vector<std::unique_ptr<Card>>&& cards)
 {
     for (auto& card : cards)
         hand_->AddLandmark(std::move(card));
 }
 
-void Player::GainInitialBuildings(std::vector<std::unique_ptr<Building>>&& cards)
+void Player::GainInitialBuildings(std::vector<std::unique_ptr<Card>>&& cards)
 {
     for (auto& card : cards)
         hand_->AddBuilding(std::move(card));
-}
-
-void Player::GainBuildingCard(std::unique_ptr<Building>&& card)
-{
-    hand_->AddBuilding(std::move(card));
 }

@@ -12,17 +12,17 @@ Hand::~Hand()
     landmarks_.clear();
 }
 
-std::vector<Building*> Hand::get_buildings() const
+std::vector<Card*> Hand::get_buildings() const
 {
-    std::vector<Building*> res;
+    std::vector<Card*> res;
     for (const auto& card : buildings_)
         res.push_back(card.get());
     return res;
 }
 
-std::vector<Landmark*> Hand::get_landmarks() const
+std::vector<Card*> Hand::get_landmarks() const
 {
-    std::vector<Landmark*> res;
+    std::vector<Card*> res;
     for (const auto& card: landmarks_)
         res.push_back(card.get());
     return res;

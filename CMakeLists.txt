@@ -51,6 +51,7 @@ aux_source_directory(plugins PLUGIN_SRC)
 aux_source_directory(usecases USECASES_SRC)
 aux_source_directory(models MODEL_SRC)
 aux_source_directory(models/card CARDS_SRC)
+aux_source_directory(models/events EVENTS_SRC)
 
 drogon_create_views(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/views
                     ${CMAKE_CURRENT_BINARY_DIR})
@@ -77,7 +78,8 @@ target_sources(${PROJECT_NAME}
                ${PLUGIN_SRC}
                ${USECASES_SRC}
                ${MODEL_SRC}
-               ${CARDS_SRC})
+               ${CARDS_SRC}
+               ${EVENTS_SRC})
 #################################
 
 # ##############################################################################
