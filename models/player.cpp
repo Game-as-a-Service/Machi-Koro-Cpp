@@ -1,5 +1,9 @@
 #include "player.h"
 
+#include <algorithm>
+
+#include "card/landmark.h"
+
 Player::Player()
     : hand_(std::make_unique<Hand>())
 {
@@ -18,12 +22,12 @@ Player::~Player()
 
 std::pair<int, int> Player::RollDice(int dice_count)
 {
-    auto it = std::find(
+    auto it = std::find_if(
         hand_->get_landmarks().begin(), 
         hand_->get_landmarks().end(),
-        [](const auto& landmark) {
+        [](Card* landmark) {
             return landmark->get_name() == CardName::TRAIN_STATION &&
-                landmark->IsActivate();
+                dynamic_cast<Landmark*>(landmark)->IsActivate();
         }
     );
 

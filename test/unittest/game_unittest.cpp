@@ -25,7 +25,7 @@ TEST_F(GameTest, GameInit) {
     ASSERT_EQ(game_->get_players().size(), 4);
     EXPECT_EQ(game_->get_bank()->get_coin(), 282 - 3 * 4);
     for (const auto& player : game_->get_players()) {
-        EXPECT_EQ(player->get_hand()->get_cards().size(), 2);
+        EXPECT_EQ(player->get_hand()->get_buildings().size(), 2);
         EXPECT_EQ(player->get_hand()->get_landmarks().size(), 4);
         EXPECT_EQ(player->get_coin(), 3);
     }

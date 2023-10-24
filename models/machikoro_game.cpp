@@ -1,6 +1,7 @@
 #include "machikoro_game.h"
 
 #include <iostream>
+#include <algorithm>
 
 #include "events/roll_dice_event.h"
 
@@ -53,13 +54,13 @@ std::unique_ptr<DomainEvent>
 MachiKoroGame::RollDice(const std::string& player_id, int dice_count) 
 {
     auto IsLandmarkInHand = 
-        [](const Hand* hand, CardName name) -> bool {
-            auto it = std::find(
+        [](const Hand* hand, const CardName name) -> bool {
+            auto it = std::find_if(
                 hand->get_landmarks().begin(),
                 hand->get_landmarks().end(),
-                [](const auto& landmark)  { 
+                [&name](Card* landmark)  { 
                     return landmark->get_name() == name &&
-                        landmark->IsActive(); 
+                        dynamic_cast<Landmark*>(landmark)->IsActivate();
                 }
             );
             return it != hand->get_landmarks().end();
@@ -67,7 +68,7 @@ MachiKoroGame::RollDice(const std::string& player_id, int dice_count)
     
     // Idnetify current player.
     auto player = (*std::find_if(players_.begin(), players_.end(),
-        [](const auto& p) { return p->get_name() == player_id; }
+        [&player_id](const auto& p) { return p->get_name() == player_id; }
     )).get();
 
     auto [pt1, pt2] = player->RollDice(dice_count);

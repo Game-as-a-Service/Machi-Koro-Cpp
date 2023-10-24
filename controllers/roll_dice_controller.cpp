@@ -34,15 +34,15 @@ void RollDice::rollDice(const HttpRequestPtr &req,
     callback(resp);
 }
 
-// void RollDicePresenter::Present(const MachiKoroGame& game)
-// {
-//     game_id_ = game.get_game_id();
-// }
+void RollDicePresenter::Present(const MachiKoroGame& game)
+{
+    //game_id_ = game.get_game_id();
+}
 
-// Json::Value RollDicePresenter::GetViewModel() const
-// {
-//     Json::Value res;
-//     res["result"] = "ok";
-//     res[controllers::utils::game_id] = game_id_;
-//     return res;
-// }
+Json::Value RollDicePresenter::GetViewModel() const
+{
+    Json::Value res;
+    //res["result"] = "ok";
+    //res[controllers::utils::game_id] = game_id_;
+    return res;
+}

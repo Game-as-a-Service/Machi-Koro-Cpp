@@ -86,7 +86,7 @@ DROGON_TEST(GIVEN_4_players_WHEN_game_setup_THEN_xxxxxx)
         CHECK(hand->get_landmarks().size() == 4);
         for (const auto& landmark: hand->get_landmarks()) {
             CHECK(std::find(card_names.begin(), card_names.end(), landmark->get_name()) != card_names.end());
-            CHECK(landmark->IsActivate() == false);
+            CHECK(dynamic_cast<Landmark*>(landmark)->IsActivate() == false);
         }
     }
 
@@ -104,7 +104,7 @@ DROGON_TEST(GIVEN_player_has_no_station_WHEN_roll_2_dice_THEN_failed) {
 
     auto client = drogon::HttpClient::newHttpClient(HTTP_ADDRESS);
     drogon::HttpRequestPtr create_req =
-        GetRequestObj(req, drogon::Post, "/CreateGame/createGame");
+        GetRequestObj(create_json, drogon::Post, "/CreateGame/createGame");
     auto create_resp = client->sendRequest(create_req);
     auto game = InMemoryRepository::self()
         .FindGameByID(
