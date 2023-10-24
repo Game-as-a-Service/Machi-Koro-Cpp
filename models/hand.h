@@ -12,17 +12,19 @@ class Hand {
 public:
     Hand();
     ~Hand();
-    
-    void AddCard(std::unique_ptr<Card> card) { cards_.push_back(std::move(card)); }
 
-    void AddLandmark(std::unique_ptr<Card> card) { landmarks_.push_back(std::move(card)); }
+    void AddBuilding(std::unique_ptr<Card> card) 
+    { buildings_.push_back(std::move(card)); }
 
-    std::vector<Card*> get_cards() const;
+    void AddLandmark(std::unique_ptr<Card> card) 
+    { landmarks_.push_back(std::move(card)); }
+
+    std::vector<Card*> get_buildings() const;
 
     std::vector<Card*> get_landmarks() const;
 
 private:
-    std::vector<std::unique_ptr<Card>> cards_;
+    std::vector<std::unique_ptr<Card>> buildings_;
     std::vector<std::unique_ptr<Card>> landmarks_;
 };
 

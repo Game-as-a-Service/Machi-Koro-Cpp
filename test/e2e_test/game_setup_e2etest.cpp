@@ -3,6 +3,8 @@
 
 #include "../../controllers/utils.h"
 #include "../../controllers/in_memory_repository.h"
+#include "../../models/card/card.h"
+#include "../../models/player.h"
 
 #include <iostream>
 #include <gtest/gtest.h>
@@ -57,6 +59,7 @@ drogon::HttpRequestPtr GetRequestObj(const std::string json_key_name,
 // GIVEN_empty_WHEN_createGame_THEN_success
 TEST_F(GameSetupE2ETest, CreateGameSuccessfully)
 {
+    // Given
     Json::Value create_game_request_json;
     Json::Value player_list(Json::arrayValue);
     player_list.append("player0");
@@ -64,9 +67,10 @@ TEST_F(GameSetupE2ETest, CreateGameSuccessfully)
     player_list.append("player2");
     player_list.append("player3");
     create_game_request_json[controllers::utils::player_names] = player_list;
+
+    // When
     drogon::HttpRequestPtr create_game_req =
         GetRequestObj(create_game_request_json, drogon::Post, "/CreateGame/createGame");
-
     auto client = drogon::HttpClient::newHttpClient(HTTP_ADDRESS);
     auto resp = client->sendRequest(create_game_req);
     ASSERT_EQ(resp.first, drogon::ReqResult::Ok);
@@ -80,30 +84,40 @@ TEST_F(GameSetupE2ETest, CreateGameSuccessfully)
     EXPECT_EQ(game->get_game_id(), (*resp.second->getJsonObject())[controllers::utils::game_id].asString());
 }
 
-/*
-// TODO(issue #9): Fix the asynchronous problem so that different test cases won't interfere with each other.
-DROGON_TEST(GIVEN_gameExists_WHEN_createGameWithSameName_THEN_reject)
-{
-    auto client = drogon::HttpClient::newHttpClient(HTTP_ADDRESS);
-    std::string gameName2 = "Game2";
-    drogon::HttpRequestPtr req1 = getRequestObj("gameName", gameName2, drogon::Post, "/CreateGame/createGame");
-    client->sendRequest(req1, [TEST_CTX](drogon::ReqResult res, const drogon::HttpResponsePtr& resp)
-    {
-        REQUIRE(res == drogon::ReqResult::Ok);
-        REQUIRE(resp != nullptr);
-    });
+//DROGON_TEST(GIVEN_player_has_no_station_WHEN_roll_2_dice_THEN_failed) {
+    // Create game
+    // send rolldice request (roll 2 dice), then failed
 
-    drogon::HttpRequestPtr req2 = getRequestObj("gameName", gameName2, drogon::Post, "/CreateGame/createGame");
-    client->sendRequest(req2, [TEST_CTX](drogon::ReqResult res, const drogon::HttpResponsePtr& resp)
-    {
-        REQUIRE(res == drogon::ReqResult::Ok);
-        REQUIRE(resp != nullptr);
-        CHECK(resp->getStatusCode() == 400);
-        LOG_INFO << resp->getBody();
-    });
-    GameRepository::self().ClearAllGames();
-}
-*/
+    // Given
+    // Json::Value create_json;
+    // Json::Value players(Json::arrayValue);
+    // players.append("player_a");
+    // create_json[controllers::utils::player_names] = players;
+
+    // auto client = drogon::HttpClient::newHttpClient(HTTP_ADDRESS);
+    // std::string gameName2 = "Game2";
+    // drogon::HttpRequestPtr req1 = getRequestObj("gameName", gameName2, drogon::Post, "/CreateGame/createGame");
+    // client->sendRequest(req1, [TEST_CTX](drogon::ReqResult res, const drogon::HttpResponsePtr& resp)
+    // {
+    //     REQUIRE(res == drogon::ReqResult::Ok);
+    //     REQUIRE(resp != nullptr);
+    // });
+
+    // When
+    // Roll Dice Controller
+
+    //Http request: player name, dice count
+//}
+
+//DROGON_TEST(GIVEN_player_has_station_WHEN_rolldice_THEN_success) {
+    // Create game
+
+    // give train station to player0
+    // send rolldice request (roll 1 dice), then success
+    // send rolldice request (roll 2 dice), then success
+
+     //auto player = game->get_players()[0];
+    //player->GainBuildingCard(std::make_unique<CardName::TRAIN_STATION>());
 
 
 // DROGON_TEST(StartGame)

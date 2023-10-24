@@ -8,6 +8,7 @@
 #include "bank.h"
 #include "player.h"
 #include "architecture_market.h"
+#include "events/domain_event.h"
 
 class MachiKoroGame {
 public:
@@ -16,11 +17,14 @@ public:
     MachiKoroGame(const MachiKoroGame& game) = delete;
     MachiKoroGame(MachiKoroGame&& game) = delete;
     ~MachiKoroGame();
-    
+
     MachiKoroGame& operator = (const MachiKoroGame& rhs) = delete;
     MachiKoroGame& operator = (MachiKoroGame&& rhs) = delete;
 
     void GameStart();
+
+    std::unique_ptr<DomainEvent> 
+    RollDice(const std::string& player_id, int dice_count);
 
     void set_game_id(const std::string& id) { game_id_ = id; }
     std::string get_game_id() const { return game_id_; }
@@ -29,8 +33,8 @@ public:
 
     const ArchitectureMarket* get_market() const { return market_.get(); }
 
-    // TODO(smart pointer): implement this function. 
-    std::vector<const Player*> get_players() const;
+    // TODO(smart pointer): implement this function.
+    std::vector<Player*> get_players();
 
 private:
     std::string game_id_;

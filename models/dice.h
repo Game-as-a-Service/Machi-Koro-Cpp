@@ -3,10 +3,10 @@
 
 class Dice {
 public:
-    Dice();
-    ~Dice();
+    Dice() = default;
+    ~Dice() = default;
     
-
+    int GeneratePoint() const;
 };
 
 #endif

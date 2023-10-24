@@ -4,9 +4,11 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <utility>
 
 #include "dice.h"
 #include "hand.h"
+#include "card/building.h"
 
 class Card;
 class Hand;
@@ -18,11 +20,11 @@ public:
     Player(const Player& player) = delete;
     Player(Player&& player) = delete;
     ~Player();
-    
+
     Player& operator = (const Player& rhs) = delete;
     Player& operator = (Player&& rhs) = delete;
-    
-    int RollDice();
+
+    std::pair<int, int> RollDice(int dice_count);
 
     void PayCoin(int coin);
 
@@ -33,9 +35,9 @@ public:
     void GainLandmarks(std::vector<std::unique_ptr<Card>>&& cards);
 
     void GainInitialBuildings(std::vector<std::unique_ptr<Card>>&& cards);
-    
+
     int get_coin() const { return coin_; }
-    
+
     void set_name(const std::string& name) { name_ = name; }
     std::string get_name() const { return name_; }
 
@@ -43,8 +45,8 @@ public:
 
 private:
     int coin_ = 0;
+    Dice dice_;
     std::string name_;
-    std::vector<Dice> dices_;
     std::unique_ptr<Hand> hand_ = nullptr;
 };
 

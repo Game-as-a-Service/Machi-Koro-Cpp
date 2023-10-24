@@ -5,9 +5,6 @@
 #include <vector>
 #include <memory>
 
-#include "../bank.h"
-#include "../player.h"
-
 enum class CardType {
     CROP,
     NATURE_RESOURCES,

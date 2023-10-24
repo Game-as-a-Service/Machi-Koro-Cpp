@@ -21,18 +21,13 @@ public:
 
     std::vector<std::unique_ptr<Card>> GetInitialBuildingsForOnePlayer();
     std::vector<std::unique_ptr<Card>> GetLandmarksForOnePlayer();
-    
-    const std::map<CardName, std::deque<std::unique_ptr<Card>>>& 
+
+    const std::map<CardName, std::deque<std::unique_ptr<Card>>>&
     get_buildings() const { return buildings_; }
-     
-    //Card DrawBuilding();
-    //Card DrawLandmark();
-    //Card DrawInitialBuilding();
-    
+
 private:
     // key: Card name; Value : Cards.
     std::map<CardName, std::deque<std::unique_ptr<Card>>> buildings_;
-
 };
 
 #endif
