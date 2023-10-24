@@ -24,8 +24,8 @@ add_executable(${PROJECT_NAME} main.cc
 
 # ##############################################################################
 # If you include the drogon source code locally in your project, use this method
-# to add drogon 
-# add_subdirectory(drogon) 
+# to add drogon
+# add_subdirectory(drogon)
 # target_link_libraries(${PROJECT_NAME} PRIVATE drogon)
 #
 # and comment out the following lines
@@ -83,13 +83,12 @@ target_sources(${PROJECT_NAME}
 #################################
 
 # ##############################################################################
-# uncomment the following line for dynamically loading views 
+# uncomment the following line for dynamically loading views
 # set_property(TARGET ${PROJECT_NAME} PROPERTY ENABLE_EXPORTS ON)
 
 # ##############################################################################
 
-add_subdirectory(test/e2e_test)
-
 # For Google test
 enable_testing()
 add_subdirectory(test/unittest)
+add_subdirectory(test/e2e_test)

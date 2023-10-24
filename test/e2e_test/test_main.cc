@@ -1,5 +1,5 @@
 #define DROGON_TEST_MAIN
-#include <drogon/drogon_test.h>
+#include <gtest/gtest.h>
 #include <drogon/drogon.h>
 #include <drogon/HttpTypes.h>
 
@@ -7,7 +7,7 @@
 
 #include <unistd.h> // For Linux, sleep
 
-int main(int argc, char** argv) 
+int main(int argc, char** argv)
 {
     using namespace drogon;
 
@@ -24,8 +24,9 @@ int main(int argc, char** argv)
 
     // The future is only satisfied after the event loop started
     f1.get();
-    
-    int status = test::run(argc, argv);
+
+    testing::InitGoogleTest(&argc, argv);
+    int status = RUN_ALL_TESTS();
 
     // Ask the event loop to shutdown and wait
     app().getLoop()->queueInLoop([]() { app().quit(); });
