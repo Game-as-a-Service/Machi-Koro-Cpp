@@ -78,10 +78,42 @@ TEST_F(GameSetupE2ETest, CreateGameSuccessfully)
     EXPECT_EQ(resp.second->getStatusCode(), 200);
     EXPECT_FALSE((*resp.second->getJsonObject())[controllers::utils::game_id].asString().empty());
 
+    // Then
     auto game = repo_.FindGameByID((*resp.second->getJsonObject())[controllers::utils::game_id].asString());
 
     ASSERT_TRUE(game);
     EXPECT_EQ(game->get_game_id(), (*resp.second->getJsonObject())[controllers::utils::game_id].asString());
+
+    auto players = game->get_players();
+    EXPECT_EQ(players.size(), 4);
+
+    auto bank = game->get_bank();
+    EXPECT_EQ(bank->get_coin(), (282 - 4 * 3));
+
+    for(const auto& player : players) {
+        EXPECT_EQ(player->get_coin(), 3);
+        auto hand = player->get_hand();
+
+        std::vector<CardName> card_names = {
+            CardName::WHEAT_FIELD,
+            CardName::BAKERY,
+            CardName::SHOPPING_MALL,
+            CardName::TRAIN_STATION,
+            CardName::AMUSEMENT_PARK,
+            CardName::RADIO_TOWER
+        };
+        EXPECT_EQ(hand->get_buildings().size(), 2);
+        for (const auto& card: hand->get_buildings()) {
+            EXPECT_NE(std::find(card_names.begin(), card_names.end(), card->get_name()), card_names.end());
+        }
+
+        EXPECT_EQ(hand->get_landmarks().size(), 4);
+        for (const auto& landmark: hand->get_landmarks()) {
+            EXPECT_NE(std::find(card_names.begin(), card_names.end(), landmark->get_name()), card_names.end());
+            EXPECT_FALSE(dynamic_cast<Landmark*>(landmark)->IsActivate());
+        }
+    }
+
 }
 
 //DROGON_TEST(GIVEN_player_has_no_station_WHEN_roll_2_dice_THEN_failed) {
