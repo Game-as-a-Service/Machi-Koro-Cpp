@@ -1,8 +1,8 @@
-#include "dice.h"
+#include "dice_impl.h"
 
 #include <random>
 
-int Dice::GeneratePoint() const
+int DiceImpl::GeneratePoint() const
 {
     std::random_device rd;
     std::mt19937 generator(rd());

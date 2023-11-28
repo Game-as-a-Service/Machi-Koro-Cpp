@@ -5,8 +5,8 @@ class Dice {
 public:
     Dice() = default;
     ~Dice() = default;
-    
-    int GeneratePoint() const;
+
+    virtual int GeneratePoint() const = 0;
 };
 
 #endif

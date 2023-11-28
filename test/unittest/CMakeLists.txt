@@ -6,9 +6,12 @@ file(GLOB card_src ../../models/card/*.cpp)
 
 add_executable(${TEST_BINARY}
     game_unittest.cpp
+    operate_effect_unittest.cpp
     ${model_src}
     ${card_src}
 )
 
 target_link_libraries(${TEST_BINARY} gtest gtest_main pthread)
-add_test(game_unittest test/unittest/game_unittest.cpp)
+add_test(game_unittest test/unittest/game_unittest.cpp
+                       test/unittest/operate_effect_unittest.cpp
+)
