@@ -45,16 +45,17 @@ public:
     Card() = delete;
     Card(const CardName& name, int price, const CardType& type);
     ~Card() = default;
-    
+
     // TODO: Resolve this dependency relationship.
     virtual void OperateEffect(Player* owner,
+        Player* dice_roller,
         std::vector<Player*> players,
         Bank* bank) = 0;
 
     CardName get_name() const { return name_; }
 
     CardType get_card_type() const { return card_type_; }
-    
+
     int get_price() const { return price_; }
 
 private:

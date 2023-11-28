@@ -6,7 +6,7 @@
 #include <memory>
 #include <utility>
 
-#include "dice.h"
+#include "dice_impl.h"
 #include "hand.h"
 #include "card/building.h"
 #include "card/landmark.h"
@@ -46,7 +46,7 @@ public:
 
 private:
     int coin_ = 0;
-    Dice dice_;
+    DiceImpl dice_;
     std::string name_;
     std::unique_ptr<Hand> hand_ = nullptr;
 };
