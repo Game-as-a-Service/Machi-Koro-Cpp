@@ -15,11 +15,12 @@ enum class IndustryType {
 class Building : public Card {
 public:
     Building() = delete;
-    Building(const CardName& name, int price, const CardType& card_type, 
+    Building(const CardName& name, int price, const CardType& card_type,
         const std::vector<int>& points, const IndustryType& ind_type);
     ~Building() = default;
 
     virtual void OperateEffect(Player* owner,
+        Player* dice_roller,
         std::vector<Player*> players,
         Bank* bank) = 0;
 
