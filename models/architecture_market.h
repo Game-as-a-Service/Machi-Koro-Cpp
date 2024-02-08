@@ -7,7 +7,6 @@
 #include <deque>
 #include <memory>
 
-#include "./card/card.h"
 #include "./card/landmark.h"
 #include "./card/building.h"
 
@@ -19,15 +18,15 @@ public:
     ArchitectureMarket& operator = (const ArchitectureMarket& rhs) = delete;
     ArchitectureMarket& operator = (ArchitectureMarket&& rhs) = delete;
 
-    std::vector<std::unique_ptr<Card>> GetInitialBuildingsForOnePlayer();
-    std::vector<std::unique_ptr<Card>> GetLandmarksForOnePlayer();
+    std::vector<std::unique_ptr<Building>> GetInitialBuildingsForOnePlayer();
+    std::vector<std::unique_ptr<Landmark>> GetLandmarksForOnePlayer();
 
-    const std::map<CardName, std::deque<std::unique_ptr<Card>>>&
+    const std::map<CardName, std::deque<std::unique_ptr<Building>>>&
     get_buildings() const { return buildings_; }
 
 private:
     // key: Card name; Value : Cards.
-    std::map<CardName, std::deque<std::unique_ptr<Card>>> buildings_;
+    std::map<CardName, std::deque<std::unique_ptr<Building>>> buildings_;
 };
 
 #endif

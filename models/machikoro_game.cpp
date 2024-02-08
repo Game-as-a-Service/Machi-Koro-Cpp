@@ -50,22 +50,22 @@ std::vector<Player*> MachiKoroGame::get_players()
     return players;
 }
 
-std::unique_ptr<DomainEvent> 
-MachiKoroGame::RollDice(const std::string& player_id, int dice_count) 
+std::unique_ptr<DomainEvent>
+MachiKoroGame::RollDice(const std::string& player_id, int dice_count)
 {
-    auto IsLandmarkInHand = 
+    auto IsLandmarkInHand =
         [](const Hand* hand, const CardName name) -> bool {
             auto it = std::find_if(
                 hand->get_landmarks().begin(),
                 hand->get_landmarks().end(),
-                [&name](Card* landmark)  { 
+                [&name](Landmark* landmark)  {
                     return landmark->get_name() == name &&
-                        dynamic_cast<Landmark*>(landmark)->IsActivate();
+                           landmark->IsActivate();
                 }
             );
             return it != hand->get_landmarks().end();
         };
-    
+
     // Idnetify current player.
     auto player = (*std::find_if(players_.begin(), players_.end(),
         [&player_id](const auto& p) { return p->get_name() == player_id; }
@@ -81,7 +81,7 @@ MachiKoroGame::RollDice(const std::string& player_id, int dice_count)
         return event;
     }
 
-    // Operate effect. 
+    // Operate effect.
 
     // If two points are the same, can roll the dice in next round or not.
     if (pt1 == pt2 &&
