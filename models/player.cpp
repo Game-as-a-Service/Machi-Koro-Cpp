@@ -23,11 +23,11 @@ Player::~Player()
 std::pair<int, int> Player::RollDice(int dice_count)
 {
     auto it = std::find_if(
-        hand_->get_landmarks().begin(), 
+        hand_->get_landmarks().begin(),
         hand_->get_landmarks().end(),
-        [](Card* landmark) {
+        [](Landmark* landmark) {
             return landmark->get_name() == CardName::TRAIN_STATION &&
-                dynamic_cast<Landmark*>(landmark)->IsActivate();
+                   landmark->IsActivate();
         }
     );
 
@@ -43,7 +43,7 @@ std::pair<int, int> Player::RollDice(int dice_count)
     if (dice_count == 2)
         pt2 = dice_.GeneratePoint();
 
-    return std::make_pair(pt1, pt2); 
+    return std::make_pair(pt1, pt2);
 }
 
 void Player::PayCoin(int coin)
@@ -62,13 +62,13 @@ void Player::PayCoin2AnotherPlayer(int coin, Player* other)
     other->GainCoin(coin);
 }
 
-void Player::GainLandmarks(std::vector<std::unique_ptr<Card>>&& cards)
+void Player::GainLandmarks(std::vector<std::unique_ptr<Landmark>>&& cards)
 {
     for (auto& card : cards)
         hand_->AddLandmark(std::move(card));
 }
 
-void Player::GainInitialBuildings(std::vector<std::unique_ptr<Card>>&& cards)
+void Player::GainInitialBuildings(std::vector<std::unique_ptr<Building>>&& cards)
 {
     for (auto& card : cards)
         hand_->AddBuilding(std::move(card));

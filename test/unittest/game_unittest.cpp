@@ -14,7 +14,7 @@ protected:
         std::vector<std::string> names = {"Alice", "Bob", "Cindy", "David"};
         game_ = std::make_unique<MachiKoroGame>(names);
     }
-    
+
     virtual void TearDown() override {
         game_.reset();
     }
@@ -29,6 +29,6 @@ TEST_F(GameTest, GameInit) {
         EXPECT_EQ(player->get_hand()->get_landmarks().size(), 4);
         EXPECT_EQ(player->get_coin(), 3);
     }
-    // 19 types of cards
-    EXPECT_EQ(game_->get_market()->get_buildings().size(), 19);
+    // 15 types of buildings (landmarks are not included)
+    EXPECT_EQ(game_->get_market()->get_buildings().size(), 15);
 }

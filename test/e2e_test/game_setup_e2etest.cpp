@@ -110,7 +110,7 @@ TEST_F(GameSetupE2ETest, CreateGameSuccessfully)
         EXPECT_EQ(hand->get_landmarks().size(), 4);
         for (const auto& landmark: hand->get_landmarks()) {
             EXPECT_NE(std::find(card_names.begin(), card_names.end(), landmark->get_name()), card_names.end());
-            EXPECT_FALSE(dynamic_cast<Landmark*>(landmark)->IsActivate());
+            EXPECT_FALSE(landmark->IsActivate());
         }
     }
 
