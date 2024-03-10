@@ -1,0 +1,91 @@
+set(CONTROLLER_HEADERS
+    ${CMAKE_SOURCE_DIR}/controllers/utils.h
+    ${CMAKE_SOURCE_DIR}/controllers/in_memory_repository.h
+    ${CMAKE_SOURCE_DIR}/controllers/roll_dice_controller.h
+    ${CMAKE_SOURCE_DIR}/controllers/create_game_controller.h
+)
+set(CONTROLLER_SOURCES
+    ${CMAKE_SOURCE_DIR}/controllers/roll_dice_controller.cpp
+    ${CMAKE_SOURCE_DIR}/controllers/utils.cpp
+    ${CMAKE_SOURCE_DIR}/controllers/create_game_controller.cpp
+    ${CMAKE_SOURCE_DIR}/controllers/in_memory_repository.cpp
+)
+set(USECASE_HEADERS
+    ${CMAKE_SOURCE_DIR}/usecases/roll_dice_usecase.h
+    ${CMAKE_SOURCE_DIR}/usecases/create_game_usecase.h
+    ${CMAKE_SOURCE_DIR}/usecases/game_repository.h
+    ${CMAKE_SOURCE_DIR}/usecases/presenter.h
+)
+set(USECASE_SOURCES
+    ${CMAKE_SOURCE_DIR}/usecases/create_game_usecase.cpp
+    ${CMAKE_SOURCE_DIR}/usecases/roll_dice_usecase.cpp
+)
+set(MODEL_HEADERS
+    ${CMAKE_SOURCE_DIR}/models/card/convenient_store.h
+    ${CMAKE_SOURCE_DIR}/models/card/fruit_and_vegetable_market.h
+    ${CMAKE_SOURCE_DIR}/models/card/wheat_field.h
+    ${CMAKE_SOURCE_DIR}/models/card/card.h
+    ${CMAKE_SOURCE_DIR}/models/card/shopping_mall.h
+    ${CMAKE_SOURCE_DIR}/models/card/cheese_factory.h
+    ${CMAKE_SOURCE_DIR}/models/card/forest.h
+    ${CMAKE_SOURCE_DIR}/models/card/ranch.h
+    ${CMAKE_SOURCE_DIR}/models/card/cafe.h
+    ${CMAKE_SOURCE_DIR}/models/card/family_restaurant.h
+    ${CMAKE_SOURCE_DIR}/models/card/radio_tower.h
+    ${CMAKE_SOURCE_DIR}/models/card/landmark.h
+    ${CMAKE_SOURCE_DIR}/models/card/building.h
+    ${CMAKE_SOURCE_DIR}/models/card/tv_station.h
+    ${CMAKE_SOURCE_DIR}/models/card/bakery.h
+    ${CMAKE_SOURCE_DIR}/models/card/amusement_park.h
+    ${CMAKE_SOURCE_DIR}/models/card/stadium.h
+    ${CMAKE_SOURCE_DIR}/models/card/apple_orchard.h
+    ${CMAKE_SOURCE_DIR}/models/card/furniture_factory.h
+    ${CMAKE_SOURCE_DIR}/models/card/train_station.h
+    ${CMAKE_SOURCE_DIR}/models/card/business_center.h
+    ${CMAKE_SOURCE_DIR}/models/card/mine.h
+    ${CMAKE_SOURCE_DIR}/models/architecture_market.h
+    ${CMAKE_SOURCE_DIR}/models/hand.h
+    ${CMAKE_SOURCE_DIR}/models/player.h
+    ${CMAKE_SOURCE_DIR}/models/machikoro_game.h
+    ${CMAKE_SOURCE_DIR}/models/bank.h
+    ${CMAKE_SOURCE_DIR}/models/events/domain_event.h
+    ${CMAKE_SOURCE_DIR}/models/events/roll_dice_event.h
+    ${CMAKE_SOURCE_DIR}/models/dice.h
+)
+set(MODEL_SOURCES
+    ${CMAKE_SOURCE_DIR}/models/bank.cpp
+    ${CMAKE_SOURCE_DIR}/models/player.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/convenient_store.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/wheat_field.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/amusement_park.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/building.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/ranch.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/fruit_and_vegetable_market.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/tv_station.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/family_restaurant.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/shopping_mall.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/bakery.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/apple_orchard.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/forest.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/cheese_factory.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/train_station.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/mine.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/stadium.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/furniture_factory.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/business_center.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/card.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/landmark.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/cafe.cpp
+    ${CMAKE_SOURCE_DIR}/models/card/radio_tower.cpp
+    ${CMAKE_SOURCE_DIR}/models/dice.cpp
+    ${CMAKE_SOURCE_DIR}/models/architecture_market.cpp
+    ${CMAKE_SOURCE_DIR}/models/hand.cpp
+    ${CMAKE_SOURCE_DIR}/models/machikoro_game.cpp
+)
+set(E2E_SOURCES
+    ${CMAKE_SOURCE_DIR}/test/e2e_test/test_main.cc
+    ${CMAKE_SOURCE_DIR}/test/e2e_test/game_setup_e2etest.cpp
+)
+set(UNIT_SOURCES
+    ${CMAKE_SOURCE_DIR}/test/unittest/game_unittest.cpp
+)
