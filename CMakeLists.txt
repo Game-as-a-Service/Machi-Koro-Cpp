@@ -1,94 +1,133 @@
-cmake_minimum_required(VERSION 3.5)
-project(MachiKoroCPP CXX)
-
-include(CheckIncludeFileCXX)
-
-check_include_file_cxx(any HAS_ANY)
-check_include_file_cxx(string_view HAS_STRING_VIEW)
-check_include_file_cxx(coroutine HAS_COROUTINE)
-if (NOT "${CMAKE_CXX_STANDARD}" STREQUAL "")
-    # Do nothing
-elseif (HAS_ANY AND HAS_STRING_VIEW AND HAS_COROUTINE)
-    set(CMAKE_CXX_STANDARD 20)
-elseif (HAS_ANY AND HAS_STRING_VIEW)
-    set(CMAKE_CXX_STANDARD 17)
-else ()
-    set(CMAKE_CXX_STANDARD 14)
-endif ()
-
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
-add_executable(${PROJECT_NAME} main.cc
+cmake_minimum_required(VERSION 3.16)
+project(MachiKoroCPP 
+    VERSION 0.0.1
+    LANGUAGES CXX
 )
 
-# ##############################################################################
-# If you include the drogon source code locally in your project, use this method
-# to add drogon
-# add_subdirectory(drogon)
-# target_link_libraries(${PROJECT_NAME} PRIVATE drogon)
-#
-# and comment out the following lines
-find_package(Drogon CONFIG REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE Drogon::Drogon)
+# ---------------------------------------------------------------------------------------
+# Set project options.
+# ---------------------------------------------------------------------------------------
 
-# ##############################################################################
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-if (CMAKE_CXX_STANDARD LESS 17)
-    # With C++14, use boost to support any, string_view and filesystem
-    message(STATUS "use c++14")
-    find_package(Boost 1.61.0 REQUIRED)
-    target_link_libraries(${PROJECT_NAME} PUBLIC Boost::boost)
-elseif (CMAKE_CXX_STANDARD LESS 20)
-    message(STATUS "use c++17")
-else ()
-    message(STATUS "use c++20")
+if (NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Release")
 endif ()
 
-aux_source_directory(controllers CTL_SRC)
-aux_source_directory(filters FILTER_SRC)
-aux_source_directory(plugins PLUGIN_SRC)
-aux_source_directory(usecases USECASES_SRC)
-aux_source_directory(models MODEL_SRC)
-aux_source_directory(models/card CARDS_SRC)
-aux_source_directory(models/events EVENTS_SRC)
+message(STATUS "Started CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...\n")
 
-drogon_create_views(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/views
-                    ${CMAKE_CURRENT_BINARY_DIR})
+# ---------------------------------------------------------------------------------------
+# Package dependency.
+# ---------------------------------------------------------------------------------------
 
-# use the following line to create views with namespaces.
-# drogon_create_views(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/views
-#                     ${CMAKE_CURRENT_BINARY_DIR} TRUE)
-# use the following line to create views with namespace CHANGE_ME prefixed
-# and path namespaces.
-# drogon_create_views(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/views
-#                     ${CMAKE_CURRENT_BINARY_DIR} TRUE CHANGE_ME)
+find_package(Drogon CONFIG REQUIRED)
+find_package(GTest)
 
-###############################
-target_include_directories(${PROJECT_NAME}
-                           PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
-                                   ${CMAKE_CURRENT_SOURCE_DIR}/models
-                                   ${CMAKE_CURRENT_SOURCE_DIR}/usecases
-                                   ${CMAKE_CURRENT_SOURCE_DIR}/controllers)
-target_sources(${PROJECT_NAME}
-               PRIVATE
-               ${SRC_DIR}
-               ${CTL_SRC}
-               ${FILTER_SRC}
-               ${PLUGIN_SRC}
-               ${USECASES_SRC}
-               ${MODEL_SRC}
-               ${CARDS_SRC}
-               ${EVENTS_SRC})
-#################################
+if (NOT GTest_FOUND)
+    include(FetchContent)
+    FetchContent_Declare(
+        googletest
+        GIT_REPOSITORY  https://github.com/google/googletest.git
+        GIT_TAG         v1.14.0
+    )
+    FetchContent_MakeAvailable(googletest)
+endif (NOT GTest_FOUND)
 
-# ##############################################################################
-# uncomment the following line for dynamically loading views
-# set_property(TARGET ${PROJECT_NAME} PROPERTY ENABLE_EXPORTS ON)
+# ---------------------------------------------------------------------------------------
+# Headers & Sources.
+# ---------------------------------------------------------------------------------------
 
-# ##############################################################################
+include(cmake/sources.cmake)
 
-# For Google test
+# Model Library
+
+add_library(Model STATIC "")
+target_sources(Model
+    PRIVATE
+    ${MODEL_SOURCES}
+    PUBLIC
+    ${MODEL_HEADERS}
+)
+target_include_directories(Model
+    PUBLIC
+    ${CMAKE_SOURCE_DIR}/models
+    ${CMAKE_SOURCE_DIR}/models/card
+    ${CMAKE_SOURCE_DIR}/models/events
+)
+
+# Controller2Usecase Library
+
+add_library(Controller2Usecase STATIC "")
+target_sources(Controller2Usecase
+    PRIVATE
+    ${CONTROLLER_SOURCES}
+    ${USECASE_SOURCES}
+    PUBLIC
+    ${CONTROLLER_HEADERS}
+    ${USECASE_HEADERS}
+)
+target_include_directories(Controller2Usecase
+    PUBLIC
+    ${CMAKE_SOURCE_DIR}/controllers
+    ${CMAKE_SOURCE_DIR}/usecases
+)
+target_link_libraries(Controller2Usecase
+    PUBLIC
+    Model
+    Drogon::Drogon
+)
+
+# app
+
+add_executable(${PROJECT_NAME}_app main.cc)
+target_link_libraries(${PROJECT_NAME}_app
+    PRIVATE
+    Controller2Usecase
+)
+
+# drogon_create_views(${PROJECT_NAME} 
+#     ${CMAKE_CURRENT_SOURCE_DIR}/views
+#     ${CMAKE_CURRENT_BINARY_DIR}
+# )
+
+# ---------------------------------------------------------------------------------------
+# E2E Test & Unit Test.
+# ---------------------------------------------------------------------------------------
+
 enable_testing()
-add_subdirectory(test/unittest)
-add_subdirectory(test/e2e_test)
+
+# E2E Test
+
+add_executable(${PROJECT_NAME}_e2e
+    ${E2E_SOURCES}
+)
+target_link_libraries(${PROJECT_NAME}_e2e
+    PRIVATE
+    GTest::gtest
+    GTest::gtest_main
+    pthread
+    Controller2Usecase
+)
+
+# Unit Test
+
+add_executable(${PROJECT_NAME}_unit
+    ${UNIT_SOURCES}
+)
+target_link_libraries(${PROJECT_NAME}_unit
+    PRIVATE
+    GTest::gtest
+    GTest::gtest_main
+    pthread
+    Model
+)
+
+# Discover
+
+include(GoogleTest)
+gtest_discover_tests(${PROJECT_NAME}_e2e)
+gtest_discover_tests(${PROJECT_NAME}_unit)
