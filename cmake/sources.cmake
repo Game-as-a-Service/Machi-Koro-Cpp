@@ -21,6 +21,7 @@ set(USECASE_SOURCES
     ${CMAKE_SOURCE_DIR}/usecases/roll_dice_usecase.cpp
 )
 set(MODEL_HEADERS
+    ${CMAKE_SOURCE_DIR}/models/dice_impl.h
     ${CMAKE_SOURCE_DIR}/models/card/convenient_store.h
     ${CMAKE_SOURCE_DIR}/models/card/fruit_and_vegetable_market.h
     ${CMAKE_SOURCE_DIR}/models/card/wheat_field.h
@@ -53,6 +54,7 @@ set(MODEL_HEADERS
     ${CMAKE_SOURCE_DIR}/models/dice.h
 )
 set(MODEL_SOURCES
+    ${CMAKE_SOURCE_DIR}/models/dice_impl.cpp
     ${CMAKE_SOURCE_DIR}/models/bank.cpp
     ${CMAKE_SOURCE_DIR}/models/player.cpp
     ${CMAKE_SOURCE_DIR}/models/card/convenient_store.cpp
@@ -77,7 +79,6 @@ set(MODEL_SOURCES
     ${CMAKE_SOURCE_DIR}/models/card/landmark.cpp
     ${CMAKE_SOURCE_DIR}/models/card/cafe.cpp
     ${CMAKE_SOURCE_DIR}/models/card/radio_tower.cpp
-    ${CMAKE_SOURCE_DIR}/models/dice.cpp
     ${CMAKE_SOURCE_DIR}/models/architecture_market.cpp
     ${CMAKE_SOURCE_DIR}/models/hand.cpp
     ${CMAKE_SOURCE_DIR}/models/machikoro_game.cpp
@@ -87,5 +88,6 @@ set(E2E_SOURCES
     ${CMAKE_SOURCE_DIR}/test/e2e_test/game_setup_e2etest.cpp
 )
 set(UNIT_SOURCES
+    ${CMAKE_SOURCE_DIR}/test/unittest/operate_effect_unittest.cpp
     ${CMAKE_SOURCE_DIR}/test/unittest/game_unittest.cpp
 )

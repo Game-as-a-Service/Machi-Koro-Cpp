@@ -18,7 +18,8 @@ if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Release")
 endif ()
 
-message(STATUS "Started CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...\n")
+message(STATUS "Started CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...")
+message(STATUS "Build Type: ${CMAKE_BUILD_TYPE}. \n")
 
 # ---------------------------------------------------------------------------------------
 # Package dependency.
@@ -45,15 +46,14 @@ include(cmake/sources.cmake)
 
 # Model Library
 
-add_library(Model STATIC "")
+add_library(Model SHARED "")
 target_sources(Model
     PRIVATE
     ${MODEL_SOURCES}
-    PUBLIC
     ${MODEL_HEADERS}
 )
 target_include_directories(Model
-    PUBLIC
+    PRIVATE
     ${CMAKE_SOURCE_DIR}/models
     ${CMAKE_SOURCE_DIR}/models/card
     ${CMAKE_SOURCE_DIR}/models/events
@@ -61,23 +61,23 @@ target_include_directories(Model
 
 # Controller2Usecase Library
 
-add_library(Controller2Usecase STATIC "")
+add_library(Controller2Usecase SHARED "")
 target_sources(Controller2Usecase
     PRIVATE
     ${CONTROLLER_SOURCES}
-    ${USECASE_SOURCES}
-    PUBLIC
     ${CONTROLLER_HEADERS}
+    ${USECASE_SOURCES}
     ${USECASE_HEADERS}
 )
 target_include_directories(Controller2Usecase
-    PUBLIC
+    PRIVATE
     ${CMAKE_SOURCE_DIR}/controllers
     ${CMAKE_SOURCE_DIR}/usecases
 )
 target_link_libraries(Controller2Usecase
-    PUBLIC
+    PRIVATE
     Model
+    PUBLIC
     Drogon::Drogon
 )
 
@@ -105,11 +105,17 @@ enable_testing()
 add_executable(${PROJECT_NAME}_e2e
     ${E2E_SOURCES}
 )
+target_include_directories(${PROJECT_NAME}_e2e
+    PRIVATE
+    ${CMAKE_SOURCE_DIR}/usecases
+    ${CMAKE_SOURCE_DIR}/models
+)
 target_link_libraries(${PROJECT_NAME}_e2e
     PRIVATE
     GTest::gtest
     GTest::gtest_main
     pthread
+    Model
     Controller2Usecase
 )
 
