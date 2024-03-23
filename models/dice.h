@@ -1,12 +1,12 @@
-#ifndef DICE_H
-#define DICE_H
+#ifndef MODELS_DICE_H
+#define MODELS_DICE_H
 
 class Dice {
 public:
-    Dice() = default;
-    ~Dice() = default;
+    virtual ~Dice() = default;
 
-    virtual int GeneratePoint() const = 0;
+    // Let dice generate the points.
+    virtual int roll() const = 0;
 };
 
-#endif
+#endif  // MODELS_DICE_H

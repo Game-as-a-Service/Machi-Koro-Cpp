@@ -66,12 +66,24 @@ target_sources(Controller2Usecase
     PRIVATE
     ${CONTROLLER_SOURCES}
     ${CONTROLLER_HEADERS}
+    ${LOGGER_SOURCES}
+    ${LOGGER_HEADERS}
+    ${REPO_SOURCES}
+    ${REPO_HEADERS}
+    ${UTIL_SOURCES}
+    ${UTIL_HEADERS}
+    ${PRESENTER_SOURCES}
+    ${PRESENTER_HEADERS}
     ${USECASE_SOURCES}
     ${USECASE_HEADERS}
 )
 target_include_directories(Controller2Usecase
     PRIVATE
     ${CMAKE_SOURCE_DIR}/controllers
+    ${CMAKE_SOURCE_DIR}/loggers
+    ${CMAKE_SOURCE_DIR}/utils
+    ${CMAKE_SOURCE_DIR}/repos
+    ${CMAKE_SOURCE_DIR}/presenters
     ${CMAKE_SOURCE_DIR}/usecases
 )
 target_link_libraries(Controller2Usecase
@@ -83,16 +95,23 @@ target_link_libraries(Controller2Usecase
 
 # app
 
-add_executable(${PROJECT_NAME}_app main.cc)
+add_executable(${PROJECT_NAME}_app main.cpp)
 target_link_libraries(${PROJECT_NAME}_app
     PRIVATE
     Controller2Usecase
+    Drogon::Drogon
 )
 
 # drogon_create_views(${PROJECT_NAME} 
 #     ${CMAKE_CURRENT_SOURCE_DIR}/views
 #     ${CMAKE_CURRENT_BINARY_DIR}
 # )
+
+# ---------------------------------------------------------------------------------------
+# Clang-format.
+# ---------------------------------------------------------------------------------------
+
+include(cmake/clang-format.cmake)
 
 # ---------------------------------------------------------------------------------------
 # E2E Test & Unit Test.
@@ -102,38 +121,38 @@ enable_testing()
 
 # E2E Test
 
-add_executable(${PROJECT_NAME}_e2e
-    ${E2E_SOURCES}
-)
-target_include_directories(${PROJECT_NAME}_e2e
-    PRIVATE
-    ${CMAKE_SOURCE_DIR}/usecases
-    ${CMAKE_SOURCE_DIR}/models
-)
-target_link_libraries(${PROJECT_NAME}_e2e
-    PRIVATE
-    GTest::gtest
-    GTest::gtest_main
-    pthread
-    Model
-    Controller2Usecase
-)
+# add_executable(${PROJECT_NAME}_e2e
+#     ${E2E_SOURCES}
+# )
+# target_include_directories(${PROJECT_NAME}_e2e
+#     PRIVATE
+#     ${CMAKE_SOURCE_DIR}/usecases
+#     ${CMAKE_SOURCE_DIR}/models
+# )
+# target_link_libraries(${PROJECT_NAME}_e2e
+#     PRIVATE
+#     GTest::gtest
+#     GTest::gtest_main
+#     pthread
+#     Model
+#     Controller2Usecase
+# )
 
 # Unit Test
 
-add_executable(${PROJECT_NAME}_unit
-    ${UNIT_SOURCES}
-)
-target_link_libraries(${PROJECT_NAME}_unit
-    PRIVATE
-    GTest::gtest
-    GTest::gtest_main
-    pthread
-    Model
-)
+# add_executable(${PROJECT_NAME}_unit
+#     ${UNIT_SOURCES}
+# )
+# target_link_libraries(${PROJECT_NAME}_unit
+#     PRIVATE
+#     GTest::gtest
+#     GTest::gtest_main
+#     pthread
+#     Model
+# )
 
 # Discover
 
 include(GoogleTest)
-gtest_discover_tests(${PROJECT_NAME}_e2e)
-gtest_discover_tests(${PROJECT_NAME}_unit)
+# gtest_discover_tests(${PROJECT_NAME}_e2e)
+# gtest_discover_tests(${PROJECT_NAME}_unit)

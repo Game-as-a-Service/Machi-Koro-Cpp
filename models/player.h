@@ -1,54 +1,29 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef MODELS_PLAYER_H
+#define MODELS_PLAYER_H
 
 #include <string>
-#include <vector>
 #include <memory>
-#include <utility>
+#include <iostream>
 
-#include "dice_impl.h"
-#include "hand.h"
-#include "card/building.h"
-#include "card/landmark.h"
-
-class Card;
-class Hand;
+#include "dice.h"
 
 class Player {
 public:
-    Player();
-    Player(const std::string& name);
-    Player(const Player& player) = delete;
-    Player(Player&& player) = delete;
-    ~Player();
+    Player(const std::string& name, std::shared_ptr<Dice> dice);
 
-    Player& operator = (const Player& rhs) = delete;
-    Player& operator = (Player&& rhs) = delete;
+    ~Player() = default;
 
-    std::pair<int, int> RollDice(int dice_count);
-
-    void PayCoin(int coin);
-
-    void GainCoin(int coin);
-
-    void PayCoin2AnotherPlayer(int coin, Player* other);
-
-    void GainLandmarks(std::vector<std::unique_ptr<Landmark>>&& cards);
-
-    void GainInitialBuildings(std::vector<std::unique_ptr<Building>>&& cards);
-
-    int get_coin() const { return coin_; }
-
-    void set_name(const std::string& name) { name_ = name; }
-    std::string get_name() const { return name_; }
-
-    const Hand* get_hand() const { return hand_.get(); }
+    std::string name() const { return name_; }
 
 private:
-    int coin_ = 0;
-    DiceImpl dice_;
+    // Player name.
     std::string name_;
-    std::unique_ptr<Hand> hand_ = nullptr;
+
+    // Coin.
+    int coin_ = 0;
+
+    // Dice.
+    std::shared_ptr<Dice> dice_ = nullptr;
 };
 
-#endif
+#endif  // MODELS_PLAYER_H
