@@ -81,8 +81,8 @@ target_include_directories(Controller2Usecase
     PRIVATE
     ${CMAKE_SOURCE_DIR}/controllers
     ${CMAKE_SOURCE_DIR}/loggers
-    ${CMAKE_SOURCE_DIR}/utils
     ${CMAKE_SOURCE_DIR}/repos
+    ${CMAKE_SOURCE_DIR}/utils
     ${CMAKE_SOURCE_DIR}/presenters
     ${CMAKE_SOURCE_DIR}/usecases
 )
@@ -99,7 +99,6 @@ add_executable(${PROJECT_NAME}_app main.cpp)
 target_link_libraries(${PROJECT_NAME}_app
     PRIVATE
     Controller2Usecase
-    Drogon::Drogon
 )
 
 # drogon_create_views(${PROJECT_NAME} 
