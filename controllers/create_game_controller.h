@@ -4,9 +4,10 @@
 #include <memory>
 
 #include "drogon/HttpController.h"
-#include "utils/util_impl.h"
-#include "loggers/logger_impl.h"
-#include "repos/memory_repository.h"
+#include "utils/util_base.h"
+#include "utils/util.h"
+#include "loggers/logger_base.h"
+#include "loggers/logger.h"
 
 using namespace drogon;
 
@@ -21,10 +22,10 @@ public:
 
 private:
     // Logger.
-    std::shared_ptr<LoggerImpl> log_ = LoggerImpl::self();
+    std::shared_ptr<LoggerBase> log_ = Logger::self();
 
     // Utility.
-    std::shared_ptr<UtilImpl> util_ = UtilImpl::self();
+    std::shared_ptr<UtilBase> util_ = Util::self();
 };
 
 #endif  // CONTROLLERS_CREATE_GAME_CONTROLLER_H

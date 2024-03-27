@@ -1,12 +1,11 @@
 #ifndef MODELS_DICE_H
 #define MODELS_DICE_H
 
-class Dice {
-public:
-    virtual ~Dice() = default;
+#include "dice_base.h"
 
-    // Let dice generate the points.
-    virtual int roll() const = 0;
+class Dice : public DiceBase {
+public:
+    int roll() const override;
 };
 
 #endif  // MODELS_DICE_H

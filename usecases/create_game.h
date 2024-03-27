@@ -5,8 +5,8 @@
 #include <string>
 #include <vector>
 
-#include "utils/util.h"
-#include "loggers/logger.h"
+#include "utils/util_base.h"
+#include "loggers/logger_base.h"
 #include "presenters/presenter.h"
 #include "repos/repository.h"
 #include "models/player.h"
@@ -28,7 +28,7 @@ private:
 
 class CreateGameUsecase {
 public:
-    CreateGameUsecase(std::shared_ptr<Logger> logger, std::shared_ptr<Util> util);
+    CreateGameUsecase(std::shared_ptr<LoggerBase> logger, std::shared_ptr<UtilBase> util);
 
     ~CreateGameUsecase() = default;
 
@@ -36,9 +36,9 @@ public:
     void execute(CreateGameRequest& req, Repository& repo, Presenter& presenter);
 
 private:
-    std::shared_ptr<Logger> log_ = nullptr;
+    std::shared_ptr<LoggerBase> log_ = nullptr;
 
-    std::shared_ptr<Util> util_ = nullptr;
+    std::shared_ptr<UtilBase> util_ = nullptr;
 };
 
 #endif  // USECASES_CREATE_GAME_H

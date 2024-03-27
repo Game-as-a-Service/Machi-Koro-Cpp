@@ -5,14 +5,14 @@
 #include <string>
 #include <vector>
 
-#include "utils/util.h"
-#include "loggers/logger.h"
+#include "utils/util_base.h"
+#include "loggers/logger_base.h"
 #include "events/event.h"
 #include "player.h"
 
 class MachiKoroGame {
 public:
-    MachiKoroGame(std::shared_ptr<Logger> logger, std::shared_ptr<Util> util);
+    MachiKoroGame(std::shared_ptr<LoggerBase> logger, std::shared_ptr<UtilBase> util);
 
     ~MachiKoroGame() = default;
 
@@ -23,10 +23,10 @@ public:
 
 private:
     // Logger.
-    std::shared_ptr<Logger> log_ = nullptr;
+    std::shared_ptr<LoggerBase> log_ = nullptr;
 
     // Utility.
-    std::shared_ptr<Util> util_ = nullptr;
+    std::shared_ptr<UtilBase> util_ = nullptr;
 
     // Game ID.
     std::string game_id_;

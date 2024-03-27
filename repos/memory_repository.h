@@ -7,6 +7,10 @@
 #include <mutex>
 
 #include "repos/repository.h"
+#include "utils/util_base.h"
+#include "utils/util.h"
+#include "loggers/logger_base.h"
+#include "loggers/logger.h"
 
 // Because Drogon's design in Controller will result in multiple Controller class,
 // 'MemoryRepository' is designed using Singleton Pattern.
@@ -30,6 +34,12 @@ private:
     MemoryRepository() = default;
 
 private:
+    // Logger.
+    std::shared_ptr<LoggerBase> log_ = Logger::self();
+
+    // Utility.
+    std::shared_ptr<UtilBase> util_ = Util::self();
+
     // The mutex for 'find game'.
     std::mutex games_mutex_;
 

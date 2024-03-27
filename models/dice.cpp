@@ -1,8 +1,8 @@
-#include "dice_impl.h"
+#include "dice.h"
 
 #include <random>
 
-int DiceImpl::roll() const
+int Dice::roll() const
 {
     std::random_device rd;
     std::mt19937 generator(rd());

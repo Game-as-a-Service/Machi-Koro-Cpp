@@ -5,7 +5,7 @@
 
 #include "events/create_game_event.h"
 
-MachiKoroGame::MachiKoroGame(std::shared_ptr<Logger> logger, std::shared_ptr<Util> util)
+MachiKoroGame::MachiKoroGame(std::shared_ptr<LoggerBase> logger, std::shared_ptr<UtilBase> util)
     : log_(logger)
     , util_(util)
 {

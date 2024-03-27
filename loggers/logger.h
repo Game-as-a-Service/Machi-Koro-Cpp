@@ -1,23 +1,33 @@
 #ifndef LOGGERS_LOGGER_H
 #define LOGGERS_LOGGER_H
 
+#include <memory>
 #include <string>
 
-class Logger {
+#include "loggers/logger_base.h"
+
+class Logger : public LoggerBase {
 public:
-    virtual ~Logger() = default;
+    Logger(const Logger&) = delete;
 
-    virtual void trace(const std::string& msg) const = 0;
+    Logger& operator=(const Logger&) = delete;
 
-    virtual void debug(const std::string& msg) const = 0;
+    static std::shared_ptr<Logger> self();
 
-    virtual void info(const std::string& msg) const = 0;
+    void trace(const std::string& msg) const override;
 
-    virtual void warn(const std::string& msg) const = 0;
+    void debug(const std::string& msg) const override;
 
-    virtual void error(const std::string& msg) const = 0;
+    void info(const std::string& msg) const override;
 
-    virtual void fatal(const std::string& msg) const = 0;
+    void warn(const std::string& msg) const override;
+
+    void error(const std::string& msg) const override;
+
+    void fatal(const std::string& msg) const override;
+
+private:
+    Logger() = default;
 };
 
 #endif  // LOGGERS_LOGGER_H

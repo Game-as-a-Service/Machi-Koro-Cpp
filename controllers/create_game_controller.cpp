@@ -3,8 +3,6 @@
 #include <vector>
 #include <string>
 
-#include "utils/util_impl.h"
-#include "loggers/logger_impl.h"
 #include "repos/memory_repository.h"
 #include "usecases/create_game.h"
 #include "presenters/create_game_present.h"

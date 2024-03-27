@@ -11,10 +11,7 @@ void CreateGamePresenter::present(Event* event)
 {
     auto res = dynamic_cast<CreateGameEvent*>(event);
 
-    if (res->status() == StatusCode::Ok)
-        status_ = drogon::HttpStatusCode::k200OK;
-    else
-        status_ = drogon::HttpStatusCode::k400BadRequest;
+    status_ = static_cast<drogon::HttpStatusCode>(res->status());
 
     view_model_.reset();
     view_model_ = std::make_unique<ViewModel>(res->message(), res->game_id());

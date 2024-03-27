@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-#include "models/dice_impl.h"
+#include "models/dice.h"
 
 CreateGameRequest::CreateGameRequest(const std::vector<std::string>& names)
     : names_(names)
@@ -15,12 +15,13 @@ std::vector<Player> CreateGameRequest::players()
 {
     // TODO: 有關骰子的部分，到底要在哪裡塞進遊戲裡（為了假骰子、做測試），待商確。
     std::vector<Player> players;
-    auto dice = std::make_shared<DiceImpl>();
+    auto dice = std::make_shared<Dice>();
     for (const auto& name : names_) players.emplace_back(name, dice);
     return players;
 }
 
-CreateGameUsecase::CreateGameUsecase(std::shared_ptr<Logger> logger, std::shared_ptr<Util> util)
+CreateGameUsecase::CreateGameUsecase(std::shared_ptr<LoggerBase> logger,
+                                     std::shared_ptr<UtilBase> util)
     : log_(logger)
     , util_(util)
 {

@@ -12,11 +12,11 @@ set(PRESENTER_SOURCES
     ${CMAKE_SOURCE_DIR}/presenters/create_game_present.cpp
 )
 set(LOGGER_HEADERS
-    ${CMAKE_SOURCE_DIR}/loggers/logger_impl.h
+    ${CMAKE_SOURCE_DIR}/loggers/logger_base.h
     ${CMAKE_SOURCE_DIR}/loggers/logger.h
 )
 set(LOGGER_SOURCES
-    ${CMAKE_SOURCE_DIR}/loggers/logger_impl.cpp
+    ${CMAKE_SOURCE_DIR}/loggers/logger.cpp
 )
 set(REPO_HEADERS
     ${CMAKE_SOURCE_DIR}/repos/repository.h
@@ -26,11 +26,11 @@ set(REPO_SOURCES
     ${CMAKE_SOURCE_DIR}/repos/memory_repository.cpp
 )
 set(UTIL_HEADERS
-    ${CMAKE_SOURCE_DIR}/utils/util_impl.h
     ${CMAKE_SOURCE_DIR}/utils/util.h
+    ${CMAKE_SOURCE_DIR}/utils/util_base.h
 )
 set(UTIL_SOURCES
-    ${CMAKE_SOURCE_DIR}/utils/util_impl.cpp
+    ${CMAKE_SOURCE_DIR}/utils/util.cpp
 )
 set(USECASE_HEADERS
     ${CMAKE_SOURCE_DIR}/usecases/create_game.h
@@ -39,7 +39,7 @@ set(USECASE_SOURCES
     ${CMAKE_SOURCE_DIR}/usecases/create_game.cpp
 )
 set(MODEL_HEADERS
-    ${CMAKE_SOURCE_DIR}/models/dice_impl.h
+    ${CMAKE_SOURCE_DIR}/models/dice_base.h
     ${CMAKE_SOURCE_DIR}/models/player.h
     ${CMAKE_SOURCE_DIR}/models/machikoro_game.h
     ${CMAKE_SOURCE_DIR}/models/events/event.h
@@ -47,8 +47,8 @@ set(MODEL_HEADERS
     ${CMAKE_SOURCE_DIR}/models/dice.h
 )
 set(MODEL_SOURCES
-    ${CMAKE_SOURCE_DIR}/models/dice_impl.cpp
     ${CMAKE_SOURCE_DIR}/models/player.cpp
+    ${CMAKE_SOURCE_DIR}/models/dice.cpp
     ${CMAKE_SOURCE_DIR}/models/machikoro_game.cpp
 )
 set(E2E_SOURCES
