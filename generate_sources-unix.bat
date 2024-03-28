@@ -85,7 +85,7 @@ echo ")" >> $OUTPUT_FILE
 # tests/e2e_test/.
 
 echo "set(E2E_SOURCES" >> $OUTPUT_FILE
-find $ROOT_DIR/tests/e2e_test -type f \( -name "*.cc" -o -name "*.cpp" \) | sed "s|$ROOT_DIR|\\\${CMAKE_SOURCE_DIR}|g" | sed 's/^/    /' >> $OUTPUT_FILE
+find $ROOT_DIR/tests/e2e_test -type f \( -name "*.cc" -o -name "*.cpp" -o -name "*.h" \) | sed "s|$ROOT_DIR|\\\${CMAKE_SOURCE_DIR}|g" | sed 's/^/    /' >> $OUTPUT_FILE
 echo ")" >> $OUTPUT_FILE
 
 # tests/unittest/.

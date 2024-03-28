@@ -1,15 +1,15 @@
-#ifndef PRESENTERS_CREATE_GAME_PRESENT_H
-#define PRESENTERS_CREATE_GAME_PRESENT_H
+#ifndef PRESENTERS_CLEAR_GAME_PRESENT_H
+#define PRESENTERS_CLEAR_GAME_PRESENT_H
 
 #include <string>
 #include <memory>
 
 #include "json/value.h"
 #include "drogon/HttpTypes.h"
-#include "presenters/presenter.h"
+#include "presenter.h"
 #include "models/events/event.h"
 
-class CreateGamePresenter : public Presenter {
+class ClearGamePresenter : public Presenter {
     /**
      * @brief Construct the result datas those will pass back to front-end.
      */
@@ -17,7 +17,7 @@ class CreateGamePresenter : public Presenter {
     public:
         ViewModel() = default;
 
-        ViewModel(const std::string& msg, const std::string& id);
+        ViewModel(const std::string& msg);
 
         ~ViewModel() = default;
 
@@ -26,15 +26,12 @@ class CreateGamePresenter : public Presenter {
     private:
         // The self-defined message.
         std::string message_;
-
-        // Game ID.
-        std::string game_id_;
     };
 
 public:
-    CreateGamePresenter();
+    ClearGamePresenter();
 
-    ~CreateGamePresenter() = default;
+    ~ClearGamePresenter() = default;
 
     // Inherited from the class 'Presenter'.
     void present(Event* event) override;
@@ -53,4 +50,4 @@ private:
     std::unique_ptr<ViewModel> view_model_ = nullptr;
 };
 
-#endif  // PRESENTERS_CREATE_GAME_PRESENT_H
+#endif  // PRESENTERS_CLEAR_GAME_PRESENT_H

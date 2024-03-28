@@ -14,7 +14,9 @@ public:
 
     virtual void save(std::unique_ptr<MachiKoroGame> game) = 0;
 
-    virtual void clear(const std::string& id) = 0;
+    virtual bool clear_game(const std::string& id) = 0;
+
+    virtual size_t game_num() = 0;
 };
 
 #endif  // REPOS_REPOSITORY_H

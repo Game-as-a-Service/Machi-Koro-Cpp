@@ -1,15 +1,19 @@
 set(CONTROLLER_HEADERS
     ${CMAKE_SOURCE_DIR}/controllers/create_game_controller.h
+    ${CMAKE_SOURCE_DIR}/controllers/clear_game_controller.h
 )
 set(CONTROLLER_SOURCES
+    ${CMAKE_SOURCE_DIR}/controllers/clear_game_controller.cpp
     ${CMAKE_SOURCE_DIR}/controllers/create_game_controller.cpp
 )
 set(PRESENTER_HEADERS
     ${CMAKE_SOURCE_DIR}/presenters/create_game_present.h
+    ${CMAKE_SOURCE_DIR}/presenters/clear_game_present.h
     ${CMAKE_SOURCE_DIR}/presenters/presenter.h
 )
 set(PRESENTER_SOURCES
     ${CMAKE_SOURCE_DIR}/presenters/create_game_present.cpp
+    ${CMAKE_SOURCE_DIR}/presenters/clear_game_present.cpp
 )
 set(LOGGER_HEADERS
     ${CMAKE_SOURCE_DIR}/loggers/logger_base.h
@@ -33,15 +37,18 @@ set(UTIL_SOURCES
     ${CMAKE_SOURCE_DIR}/utils/util.cpp
 )
 set(USECASE_HEADERS
+    ${CMAKE_SOURCE_DIR}/usecases/clear_game.h
     ${CMAKE_SOURCE_DIR}/usecases/create_game.h
 )
 set(USECASE_SOURCES
     ${CMAKE_SOURCE_DIR}/usecases/create_game.cpp
+    ${CMAKE_SOURCE_DIR}/usecases/clear_game.cpp
 )
 set(MODEL_HEADERS
     ${CMAKE_SOURCE_DIR}/models/dice_base.h
     ${CMAKE_SOURCE_DIR}/models/player.h
     ${CMAKE_SOURCE_DIR}/models/machikoro_game.h
+    ${CMAKE_SOURCE_DIR}/models/events/clear_game_event.h
     ${CMAKE_SOURCE_DIR}/models/events/event.h
     ${CMAKE_SOURCE_DIR}/models/events/create_game_event.h
     ${CMAKE_SOURCE_DIR}/models/dice.h
@@ -52,6 +59,9 @@ set(MODEL_SOURCES
     ${CMAKE_SOURCE_DIR}/models/machikoro_game.cpp
 )
 set(E2E_SOURCES
+    ${CMAKE_SOURCE_DIR}/tests/e2e_test/e2e_main.cpp
+    ${CMAKE_SOURCE_DIR}/tests/e2e_test/e2e_create_game.cpp
+    ${CMAKE_SOURCE_DIR}/tests/e2e_test/test_def.h
 )
 set(UNIT_SOURCES
 )
