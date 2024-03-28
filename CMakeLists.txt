@@ -120,22 +120,24 @@ enable_testing()
 
 # E2E Test
 
-# add_executable(${PROJECT_NAME}_e2e
-#     ${E2E_SOURCES}
-# )
-# target_include_directories(${PROJECT_NAME}_e2e
-#     PRIVATE
-#     ${CMAKE_SOURCE_DIR}/usecases
-#     ${CMAKE_SOURCE_DIR}/models
-# )
-# target_link_libraries(${PROJECT_NAME}_e2e
-#     PRIVATE
-#     GTest::gtest
-#     GTest::gtest_main
-#     pthread
-#     Model
-#     Controller2Usecase
-# )
+add_executable(${PROJECT_NAME}_e2e
+    ${E2E_SOURCES}
+)
+target_include_directories(${PROJECT_NAME}_e2e
+    PRIVATE
+    ${CMAKE_SOURCE_DIR}/usecases
+    ${CMAKE_SOURCE_DIR}/models
+)
+target_link_libraries(${PROJECT_NAME}_e2e
+    PRIVATE
+    GTest::gtest
+    GTest::gtest_main
+    GTest::gmock
+    GTest::gmock_main
+    pthread
+    Model
+    Controller2Usecase
+)
 
 # Unit Test
 
@@ -153,5 +155,5 @@ enable_testing()
 # Discover
 
 include(GoogleTest)
-# gtest_discover_tests(${PROJECT_NAME}_e2e)
+gtest_discover_tests(${PROJECT_NAME}_e2e)
 # gtest_discover_tests(${PROJECT_NAME}_unit)

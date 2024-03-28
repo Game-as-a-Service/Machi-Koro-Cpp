@@ -26,7 +26,9 @@ public:
 
     void save(std::unique_ptr<MachiKoroGame> game) override;
 
-    void clear(const std::string& id) override;
+    bool clear_game(const std::string& id) override;
+
+    size_t game_num() override;
 
     void clearAll();
 

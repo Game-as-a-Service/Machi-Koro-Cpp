@@ -21,11 +21,18 @@ void MemoryRepository::save(std::unique_ptr<MachiKoroGame> game)
     games_[game->game_id()] = std::move(game);
 }
 
-void MemoryRepository::clear(const std::string& id)
+bool MemoryRepository::clear_game(const std::string& id)
 {
     std::lock_guard<std::mutex> lock(games_mutex_);
-    if (games_.find(id) == games_.end()) return;
+    if (games_.find(id) == games_.end()) return false;
     games_.erase(id);
+    return true;
+}
+
+size_t MemoryRepository::game_num()
+{
+    std::lock_guard<std::mutex> lock(games_mutex_);
+    return games_.size();
 }
 
 void MemoryRepository::clearAll()

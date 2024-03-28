@@ -15,7 +15,7 @@ class CreateGameRequest {
 public:
     CreateGameRequest() = default;
 
-    CreateGameRequest(const std::vector<std::string>& names);
+    explicit CreateGameRequest(const std::vector<std::string>& names);
 
     ~CreateGameRequest() = default;
 
