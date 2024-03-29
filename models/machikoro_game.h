@@ -9,6 +9,8 @@
 #include "loggers/logger_base.h"
 #include "events/event.h"
 #include "player.h"
+#include "bank.h"
+#include "architecture_market.h"
 
 class MachiKoroGame {
 public:
@@ -17,7 +19,10 @@ public:
     ~MachiKoroGame() = default;
 
     // Create game instance and add players.
-    std::unique_ptr<Event> createGame(std::vector<Player>&& players);
+    std::unique_ptr<Event> createGame(std::vector<PlayerPtr>&& players);
+
+    // Init the game.
+    std::unique_ptr<Event> initGame();
 
     std::string game_id() const { return game_id_; }
 
@@ -31,8 +36,19 @@ private:
     // Game ID.
     std::string game_id_;
 
+    // Bank.
+    Bank bank_;
+
+    // Architecture Market.
+    ArchitectureMarket market_;
+
     // Players.
-    std::vector<Player> players_;
+    PlayerPtrs players_;
+
+    // Current player order.
+    // Mod by the number of players to know 
+    // the players currently playing that round.
+    int current_player_ = 0;
 };
 
 #endif  // MODELS_MACHIKORO_GAME_H

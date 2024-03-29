@@ -4,6 +4,7 @@
 #include <string>
 
 #include "events/create_game_event.h"
+#include "events/init_game_event.h"
 
 MachiKoroGame::MachiKoroGame(std::shared_ptr<LoggerBase> logger, std::shared_ptr<UtilBase> util)
     : log_(logger)
@@ -11,7 +12,7 @@ MachiKoroGame::MachiKoroGame(std::shared_ptr<LoggerBase> logger, std::shared_ptr
 {
 }
 
-std::unique_ptr<Event> MachiKoroGame::createGame(std::vector<Player>&& players)
+std::unique_ptr<Event> MachiKoroGame::createGame(std::vector<PlayerPtr>&& players)
 {
     auto event = std::make_unique<CreateGameEvent>();
 
@@ -30,6 +31,34 @@ std::unique_ptr<Event> MachiKoroGame::createGame(std::vector<Player>&& players)
     event->set_message("Success to create game.");
     event->set_game_id(game_id_);
     log_->info(event->message() + " Game ID: " + game_id_);
+
+    return event;
+}
+
+std::unique_ptr<Event> MachiKoroGame::initGame()
+{
+    auto event = std::make_unique<InitGameEvent>();
+
+    // Allocate money.
+    for (auto& player : players_) player->gainCoinFromBank(bank_, 3);
+
+    // Get initial buildings.
+    for (auto& player : players_)
+    {
+        player->hand().gainCard(market_.drawCard(CardName::WHEAT_FIELD));
+        player->hand().gainCard(market_.drawCard(CardName::BAKERY));
+    }
+
+    // Choose one player to be the player for the first round.
+    current_player_ = 0;
+
+    event->set_status(StatusCode::Ok);
+    event->set_message("Success to init game.");
+    event->set_bank(&bank_);
+    event->set_market(&market_);
+    event->set_players(&players_);
+    event->set_player_name(players_[current_player_ % players_.size()]->name());
+    log_->info(event->message() + "Game ID: " + game_id_);
 
     return event;
 }

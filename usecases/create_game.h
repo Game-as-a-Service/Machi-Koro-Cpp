@@ -19,7 +19,7 @@ public:
 
     ~CreateGameRequest() = default;
 
-    std::vector<Player> players();
+    std::vector<PlayerPtr> players();
 
 private:
     // Player names.
