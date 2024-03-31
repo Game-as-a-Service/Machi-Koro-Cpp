@@ -74,4 +74,6 @@ TEST_F(TestInitGame, GivenCreateGame_WhenInitGame_ThenPlayerBandArchitectureMark
 
     auto& res_body = *((*res.second).getJsonObject());
     ASSERT_THAT(res_body["NextPlayerName"].asString(), StrNe(""));
+
+    // TODO: Verify other results.
 }

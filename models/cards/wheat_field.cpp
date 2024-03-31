@@ -13,4 +13,5 @@ void WheatField::OperateEffect(Player* owner,
                                std::vector<Player*> players,
                                Bank* bank)
 {
+    owner->gainCoinFromBank(*bank, 1);
 }

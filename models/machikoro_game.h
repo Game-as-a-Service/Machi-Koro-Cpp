@@ -26,6 +26,12 @@ public:
 
     std::string game_id() const { return game_id_; }
 
+    Bank* bank() { return &bank_; }
+
+    ArchitectureMarket* market() { return &market_; }
+
+    PlayerPtrs* players() { return &players_; }
+
 private:
     // Logger.
     std::shared_ptr<LoggerBase> log_ = nullptr;

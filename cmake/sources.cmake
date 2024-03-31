@@ -122,4 +122,6 @@ set(E2E_SOURCES
     ${CMAKE_SOURCE_DIR}/tests/e2e_test/test_def.h
 )
 set(UNIT_SOURCES
+    ${CMAKE_SOURCE_DIR}/tests/unittest/unit_operate_effect.cpp
+    ${CMAKE_SOURCE_DIR}/tests/unittest/unit_game.cpp
 )

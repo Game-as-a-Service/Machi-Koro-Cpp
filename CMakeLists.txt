@@ -141,19 +141,20 @@ target_link_libraries(${PROJECT_NAME}_e2e
 
 # Unit Test
 
-# add_executable(${PROJECT_NAME}_unit
-#     ${UNIT_SOURCES}
-# )
-# target_link_libraries(${PROJECT_NAME}_unit
-#     PRIVATE
-#     GTest::gtest
-#     GTest::gtest_main
-#     pthread
-#     Model
-# )
+add_executable(${PROJECT_NAME}_unit
+    ${UNIT_SOURCES}
+)
+target_link_libraries(${PROJECT_NAME}_unit
+    PRIVATE
+    GTest::gtest
+    GTest::gtest_main
+    pthread
+    Model
+    Controller2Usecase
+)
 
 # Discover
 
 include(GoogleTest)
 gtest_discover_tests(${PROJECT_NAME}_e2e)
-# gtest_discover_tests(${PROJECT_NAME}_unit)
+gtest_discover_tests(${PROJECT_NAME}_unit)
