@@ -1,33 +1,33 @@
-#ifndef HAND_H
-#define HAND_H
+#ifndef MODELS_HAND_H
+#define MODELS_HAND_H
 
 #include <vector>
-#include <memory>
 
-#include "card/building.h"
-#include "card/landmark.h"
-
-class Building;
-class Landmark;
+#include "cards/landmark.h"
+#include "cards/building.h"
 
 class Hand {
 public:
     Hand();
-    ~Hand();
 
-    void AddBuilding(std::unique_ptr<Building> card)
-    { buildings_.push_back(std::move(card)); }
+    Hand(LandmarkPtrs&& landmarks, BuildingPtrs&& buildings);
 
-    void AddLandmark(std::unique_ptr<Landmark> card)
-    { landmarks_.push_back(std::move(card)); }
+    // Non-copyable.
+    Hand(const Hand& other) = delete;
+    Hand& operator=(const Hand& other) = delete;
 
-    std::vector<Building*> get_buildings() const;
+    ~Hand() = default;
 
-    std::vector<Landmark*> get_landmarks() const;
+    void gainCard(BuildingPtr building);
+
+    std::vector<Landmark*> landmarks() const;
+
+    std::vector<Building*> buildings() const;
 
 private:
-    std::vector<std::unique_ptr<Building>> buildings_;
-    std::vector<std::unique_ptr<Landmark>> landmarks_;
+    LandmarkPtrs landmarks_;
+
+    BuildingPtrs buildings_;
 };
 
-#endif
+#endif  // MODELS_HAND_H

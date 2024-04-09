@@ -1,91 +1,127 @@
 set(CONTROLLER_HEADERS
-    ${CMAKE_SOURCE_DIR}/controllers/utils.h
-    ${CMAKE_SOURCE_DIR}/controllers/in_memory_repository.h
-    ${CMAKE_SOURCE_DIR}/controllers/roll_dice_controller.h
+    ${CMAKE_SOURCE_DIR}/controllers/init_game_controller.h
     ${CMAKE_SOURCE_DIR}/controllers/create_game_controller.h
+    ${CMAKE_SOURCE_DIR}/controllers/clear_game_controller.h
 )
 set(CONTROLLER_SOURCES
-    ${CMAKE_SOURCE_DIR}/controllers/roll_dice_controller.cpp
-    ${CMAKE_SOURCE_DIR}/controllers/utils.cpp
+    ${CMAKE_SOURCE_DIR}/controllers/clear_game_controller.cpp
     ${CMAKE_SOURCE_DIR}/controllers/create_game_controller.cpp
-    ${CMAKE_SOURCE_DIR}/controllers/in_memory_repository.cpp
+    ${CMAKE_SOURCE_DIR}/controllers/init_game_controller.cpp
+)
+set(PRESENTER_HEADERS
+    ${CMAKE_SOURCE_DIR}/presenters/create_game_present.h
+    ${CMAKE_SOURCE_DIR}/presenters/init_game_present.h
+    ${CMAKE_SOURCE_DIR}/presenters/clear_game_present.h
+    ${CMAKE_SOURCE_DIR}/presenters/presenter.h
+)
+set(PRESENTER_SOURCES
+    ${CMAKE_SOURCE_DIR}/presenters/create_game_present.cpp
+    ${CMAKE_SOURCE_DIR}/presenters/clear_game_present.cpp
+    ${CMAKE_SOURCE_DIR}/presenters/init_game_present.cpp
+)
+set(LOGGER_HEADERS
+    ${CMAKE_SOURCE_DIR}/loggers/logger_base.h
+    ${CMAKE_SOURCE_DIR}/loggers/logger.h
+)
+set(LOGGER_SOURCES
+    ${CMAKE_SOURCE_DIR}/loggers/logger.cpp
+)
+set(REPO_HEADERS
+    ${CMAKE_SOURCE_DIR}/repos/repository.h
+    ${CMAKE_SOURCE_DIR}/repos/memory_repository.h
+)
+set(REPO_SOURCES
+    ${CMAKE_SOURCE_DIR}/repos/memory_repository.cpp
+)
+set(UTIL_HEADERS
+    ${CMAKE_SOURCE_DIR}/utils/util.h
+    ${CMAKE_SOURCE_DIR}/utils/util_base.h
+)
+set(UTIL_SOURCES
+    ${CMAKE_SOURCE_DIR}/utils/util.cpp
 )
 set(USECASE_HEADERS
-    ${CMAKE_SOURCE_DIR}/usecases/roll_dice_usecase.h
-    ${CMAKE_SOURCE_DIR}/usecases/create_game_usecase.h
-    ${CMAKE_SOURCE_DIR}/usecases/game_repository.h
-    ${CMAKE_SOURCE_DIR}/usecases/presenter.h
+    ${CMAKE_SOURCE_DIR}/usecases/clear_game.h
+    ${CMAKE_SOURCE_DIR}/usecases/create_game.h
+    ${CMAKE_SOURCE_DIR}/usecases/init_game.h
 )
 set(USECASE_SOURCES
-    ${CMAKE_SOURCE_DIR}/usecases/create_game_usecase.cpp
-    ${CMAKE_SOURCE_DIR}/usecases/roll_dice_usecase.cpp
+    ${CMAKE_SOURCE_DIR}/usecases/create_game.cpp
+    ${CMAKE_SOURCE_DIR}/usecases/clear_game.cpp
+    ${CMAKE_SOURCE_DIR}/usecases/init_game.cpp
 )
 set(MODEL_HEADERS
-    ${CMAKE_SOURCE_DIR}/models/card/convenient_store.h
-    ${CMAKE_SOURCE_DIR}/models/card/fruit_and_vegetable_market.h
-    ${CMAKE_SOURCE_DIR}/models/card/wheat_field.h
-    ${CMAKE_SOURCE_DIR}/models/card/card.h
-    ${CMAKE_SOURCE_DIR}/models/card/shopping_mall.h
-    ${CMAKE_SOURCE_DIR}/models/card/cheese_factory.h
-    ${CMAKE_SOURCE_DIR}/models/card/forest.h
-    ${CMAKE_SOURCE_DIR}/models/card/ranch.h
-    ${CMAKE_SOURCE_DIR}/models/card/cafe.h
-    ${CMAKE_SOURCE_DIR}/models/card/family_restaurant.h
-    ${CMAKE_SOURCE_DIR}/models/card/radio_tower.h
-    ${CMAKE_SOURCE_DIR}/models/card/landmark.h
-    ${CMAKE_SOURCE_DIR}/models/card/building.h
-    ${CMAKE_SOURCE_DIR}/models/card/tv_station.h
-    ${CMAKE_SOURCE_DIR}/models/card/bakery.h
-    ${CMAKE_SOURCE_DIR}/models/card/amusement_park.h
-    ${CMAKE_SOURCE_DIR}/models/card/stadium.h
-    ${CMAKE_SOURCE_DIR}/models/card/apple_orchard.h
-    ${CMAKE_SOURCE_DIR}/models/card/furniture_factory.h
-    ${CMAKE_SOURCE_DIR}/models/card/train_station.h
-    ${CMAKE_SOURCE_DIR}/models/card/business_center.h
-    ${CMAKE_SOURCE_DIR}/models/card/mine.h
+    ${CMAKE_SOURCE_DIR}/models/dice_base.h
     ${CMAKE_SOURCE_DIR}/models/architecture_market.h
+    ${CMAKE_SOURCE_DIR}/models/cards/convenient_store.h
+    ${CMAKE_SOURCE_DIR}/models/cards/fruit_and_vegetable_market.h
+    ${CMAKE_SOURCE_DIR}/models/cards/wheat_field.h
+    ${CMAKE_SOURCE_DIR}/models/cards/card.h
+    ${CMAKE_SOURCE_DIR}/models/cards/shopping_mall.h
+    ${CMAKE_SOURCE_DIR}/models/cards/cheese_factory.h
+    ${CMAKE_SOURCE_DIR}/models/cards/forest.h
+    ${CMAKE_SOURCE_DIR}/models/cards/ranch.h
+    ${CMAKE_SOURCE_DIR}/models/cards/cafe.h
+    ${CMAKE_SOURCE_DIR}/models/cards/family_restaurant.h
+    ${CMAKE_SOURCE_DIR}/models/cards/radio_tower.h
+    ${CMAKE_SOURCE_DIR}/models/cards/landmark.h
+    ${CMAKE_SOURCE_DIR}/models/cards/building.h
+    ${CMAKE_SOURCE_DIR}/models/cards/tv_station.h
+    ${CMAKE_SOURCE_DIR}/models/cards/bakery.h
+    ${CMAKE_SOURCE_DIR}/models/cards/amusement_park.h
+    ${CMAKE_SOURCE_DIR}/models/cards/stadium.h
+    ${CMAKE_SOURCE_DIR}/models/cards/apple_orchard.h
+    ${CMAKE_SOURCE_DIR}/models/cards/furniture_factory.h
+    ${CMAKE_SOURCE_DIR}/models/cards/train_station.h
+    ${CMAKE_SOURCE_DIR}/models/cards/business_center.h
+    ${CMAKE_SOURCE_DIR}/models/cards/mine.h
     ${CMAKE_SOURCE_DIR}/models/hand.h
     ${CMAKE_SOURCE_DIR}/models/player.h
     ${CMAKE_SOURCE_DIR}/models/machikoro_game.h
     ${CMAKE_SOURCE_DIR}/models/bank.h
-    ${CMAKE_SOURCE_DIR}/models/events/domain_event.h
-    ${CMAKE_SOURCE_DIR}/models/events/roll_dice_event.h
+    ${CMAKE_SOURCE_DIR}/models/events/clear_game_event.h
+    ${CMAKE_SOURCE_DIR}/models/events/init_game_event.h
+    ${CMAKE_SOURCE_DIR}/models/events/event.h
+    ${CMAKE_SOURCE_DIR}/models/events/create_game_event.h
     ${CMAKE_SOURCE_DIR}/models/dice.h
 )
 set(MODEL_SOURCES
     ${CMAKE_SOURCE_DIR}/models/bank.cpp
     ${CMAKE_SOURCE_DIR}/models/player.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/convenient_store.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/wheat_field.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/amusement_park.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/building.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/ranch.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/fruit_and_vegetable_market.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/tv_station.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/family_restaurant.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/shopping_mall.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/bakery.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/apple_orchard.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/forest.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/cheese_factory.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/train_station.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/mine.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/stadium.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/furniture_factory.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/business_center.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/card.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/landmark.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/cafe.cpp
-    ${CMAKE_SOURCE_DIR}/models/card/radio_tower.cpp
     ${CMAKE_SOURCE_DIR}/models/dice.cpp
     ${CMAKE_SOURCE_DIR}/models/architecture_market.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/convenient_store.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/wheat_field.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/amusement_park.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/building.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/ranch.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/fruit_and_vegetable_market.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/tv_station.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/family_restaurant.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/shopping_mall.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/bakery.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/apple_orchard.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/forest.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/cheese_factory.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/train_station.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/mine.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/stadium.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/furniture_factory.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/business_center.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/card.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/landmark.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/cafe.cpp
+    ${CMAKE_SOURCE_DIR}/models/cards/radio_tower.cpp
     ${CMAKE_SOURCE_DIR}/models/hand.cpp
     ${CMAKE_SOURCE_DIR}/models/machikoro_game.cpp
 )
 set(E2E_SOURCES
-    ${CMAKE_SOURCE_DIR}/test/e2e_test/test_main.cc
-    ${CMAKE_SOURCE_DIR}/test/e2e_test/game_setup_e2etest.cpp
+    ${CMAKE_SOURCE_DIR}/tests/e2e_test/e2e_main.cpp
+    ${CMAKE_SOURCE_DIR}/tests/e2e_test/e2e_create_game.cpp
+    ${CMAKE_SOURCE_DIR}/tests/e2e_test/e2e_init_game.cpp
+    ${CMAKE_SOURCE_DIR}/tests/e2e_test/test_def.h
 )
 set(UNIT_SOURCES
-    ${CMAKE_SOURCE_DIR}/test/unittest/game_unittest.cpp
+    ${CMAKE_SOURCE_DIR}/tests/unittest/unit_operate_effect.cpp
+    ${CMAKE_SOURCE_DIR}/tests/unittest/unit_game.cpp
 )

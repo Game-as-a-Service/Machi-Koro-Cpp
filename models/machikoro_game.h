@@ -1,46 +1,60 @@
-#ifndef MACHIKORO_GAME_H
-#define MACHIKORO_GAME_H
+#ifndef MODELS_MACHIKORO_GAME_H
+#define MODELS_MACHIKORO_GAME_H
 
+#include <memory>
 #include <string>
 #include <vector>
-#include <memory>
 
-#include "bank.h"
+#include "utils/util_base.h"
+#include "loggers/logger_base.h"
+#include "events/event.h"
 #include "player.h"
+#include "bank.h"
 #include "architecture_market.h"
-#include "events/domain_event.h"
 
 class MachiKoroGame {
 public:
-    MachiKoroGame() = default;
-    MachiKoroGame(const std::vector<std::string>& player_names);
-    MachiKoroGame(const MachiKoroGame& game) = delete;
-    MachiKoroGame(MachiKoroGame&& game) = delete;
-    ~MachiKoroGame();
+    MachiKoroGame(std::shared_ptr<LoggerBase> logger, std::shared_ptr<UtilBase> util);
 
-    MachiKoroGame& operator = (const MachiKoroGame& rhs) = delete;
-    MachiKoroGame& operator = (MachiKoroGame&& rhs) = delete;
+    ~MachiKoroGame() = default;
 
-    void GameStart();
+    // Create game instance and add players.
+    std::unique_ptr<Event> createGame(std::vector<PlayerPtr>&& players);
 
-    std::unique_ptr<DomainEvent> 
-    RollDice(const std::string& player_id, int dice_count);
+    // Init the game.
+    std::unique_ptr<Event> initGame();
 
-    void set_game_id(const std::string& id) { game_id_ = id; }
-    std::string get_game_id() const { return game_id_; }
+    std::string game_id() const { return game_id_; }
 
-    const Bank* get_bank() const { return bank_.get(); }
+    Bank* bank() { return &bank_; }
 
-    const ArchitectureMarket* get_market() const { return market_.get(); }
+    ArchitectureMarket* market() { return &market_; }
 
-    // TODO(smart pointer): implement this function.
-    std::vector<Player*> get_players();
+    PlayerPtrs* players() { return &players_; }
 
 private:
+    // Logger.
+    std::shared_ptr<LoggerBase> log_ = nullptr;
+
+    // Utility.
+    std::shared_ptr<UtilBase> util_ = nullptr;
+
+    // Game ID.
     std::string game_id_;
-    std::unique_ptr<Bank> bank_ = nullptr;
-    std::vector<std::unique_ptr<Player>> players_;
-    std::unique_ptr<ArchitectureMarket> market_ = nullptr;
+
+    // Bank.
+    Bank bank_;
+
+    // Architecture Market.
+    ArchitectureMarket market_;
+
+    // Players.
+    PlayerPtrs players_;
+
+    // Current player order.
+    // Mod by the number of players to know 
+    // the players currently playing that round.
+    int current_player_ = 0;
 };
 
-#endif
+#endif  // MODELS_MACHIKORO_GAME_H

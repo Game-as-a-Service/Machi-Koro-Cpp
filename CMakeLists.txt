@@ -66,12 +66,24 @@ target_sources(Controller2Usecase
     PRIVATE
     ${CONTROLLER_SOURCES}
     ${CONTROLLER_HEADERS}
+    ${LOGGER_SOURCES}
+    ${LOGGER_HEADERS}
+    ${REPO_SOURCES}
+    ${REPO_HEADERS}
+    ${UTIL_SOURCES}
+    ${UTIL_HEADERS}
+    ${PRESENTER_SOURCES}
+    ${PRESENTER_HEADERS}
     ${USECASE_SOURCES}
     ${USECASE_HEADERS}
 )
 target_include_directories(Controller2Usecase
     PRIVATE
     ${CMAKE_SOURCE_DIR}/controllers
+    ${CMAKE_SOURCE_DIR}/loggers
+    ${CMAKE_SOURCE_DIR}/repos
+    ${CMAKE_SOURCE_DIR}/utils
+    ${CMAKE_SOURCE_DIR}/presenters
     ${CMAKE_SOURCE_DIR}/usecases
 )
 target_link_libraries(Controller2Usecase
@@ -83,7 +95,7 @@ target_link_libraries(Controller2Usecase
 
 # app
 
-add_executable(${PROJECT_NAME}_app main.cc)
+add_executable(${PROJECT_NAME}_app main.cpp)
 target_link_libraries(${PROJECT_NAME}_app
     PRIVATE
     Controller2Usecase
@@ -93,6 +105,12 @@ target_link_libraries(${PROJECT_NAME}_app
 #     ${CMAKE_CURRENT_SOURCE_DIR}/views
 #     ${CMAKE_CURRENT_BINARY_DIR}
 # )
+
+# ---------------------------------------------------------------------------------------
+# Clang-format.
+# ---------------------------------------------------------------------------------------
+
+include(cmake/clang-format.cmake)
 
 # ---------------------------------------------------------------------------------------
 # E2E Test & Unit Test.
@@ -114,6 +132,8 @@ target_link_libraries(${PROJECT_NAME}_e2e
     PRIVATE
     GTest::gtest
     GTest::gtest_main
+    GTest::gmock
+    GTest::gmock_main
     pthread
     Model
     Controller2Usecase
@@ -130,6 +150,7 @@ target_link_libraries(${PROJECT_NAME}_unit
     GTest::gtest_main
     pthread
     Model
+    Controller2Usecase
 )
 
 # Discover

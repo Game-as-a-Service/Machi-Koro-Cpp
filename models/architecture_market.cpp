@@ -1,80 +1,60 @@
 #include "architecture_market.h"
 
-#include <cassert>
-
-#include "card/wheat_field.h"
-#include "card/ranch.h"
-#include "card/bakery.h"
-#include "card/cafe.h"
-#include "card/convenient_store.h"
-#include "card/forest.h"
-#include "card/stadium.h"
-#include "card/tv_station.h"
-#include "card/business_center.h"
-#include "card/cheese_factory.h"
-#include "card/furniture_factory.h"
-#include "card/mine.h"
-#include "card/family_restaurant.h"
-#include "card/apple_orchard.h"
-#include "card/fruit_and_vegetable_market.h"
-#include "card/amusement_park.h"
-#include "card/radio_tower.h"
-#include "card/shopping_mall.h"
-#include "card/train_station.h"
+#include "models/cards/wheat_field.h"
+#include "models/cards/ranch.h"
+#include "models/cards/bakery.h"
+#include "models/cards/cafe.h"
+#include "models/cards/convenient_store.h"
+#include "models/cards/forest.h"
+#include "models/cards/stadium.h"
+#include "models/cards/tv_station.h"
+#include "models/cards/business_center.h"
+#include "models/cards/cheese_factory.h"
+#include "models/cards/furniture_factory.h"
+#include "models/cards/mine.h"
+#include "models/cards/family_restaurant.h"
+#include "models/cards/apple_orchard.h"
+#include "models/cards/fruit_and_vegetable_market.h"
+#include "models/cards/amusement_park.h"
+#include "models/cards/radio_tower.h"
+#include "models/cards/shopping_mall.h"
+#include "models/cards/train_station.h"
 
 ArchitectureMarket::ArchitectureMarket()
 {
-    auto addBuildings = [&](const CardName& name, auto building, const int count) {
-        for (int i = 0; i < count; ++i) {
-            buildings_[name].push_back(std::make_unique<decltype(building)>());
-        }
-    };
-
-    // Buildings.
-    addBuildings(CardName::WHEAT_FIELD, WheatField{}, 10);
-    addBuildings(CardName::RANCH, Ranch{}, 6);
-    addBuildings(CardName::BAKERY, Bakery{}, 10);
-    addBuildings(CardName::CAFE, Cafe{}, 6);
-    addBuildings(CardName::CONVENIENCE_STORE, ConvenientStore{}, 6);
-    addBuildings(CardName::FOREST, Forest{}, 6);
-    addBuildings(CardName::STADIUM, Stadium{}, 4);
-    addBuildings(CardName::TV_STATION, TvStation{}, 4);
-    addBuildings(CardName::BUSINESS_CENTER, BusinessCenter{}, 4);
-    addBuildings(CardName::CHEESE_FACTORY, CheeseFactory{}, 6);
-    addBuildings(CardName::FURNITURE_FACTORY, FurnitureFactory{}, 6);
-    addBuildings(CardName::MINE, Mine{}, 6);
-    addBuildings(CardName::FAMILY_RESTAURANT, FamilyRestaurant{}, 6);
-    addBuildings(CardName::APPLE_ORCHARD, AppleOrchard{}, 6);
-    addBuildings(CardName::FRUIT_AND_VEGETABLE_MARKET, FruitAndVegetableMarket{}, 6);
+    cards_[CardName::WHEAT_FIELD] = generateBuildingsTemp<WheatField>(10);
+    cards_[CardName::RANCH] = generateBuildingsTemp<Ranch>(6);
+    cards_[CardName::BAKERY] = generateBuildingsTemp<Bakery>(10);
+    cards_[CardName::CAFE] = generateBuildingsTemp<Cafe>(6);
+    cards_[CardName::CONVENIENCE_STORE] = generateBuildingsTemp<ConvenientStore>(6);
+    cards_[CardName::FOREST] = generateBuildingsTemp<Forest>(6);
+    cards_[CardName::STADIUM] = generateBuildingsTemp<Stadium>(4);
+    cards_[CardName::TV_STATION] = generateBuildingsTemp<TvStation>(4);
+    cards_[CardName::BUSINESS_CENTER] = generateBuildingsTemp<BusinessCenter>(4);
+    cards_[CardName::CHEESE_FACTORY] = generateBuildingsTemp<CheeseFactory>(6);
+    cards_[CardName::FURNITURE_FACTORY] = generateBuildingsTemp<FurnitureFactory>(6);
+    cards_[CardName::MINE] = generateBuildingsTemp<Mine>(6);
+    cards_[CardName::FAMILY_RESTAURANT] = generateBuildingsTemp<FamilyRestaurant>(6);
+    cards_[CardName::APPLE_ORCHARD] = generateBuildingsTemp<AppleOrchard>(6);
+    cards_[CardName::FRUIT_AND_VEGETABLE_MARKET] =
+        generateBuildingsTemp<FruitAndVegetableMarket>(6);
 }
 
-ArchitectureMarket::~ArchitectureMarket()
+BuildingPtr ArchitectureMarket::drawCard(const CardName& name)
 {
-    for (auto& cards : buildings_)
-        for (auto& c : cards.second) c = nullptr;
-    buildings_.clear();
+    auto res = std::move(cards_[name].back());
+    cards_[name].pop_back();
+    return res;
 }
 
-std::vector<std::unique_ptr<Building>> ArchitectureMarket::GetInitialBuildingsForOnePlayer()
+std::map<CardName, std::vector<Building*>> ArchitectureMarket::cards() const
 {
-    // 每個玩家一開始都各持有一張小麥田和麵包店。
-    std::vector<std::unique_ptr<Building>> cards;
-    assert(buildings_[CardName::WHEAT_FIELD].size() > 0 && "There is no wheat field card in the market.");
-    assert(buildings_[CardName::BAKERY].size() > 0 && "There is no bakery card in the market.");
-    cards.push_back(std::move(buildings_[CardName::WHEAT_FIELD].back()));
-    cards.push_back(std::move(buildings_[CardName::BAKERY].back()));
-    buildings_[CardName::WHEAT_FIELD].pop_back();
-    buildings_[CardName::BAKERY].pop_back();
-    return cards;
-}
-
-std::vector<std::unique_ptr<Landmark>> ArchitectureMarket::GetLandmarksForOnePlayer()
-{
-    // 每個玩家一開始各分到一張主題樂園、一張廣播電台、一張購物中心，以及一張火車站。
-    std::vector<std::unique_ptr<Landmark>> cards;
-    cards.push_back(std::make_unique<AmusementPark>());
-    cards.push_back(std::make_unique<ShoppingMall>());
-    cards.push_back(std::make_unique<TrainStation>());
-    cards.push_back(std::make_unique<RadioTower>());
-    return cards;
+    std::map<CardName, std::vector<Building*>> res;
+    for (const auto& card : cards_)
+    {
+        std::vector<Building*> buildings;
+        for (const auto& building : card.second) buildings.push_back(building.get());
+        res[card.first] = buildings;
+    }
+    return res;
 }

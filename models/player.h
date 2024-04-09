@@ -1,54 +1,58 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef MODELS_PLAYER_H
+#define MODELS_PLAYER_H
 
 #include <string>
-#include <vector>
 #include <memory>
-#include <utility>
+#include <vector>
 
-#include "dice.h"
+#include "dice_base.h"
 #include "hand.h"
-#include "card/building.h"
-#include "card/landmark.h"
+#include "bank.h"
 
-class Card;
-class Hand;
+class Player;
+using PlayerPtr = std::unique_ptr<Player>;
+using PlayerPtrs = std::vector<PlayerPtr>;
 
 class Player {
 public:
-    Player();
-    Player(const std::string& name);
-    Player(const Player& player) = delete;
-    Player(Player&& player) = delete;
-    ~Player();
+    Player(const std::string& name, std::shared_ptr<DiceBase> dice);
 
-    Player& operator = (const Player& rhs) = delete;
-    Player& operator = (Player&& rhs) = delete;
+    // Non copyable.
+    Player(const Player& other) = delete;
+    Player& operator=(const Player& other) = delete;
 
-    std::pair<int, int> RollDice(int dice_count);
+    ~Player() = default;
 
-    void PayCoin(int coin);
+    void payCoin2Bank(Bank& bank, int coin);
 
-    void GainCoin(int coin);
+    void gainCoinFromBank(Bank& bank, int coin);
 
-    void PayCoin2AnotherPlayer(int coin, Player* other);
+    void payCoin2Player(Player* other, int coin);
 
-    void GainLandmarks(std::vector<std::unique_ptr<Landmark>>&& cards);
+    void gainCoinFromPlayer(Player* other, int coin);
 
-    void GainInitialBuildings(std::vector<std::unique_ptr<Building>>&& cards);
+    void payCoin(int coin) { coin_ -= coin; }
 
-    int get_coin() const { return coin_; }
+    void gainCoin(int coin) { coin_ += coin; }
 
-    void set_name(const std::string& name) { name_ = name; }
-    std::string get_name() const { return name_; }
+    std::string name() const { return name_; }
 
-    const Hand* get_hand() const { return hand_.get(); }
+    int totalCoin() const { return coin_; }
+
+    Hand& hand() { return hand_; }
 
 private:
-    int coin_ = 0;
-    Dice dice_;
+    // Player name.
     std::string name_;
-    std::unique_ptr<Hand> hand_ = nullptr;
+
+    // Coin.
+    int coin_ = 0;
+
+    // Dice.
+    std::shared_ptr<DiceBase> dice_ = nullptr;
+
+    // Hand.
+    Hand hand_;
 };
 
-#endif
+#endif  // MODELS_PLAYER_H

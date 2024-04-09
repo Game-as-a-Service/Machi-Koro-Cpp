@@ -2,7 +2,7 @@
 
 #include <random>
 
-int Dice::GeneratePoint() const
+int Dice::roll() const
 {
     std::random_device rd;
     std::mt19937 generator(rd());

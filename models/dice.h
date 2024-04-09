@@ -1,12 +1,11 @@
-#ifndef DICE_H
-#define DICE_H
+#ifndef MODELS_DICE_H
+#define MODELS_DICE_H
 
-class Dice {
+#include "dice_base.h"
+
+class Dice : public DiceBase {
 public:
-    Dice() = default;
-    ~Dice() = default;
-    
-    int GeneratePoint() const;
+    int roll() const override;
 };
 
-#endif
+#endif  // MODELS_DICE_H

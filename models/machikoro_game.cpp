@@ -1,91 +1,64 @@
-#include "machikoro_game.h"
+#include "models/machikoro_game.h"
 
-#include <iostream>
-#include <algorithm>
+#include <vector>
+#include <string>
 
-#include "events/roll_dice_event.h"
+#include "events/create_game_event.h"
+#include "events/init_game_event.h"
 
-MachiKoroGame::MachiKoroGame(const std::vector<std::string>& player_names)
+MachiKoroGame::MachiKoroGame(std::shared_ptr<LoggerBase> logger, std::shared_ptr<UtilBase> util)
+    : log_(logger)
+    , util_(util)
 {
-    for (const auto& name : player_names)
+}
+
+std::unique_ptr<Event> MachiKoroGame::createGame(std::vector<PlayerPtr>&& players)
+{
+    auto event = std::make_unique<CreateGameEvent>();
+
+    if (players.empty() || players.size() > 4)
     {
-        auto player = std::make_unique<Player>(name);
-        players_.push_back(std::move(player));
-    }
-
-    bank_ = std::make_unique<Bank>();
-    for (auto& player : players_)
-        bank_->PayCoin2Player(3, player.get());
-
-    market_ = std::make_unique<ArchitectureMarket>();
-
-    for (auto& player : players_) {
-        player->GainInitialBuildings(std::move(market_->GetInitialBuildingsForOnePlayer()));
-        player->GainLandmarks(std::move(market_->GetLandmarksForOnePlayer()));
-    }
-
-    // Choose one player as starter
-
-}
-
-MachiKoroGame::~MachiKoroGame()
-{
-    bank_ = nullptr;
-    market_ = nullptr;
-    for (auto& p : players_)
-        p = nullptr;
-    players_.clear();
-}
-
-void MachiKoroGame::GameStart()
-{
-    std::cout << "Game Start !!" << std::endl;
-}
-
-std::vector<Player*> MachiKoroGame::get_players()
-{
-    std::vector<Player*> players;
-    for (const auto& player: players_)
-        players.push_back(player.get());
-    return players;
-}
-
-std::unique_ptr<DomainEvent>
-MachiKoroGame::RollDice(const std::string& player_id, int dice_count)
-{
-    auto IsLandmarkInHand =
-        [](const Hand* hand, const CardName name) -> bool {
-            auto it = std::find_if(
-                hand->get_landmarks().begin(),
-                hand->get_landmarks().end(),
-                [&name](Landmark* landmark)  {
-                    return landmark->get_name() == name &&
-                           landmark->IsActivate();
-                }
-            );
-            return it != hand->get_landmarks().end();
-        };
-
-    // Idnetify current player.
-    auto player = (*std::find_if(players_.begin(), players_.end(),
-        [&player_id](const auto& p) { return p->get_name() == player_id; }
-    )).get();
-
-    auto [pt1, pt2] = player->RollDice(dice_count);
-    auto event = std::make_unique<RollDiceEvent>(pt1, pt2,
-        !(dice_count == 2 && pt2 == 0));
-    if (IsLandmarkInHand(player->get_hand(), CardName::RADIO_TOWER))
-    {
-        // Can reroll the dice or not.
-        event->set_can_reroll(true);
+        event->set_status(StatusCode::BadRequest);
+        event->set_message("The number of players cannot empty or exceed 4 !");
+        log_->error("Failed to create game ! " + event->message());
         return event;
     }
 
-    // Operate effect.
+    game_id_ = util_->generateUUID();
+    players_ = std::move(players);
 
-    // If two points are the same, can roll the dice in next round or not.
-    if (pt1 == pt2 &&
-        IsLandmarkInHand(player->get_hand(), CardName::AMUSEMENT_PARK))
-        event->set_can_roll_next(true);
+    event->set_status(StatusCode::Ok);
+    event->set_message("Success to create game.");
+    event->set_game_id(game_id_);
+    log_->info(event->message() + " Game ID: " + game_id_);
+
+    return event;
+}
+
+std::unique_ptr<Event> MachiKoroGame::initGame()
+{
+    auto event = std::make_unique<InitGameEvent>();
+
+    // Allocate money.
+    for (auto& player : players_) player->gainCoinFromBank(bank_, 3);
+
+    // Get initial buildings.
+    for (auto& player : players_)
+    {
+        player->hand().gainCard(market_.drawCard(CardName::WHEAT_FIELD));
+        player->hand().gainCard(market_.drawCard(CardName::BAKERY));
+    }
+
+    // Choose one player to be the player for the first round.
+    current_player_ = 0;
+
+    event->set_status(StatusCode::Ok);
+    event->set_message("Success to init game.");
+    event->set_bank(&bank_);
+    event->set_market(&market_);
+    event->set_players(&players_);
+    event->set_player_name(players_[current_player_ % players_.size()]->name());
+    log_->info(event->message() + "Game ID: " + game_id_);
+
     return event;
 }

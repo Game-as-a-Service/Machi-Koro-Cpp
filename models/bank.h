@@ -1,26 +1,22 @@
-#ifndef BANK_H
-#define BANK_H
-
-#include "player.h"
-
-class Player;
+#ifndef MODELS_BANK_H
+#define MODELS_BANK_H
 
 class Bank {
 public:
-    Bank();
-    Bank(const Bank& bank);
-    Bank(Bank&& bank);
-    ~Bank();
+    Bank() = default;
 
-    Bank& operator = (const Bank& rhs);
-    Bank& operator = (Bank&& rhs);
+    Bank(int coin);
 
-    void PayCoin2Player(int coin, Player* player);
+    ~Bank() = default;
 
-    int get_coin() const { return coin_; } 
-    
+    void payCoin(int coin) { coin_ -= coin; }
+
+    void gainCoin(int coin) { coin_ += coin; }
+
+    int totalCoin() const { return coin_; }
+
 private:
     int coin_ = 282;
 };
 
-#endif
+#endif  // MODELS_BANK_H

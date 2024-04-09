@@ -22,6 +22,46 @@ echo "set(CONTROLLER_SOURCES" >> $OUTPUT_FILE
 find $ROOT_DIR/controllers -type f \( -name "*.cc" -o -name "*.cpp" \) | sed "s|$ROOT_DIR|\\\${CMAKE_SOURCE_DIR}|g" | sed 's/^/    /' >> $OUTPUT_FILE
 echo ")" >> $OUTPUT_FILE
 
+# presenters/.
+
+echo "set(PRESENTER_HEADERS" >> $OUTPUT_FILE
+find $ROOT_DIR/presenters -type f \( -name "*.h" \) | sed "s|$ROOT_DIR|\\\${CMAKE_SOURCE_DIR}|g" | sed 's/^/    /' >> $OUTPUT_FILE
+echo ")" >> $OUTPUT_FILE
+
+echo "set(PRESENTER_SOURCES" >> $OUTPUT_FILE
+find $ROOT_DIR/presenters -type f \( -name "*.cc" -o -name "*.cpp" \) | sed "s|$ROOT_DIR|\\\${CMAKE_SOURCE_DIR}|g" | sed 's/^/    /' >> $OUTPUT_FILE
+echo ")" >> $OUTPUT_FILE
+
+# loggers/.
+
+echo "set(LOGGER_HEADERS" >> $OUTPUT_FILE
+find $ROOT_DIR/loggers -type f \( -name "*.h" \) | sed "s|$ROOT_DIR|\\\${CMAKE_SOURCE_DIR}|g" | sed 's/^/    /' >> $OUTPUT_FILE
+echo ")" >> $OUTPUT_FILE
+
+echo "set(LOGGER_SOURCES" >> $OUTPUT_FILE
+find $ROOT_DIR/loggers -type f \( -name "*.cc" -o -name "*.cpp" \) | sed "s|$ROOT_DIR|\\\${CMAKE_SOURCE_DIR}|g" | sed 's/^/    /' >> $OUTPUT_FILE
+echo ")" >> $OUTPUT_FILE
+
+# repos/.
+
+echo "set(REPO_HEADERS" >> $OUTPUT_FILE
+find $ROOT_DIR/repos -type f \( -name "*.h" \) | sed "s|$ROOT_DIR|\\\${CMAKE_SOURCE_DIR}|g" | sed 's/^/    /' >> $OUTPUT_FILE
+echo ")" >> $OUTPUT_FILE
+
+echo "set(REPO_SOURCES" >> $OUTPUT_FILE
+find $ROOT_DIR/repos -type f \( -name "*.cc" -o -name "*.cpp" \) | sed "s|$ROOT_DIR|\\\${CMAKE_SOURCE_DIR}|g" | sed 's/^/    /' >> $OUTPUT_FILE
+echo ")" >> $OUTPUT_FILE
+
+# utils/.
+
+echo "set(UTIL_HEADERS" >> $OUTPUT_FILE
+find $ROOT_DIR/utils -type f \( -name "*.h" \) | sed "s|$ROOT_DIR|\\\${CMAKE_SOURCE_DIR}|g" | sed 's/^/    /' >> $OUTPUT_FILE
+echo ")" >> $OUTPUT_FILE
+
+echo "set(UTIL_SOURCES" >> $OUTPUT_FILE
+find $ROOT_DIR/utils -type f \( -name "*.cc" -o -name "*.cpp" \) | sed "s|$ROOT_DIR|\\\${CMAKE_SOURCE_DIR}|g" | sed 's/^/    /' >> $OUTPUT_FILE
+echo ")" >> $OUTPUT_FILE
+
 # usecases/.
 
 echo "set(USECASE_HEADERS" >> $OUTPUT_FILE
@@ -42,14 +82,14 @@ echo "set(MODEL_SOURCES" >> $OUTPUT_FILE
 find $ROOT_DIR/models -type f \( -name "*.cc" -o -name "*.cpp" \) | sed "s|$ROOT_DIR|\\\${CMAKE_SOURCE_DIR}|g" | sed 's/^/    /' >> $OUTPUT_FILE
 echo ")" >> $OUTPUT_FILE
 
-# test/e2e_test/.
+# tests/e2e_test/.
 
 echo "set(E2E_SOURCES" >> $OUTPUT_FILE
-find $ROOT_DIR/test/e2e_test -type f \( -name "*.cc" -o -name "*.cpp" \) | sed "s|$ROOT_DIR|\\\${CMAKE_SOURCE_DIR}|g" | sed 's/^/    /' >> $OUTPUT_FILE
+find $ROOT_DIR/tests/e2e_test -type f \( -name "*.cc" -o -name "*.cpp" -o -name "*.h" \) | sed "s|$ROOT_DIR|\\\${CMAKE_SOURCE_DIR}|g" | sed 's/^/    /' >> $OUTPUT_FILE
 echo ")" >> $OUTPUT_FILE
 
-# test/unittest/.
+# tests/unittest/.
 
 echo "set(UNIT_SOURCES" >> $OUTPUT_FILE
-find $ROOT_DIR/test/unittest -type f \( -name "*.cc" -o -name "*.cpp" \) | sed "s|$ROOT_DIR|\\\${CMAKE_SOURCE_DIR}|g" | sed 's/^/    /' >> $OUTPUT_FILE
+find $ROOT_DIR/tests/unittest -type f \( -name "*.cc" -o -name "*.cpp" \) | sed "s|$ROOT_DIR|\\\${CMAKE_SOURCE_DIR}|g" | sed 's/^/    /' >> $OUTPUT_FILE
 echo ")" >> $OUTPUT_FILE

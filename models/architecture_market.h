@@ -1,32 +1,30 @@
-#ifndef ARCHITECTURE_MARKET_H
-#define ARCHITECTURE_MARKET_H
+#ifndef MODELS_ARCHITECTURE_MARKET_H
+#define MODELS_ARCHITECTURE_MARKET_H
 
 #include <map>
-#include <string>
-#include <vector>
-#include <deque>
 #include <memory>
+#include <functional>
 
-#include "./card/landmark.h"
-#include "./card/building.h"
+#include "utils/util_base.h"
+#include "cards/building.h"
 
 class ArchitectureMarket {
 public:
     ArchitectureMarket();
-    ~ArchitectureMarket();
 
-    ArchitectureMarket& operator = (const ArchitectureMarket& rhs) = delete;
-    ArchitectureMarket& operator = (ArchitectureMarket&& rhs) = delete;
+    // Non-copyable.
+    ArchitectureMarket(const ArchitectureMarket& other) = delete;
+    ArchitectureMarket& operator=(const ArchitectureMarket& other) = delete;
 
-    std::vector<std::unique_ptr<Building>> GetInitialBuildingsForOnePlayer();
-    std::vector<std::unique_ptr<Landmark>> GetLandmarksForOnePlayer();
+    ~ArchitectureMarket() = default;
 
-    const std::map<CardName, std::deque<std::unique_ptr<Building>>>&
-    get_buildings() const { return buildings_; }
+    BuildingPtr drawCard(const CardName& name);
+
+    std::map<CardName, std::vector<Building*>> cards() const;
 
 private:
-    // key: Card name; Value : Cards.
-    std::map<CardName, std::deque<std::unique_ptr<Building>>> buildings_;
+    // All the building cards.
+    std::map<CardName, BuildingPtrs> cards_;
 };
 
-#endif
+#endif  // MODELS_ARCHITECTURE_MARKET_H

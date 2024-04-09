@@ -1,31 +1,31 @@
-#pragma once
+#ifndef CONTROLLERS_CREATE_GAME_CONTROLLER_H
+#define CONTROLLERS_CREATE_GAME_CONTROLLER_H
 
-#include <drogon/HttpController.h>
+#include <memory>
 
-#include <string>
-
-#include "../usecases/create_game_usecase.h"
-#include "../usecases/presenter.h"
+#include "drogon/HttpController.h"
+#include "utils/util_base.h"
+#include "utils/util.h"
+#include "loggers/logger_base.h"
+#include "loggers/logger.h"
 
 using namespace drogon;
 
-class CreateGame : public drogon::HttpController<CreateGame>
-{
-  public:
+class CreateGame : public drogon::HttpController<CreateGame> {
+public:
     METHOD_LIST_BEGIN
-    METHOD_ADD(CreateGame::createGame, "/createGame", Post);
+    METHOD_ADD(CreateGame::createGame, "/", Post);
     METHOD_LIST_END
 
-    void createGame(const HttpRequestPtr &req,
-               std::function<void (const HttpResponsePtr &)> &&callback);
+    void createGame(const HttpRequestPtr& req,
+                    std::function<void(const HttpResponsePtr&)>&& callback);
+
+private:
+    // Logger.
+    std::shared_ptr<LoggerBase> log_ = Logger::self();
+
+    // Utility.
+    std::shared_ptr<UtilBase> util_ = Util::self();
 };
 
-class CreateGamePresenter : public Presenter
-{
-  public:
-    void Present(const MachiKoroGame& game) override;
-    Json::Value GetViewModel() const;
-
-  private:
-    std::string game_id_;
-};
+#endif  // CONTROLLERS_CREATE_GAME_CONTROLLER_H

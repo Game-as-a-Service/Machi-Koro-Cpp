@@ -1,29 +1,39 @@
 #include "hand.h"
 
+#include "cards/radio_tower.h"
+#include "cards/train_station.h"
+#include "cards/shopping_mall.h"
+#include "cards/amusement_park.h"
+
 Hand::Hand()
 {
+    landmarks_.push_back(std::make_unique<RadioTower>());
+    landmarks_.push_back(std::make_unique<TrainStation>());
+    landmarks_.push_back(std::make_unique<ShoppingMall>());
+    landmarks_.push_back(std::make_unique<AmusementPark>());
 }
 
-Hand::~Hand()
+Hand::Hand(LandmarkPtrs&& landmarks, BuildingPtrs&& buildings)
+    : landmarks_(std::move(landmarks))
+    , buildings_(std::move(buildings))
 {
-    for (auto& c : buildings_) c = nullptr;
-    buildings_.clear();
-    for (auto& l : landmarks_) l = nullptr;
-    landmarks_.clear();
 }
 
-std::vector<Building*> Hand::get_buildings() const
+void Hand::gainCard(BuildingPtr card)
 {
-    std::vector<Building*> res;
-    for (const auto& card : buildings_)
-        res.push_back(card.get());
+    buildings_.push_back(std::move(card));
+}
+
+std::vector<Landmark*> Hand::landmarks() const
+{
+    std::vector<Landmark*> res;
+    for (auto& card : landmarks_) res.push_back(card.get());
     return res;
 }
 
-std::vector<Landmark*> Hand::get_landmarks() const
+std::vector<Building*> Hand::buildings() const
 {
-    std::vector<Landmark*> res;
-    for (const auto& card: landmarks_)
-        res.push_back(card.get());
+    std::vector<Building*> res;
+    for (auto& card : buildings_) res.push_back(card.get());
     return res;
 }
