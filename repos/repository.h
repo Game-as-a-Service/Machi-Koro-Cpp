@@ -4,7 +4,7 @@
 #include <string>
 #include <memory>
 
-#include "models/machikoro_game.h"
+class MachiKoroGame;
 
 class Repository {
 public:

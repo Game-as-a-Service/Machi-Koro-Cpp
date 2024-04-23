@@ -1,6 +1,10 @@
 #include "init_game_present.h"
 
+#include "models/architecture_market.h"
+#include "models/bank.h"
+#include "models/events/event.h"
 #include "models/events/init_game_event.h"
+#include "utils/util_base.h"
 
 InitGamePresenter::InitGamePresenter(std::shared_ptr<UtilBase> util)
     : util_(util)

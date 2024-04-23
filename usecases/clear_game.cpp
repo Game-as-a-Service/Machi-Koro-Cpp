@@ -2,7 +2,11 @@
 
 #include <memory>
 
+#include "loggers/logger_base.h"
 #include "models/events/clear_game_event.h"
+#include "presenters/presenter.h"
+#include "repos/repository.h"
+#include "utils/util_base.h"
 
 ClearGameRequest::ClearGameRequest(const std::string& id)
     : id_(id)

@@ -5,9 +5,10 @@
 #include <vector>
 
 #include "event.h"
-#include "models/bank.h"
 #include "models/player.h"
-#include "models/architecture_market.h"
+
+class ArchitectureMarket;
+class Bank;
 
 class InitGameEvent : public Event {
 public:

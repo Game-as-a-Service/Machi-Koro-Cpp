@@ -4,10 +4,10 @@
 #include <string>
 #include <memory>
 
-#include "utils/util_base.h"
-#include "loggers/logger_base.h"
-#include "presenters/presenter.h"
-#include "repos/repository.h"
+class LoggerBase;
+class Presenter;
+class Repository;
+class UtilBase;
 
 class InitGameRequest {
 public:

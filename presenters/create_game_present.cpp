@@ -1,6 +1,7 @@
 #include "create_game_present.h"
 
 #include "models/events/create_game_event.h"
+#include "models/events/event.h"
 
 CreateGamePresenter::CreateGamePresenter()
     : view_model_(std::make_unique<ViewModel>())
