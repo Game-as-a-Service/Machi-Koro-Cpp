@@ -1,6 +1,7 @@
 #include "clear_game_present.h"
 
 #include "models/events/clear_game_event.h"
+#include "models/events/event.h"
 
 ClearGamePresenter::ClearGamePresenter()
     : view_model_(std::make_unique<ViewModel>())

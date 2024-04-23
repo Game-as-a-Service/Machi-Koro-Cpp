@@ -10,6 +10,9 @@
 #include "loggers/logger_base.h"
 #include "loggers/logger.h"
 
+class LoggerBase;
+class UtilBase;
+
 using namespace drogon;
 
 class ClearGame : public drogon::HttpController<ClearGame> {

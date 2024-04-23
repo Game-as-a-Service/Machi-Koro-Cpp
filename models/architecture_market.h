@@ -5,7 +5,6 @@
 #include <memory>
 #include <functional>
 
-#include "utils/util_base.h"
 #include "cards/building.h"
 
 class ArchitectureMarket {

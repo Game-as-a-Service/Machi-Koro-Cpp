@@ -4,7 +4,12 @@
 #include <vector>
 #include <string>
 
+#include "loggers/logger_base.h"
 #include "models/dice.h"
+#include "models/machikoro_game.h"
+#include "presenters/presenter.h"
+#include "repos/repository.h"
+#include "utils/util_base.h"
 
 CreateGameRequest::CreateGameRequest(const std::vector<std::string>& names)
     : names_(names)
