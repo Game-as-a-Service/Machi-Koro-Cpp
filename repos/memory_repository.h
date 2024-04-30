@@ -6,11 +6,13 @@
 #include <memory>
 #include <mutex>
 
-#include "repos/repository.h"
-#include "utils/util_base.h"
-#include "utils/util.h"
-#include "loggers/logger_base.h"
 #include "loggers/logger.h"
+#include "repos/repository.h"
+#include "utils/util.h"
+
+class LoggerBase;
+class MachiKoroGame;
+class UtilBase;
 
 // Because Drogon's design in Controller will result in multiple Controller class,
 // 'MemoryRepository' is designed using Singleton Pattern.

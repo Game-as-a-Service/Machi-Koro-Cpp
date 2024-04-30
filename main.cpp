@@ -1,5 +1,10 @@
 #include "drogon/drogon.h"
 
+// TODO(#39): Fix 404 error without including controllers
+#include "controllers/clear_game_controller.h"
+#include "controllers/create_game_controller.h"
+#include "controllers/init_game_controller.h"
+
 int main()
 {
     // Set HTTP listener address and port

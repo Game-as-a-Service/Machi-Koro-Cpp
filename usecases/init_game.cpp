@@ -2,7 +2,12 @@
 
 #include <memory>
 
+#include "loggers/logger_base.h"
 #include "models/events/init_game_event.h"
+#include "models/machikoro_game.h"
+#include "presenters/presenter.h"
+#include "repos/repository.h"
+#include "utils/util_base.h"
 
 InitGameRequest::InitGameRequest(const std::string& id)
     : id_(id)

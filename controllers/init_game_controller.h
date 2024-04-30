@@ -4,10 +4,11 @@
 #include <memory>
 
 #include "drogon/HttpController.h"
-#include "utils/util_base.h"
 #include "utils/util.h"
-#include "loggers/logger_base.h"
 #include "loggers/logger.h"
+
+class LoggerBase;
+class UtilBase;
 
 using namespace drogon;
 

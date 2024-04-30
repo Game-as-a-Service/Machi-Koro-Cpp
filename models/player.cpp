@@ -1,5 +1,8 @@
 #include "player.h"
 
+#include "bank.h"
+#include "dice_base.h"
+
 Player::Player(const std::string& name, std::shared_ptr<DiceBase> dice)
     : name_(name)
     , dice_(dice)

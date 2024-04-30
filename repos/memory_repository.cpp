@@ -2,6 +2,13 @@
 
 #include <mutex>
 
+#include "loggers/logger.h"
+#include "loggers/logger_base.h"
+#include "models/machikoro_game.h"
+#include "repos/repository.h"
+#include "utils/util.h"
+#include "utils/util_base.h"
+
 MemoryRepository& MemoryRepository::self()
 {
     static MemoryRepository repo;

@@ -5,10 +5,10 @@
 #include <memory>
 #include <vector>
 
-#include "dice_base.h"
 #include "hand.h"
-#include "bank.h"
 
+class Bank;
+class DiceBase;
 class Player;
 using PlayerPtr = std::unique_ptr<Player>;
 using PlayerPtrs = std::vector<PlayerPtr>;

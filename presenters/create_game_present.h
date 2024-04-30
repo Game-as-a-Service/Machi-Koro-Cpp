@@ -7,7 +7,8 @@
 #include "json/value.h"
 #include "drogon/HttpTypes.h"
 #include "presenters/presenter.h"
-#include "models/events/event.h"
+
+class Event;
 
 class CreateGamePresenter : public Presenter {
     /**

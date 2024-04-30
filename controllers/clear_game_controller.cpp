@@ -1,8 +1,10 @@
 #include "clear_game_controller.h"
 
+#include "loggers/logger_base.h"
+#include "presenters/clear_game_present.h"
 #include "repos/memory_repository.h"
 #include "usecases/clear_game.h"
-#include "presenters/clear_game_present.h"
+#include "utils/util_base.h"
 
 void ClearGame::clearGame(const HttpRequestPtr& req,
                           std::function<void(const HttpResponsePtr&)>&& callback,

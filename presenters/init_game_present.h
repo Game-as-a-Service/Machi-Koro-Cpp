@@ -7,11 +7,12 @@
 #include "json/value.h"
 #include "drogon/HttpTypes.h"
 #include "presenter.h"
-#include "utils/util_base.h"
-#include "models/events/event.h"
-#include "models/bank.h"
-#include "models/architecture_market.h"
 #include "models/player.h"
+
+class ArchitectureMarket;
+class Bank;
+class Event;
+class UtilBase;
 
 class InitGamePresenter : public Presenter {
     /**
