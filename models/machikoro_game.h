@@ -52,7 +52,7 @@ private:
     PlayerPtrs players_;
 
     // Current player order.
-    // Mod by the number of players to know 
+    // Mod by the number of players to know
     // the players currently playing that round.
     int current_player_ = 0;
 };

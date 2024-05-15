@@ -7,10 +7,8 @@
 #include "json/value.h"
 #include "drogon/HttpTypes.h"
 #include "presenter.h"
-#include "models/player.h"
+#include "models/events/event_player.h"
 
-class ArchitectureMarket;
-class Bank;
 class Event;
 class UtilBase;
 
@@ -24,12 +22,12 @@ class InitGamePresenter : public Presenter {
 
         ViewModel(std::shared_ptr<UtilBase> util,
                   const std::string& msg,
-                  Bank* bank,
-                  ArchitectureMarket* market,
-                  PlayerPtrs* players,
+                  int bank_balance,
+                  const std::map<std::string, int>& market_cards,
+                  const std::vector<EventPlayer>& players,
                   const std::string& name);
 
-        ~ViewModel();
+        ~ViewModel() = default;
 
         Json::Value getJson() const;
 
@@ -39,11 +37,14 @@ class InitGamePresenter : public Presenter {
         // The self-defined message.
         std::string message_;
 
-        Bank* bank_ = nullptr;
+        // Bank balance.
+        int bank_balance_;
 
-        ArchitectureMarket* market_ = nullptr;
+        // Market cards.
+        std::map<std::string, int> market_cards_;
 
-        PlayerPtrs* players_ = nullptr;
+        // Players.
+        std::vector<EventPlayer> players_;
 
         // Player for the next turn.
         std::string player_name_;

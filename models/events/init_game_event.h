@@ -3,9 +3,13 @@
 
 #include <string>
 #include <vector>
+#include <map>
+#include <memory>
 
-#include "event.h"
 #include "models/player.h"
+#include "models/events/event.h"
+#include "models/events/event_player.h"
+#include "utils/util_base.h"
 
 class ArchitectureMarket;
 class Bank;
@@ -13,6 +17,8 @@ class Bank;
 class InitGameEvent : public Event {
 public:
     InitGameEvent() = default;
+
+    InitGameEvent(std::shared_ptr<UtilBase> util);
 
     ~InitGameEvent() = default;
 
@@ -24,32 +30,37 @@ public:
 
     std::string message() const override { return message_; }
 
-    void set_bank(Bank* bank) { bank_ = bank; }
+    void set_bank(Bank* bank);
 
-    Bank* bank() const { return bank_; }
+    int bank_balance() const { return bank_balance_; }
 
-    void set_market(ArchitectureMarket* market) { market_ = market; }
+    void set_market(ArchitectureMarket* market);
 
-    ArchitectureMarket* market() const { return market_; }
+    std::map<std::string, int> market_cards() const { return market_cards_; }
 
-    void set_players(PlayerPtrs* players) { players_ = players; }
+    void set_players(PlayerPtrs* players);
 
-    PlayerPtrs* players() const { return players_; }
+    std::vector<EventPlayer> players() const { return players_; }
 
     void set_player_name(const std::string& name) { player_name_ = name; }
 
     std::string player_name() const { return player_name_; }
 
 private:
+    std::shared_ptr<UtilBase> util_ = nullptr;
+
     StatusCode status_ = StatusCode::NoContent;
 
     std::string message_;
 
-    Bank* bank_ = nullptr;
+    // Bank's balance.
+    int bank_balance_ = 0;
 
-    ArchitectureMarket* market_ = nullptr;
+    // Market's cards.
+    std::map<std::string, int> market_cards_;
 
-    PlayerPtrs* players_ = nullptr;
+    // Players.
+    std::vector<EventPlayer> players_;
 
     // Player name for the next turn.
     std::string player_name_;
