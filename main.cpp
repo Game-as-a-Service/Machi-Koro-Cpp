@@ -7,13 +7,15 @@
 
 int main()
 {
-    // Set HTTP listener address and port
-    drogon::app().addListener("127.0.0.1", 8080);
+    const std::string strConfig =
+        "{\"listeners\":[{\"address\":\"127.0.0.1\",\"port\":8080}],\"app\":{\"log\":{\"use_"
+        "spdlog\":true,\"log_level\":\"TRACE\"}},\"plugins\":[{\"name\":\"drogon::plugin::"
+        "AccessLogger\",\"config\":{\"use_spdlog\":true}}]}";
+    Json::Value jsonConfig;
+    Json::Reader reader;
+    reader.parse(strConfig, jsonConfig);
 
-    // Load config file
-    // drogon::app().loadConfigFile("../config.json");
-
-    // Run HTTP framework,the method will block in the internal event loop
+    drogon::app().loadConfigJson(jsonConfig);
     drogon::app().run();
 
     return 0;

@@ -19,7 +19,7 @@ Hand::Hand(LandmarkPtrs&& landmarks, BuildingPtrs&& buildings)
 {
 }
 
-void Hand::gainCard(BuildingPtr card)
+void Hand::gainCard(BuildingPtr&& card)
 {
     buildings_.push_back(std::move(card));
 }

@@ -15,10 +15,12 @@ void Player::payCoin2Bank(Bank& bank, int coin)
     bank.gainCoin(coin);
 }
 
-void Player::gainCoinFromBank(Bank& bank, int coin)
+bool Player::gainCoinFromBank(std::shared_ptr<Bank> bank, int coin)
 {
+    if (!bank) return false;
     coin_ += coin;
-    bank.payCoin(coin);
+    bank->payCoin(coin);
+    return true;
 }
 
 void Player::payCoin2Player(Player* other, int coin)

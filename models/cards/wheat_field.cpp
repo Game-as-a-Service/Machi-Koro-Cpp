@@ -11,7 +11,7 @@ WheatField::WheatField()
 void WheatField::OperateEffect(Player* owner,
                                Player* dice_roller,
                                std::vector<Player*> players,
-                               Bank* bank)
+                               std::shared_ptr<Bank> bank)
 {
-    owner->gainCoinFromBank(*bank, 1);
+    owner->gainCoinFromBank(bank, 1);
 }

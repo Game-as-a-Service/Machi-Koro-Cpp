@@ -27,18 +27,14 @@ BuildingPtrs generateBuildingsTemp(int count)
 
 class Building : public Card {
 public:
-    Building(const CardName& name,
-             const CardType& type,
-             int price,
-             const IndustryType& ind,
-             std::vector<int>&& points);
+    Building(CardName name, CardType type, int price, IndustryType ind, std::vector<int>&& points);
 
     ~Building() = default;
 
     virtual void OperateEffect(Player* owner,
                                Player* dice_roller,
                                std::vector<Player*> others,
-                               Bank* bank) = 0;
+                               std::shared_ptr<Bank> bank) = 0;
 
     IndustryType industryType() const { return ind_type_; }
 

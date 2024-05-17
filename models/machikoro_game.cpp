@@ -39,14 +39,64 @@ std::unique_ptr<Event> MachiKoroGame::initGame()
 {
     auto event = std::make_unique<InitGameEvent>(util_);
 
+    if (bank_->totalCoin() != 282)
+    {
+        event->set_status(StatusCode::BadRequest);
+        event->set_message("Failed to init game because bank's total coin is not 282 !");
+        log_->error(event->message());
+        return event;
+    }
+
     // Allocate money.
-    for (auto& player : players_) player->gainCoinFromBank(bank_, 3);
+    for (auto& player : players_)
+    {
+        if (!player->gainCoinFromBank(bank_, 3))
+        {
+            event->set_status(StatusCode::BadRequest);
+            event->set_message("Failed to init game because bank_ is nullptr !");
+            log_->error(event->message());
+            return event;
+        }
+        else if (player->totalCoin() != 3)
+        {
+            event->set_status(StatusCode::BadRequest);
+            event->set_message("Failed to init game because player's total coin is not 3 !");
+            log_->error(event->message());
+            return event;
+        }
+    }
 
     // Get initial buildings.
     for (auto& player : players_)
     {
-        player->hand().gainCard(market_.drawCard(CardName::WHEAT_FIELD));
-        player->hand().gainCard(market_.drawCard(CardName::BAKERY));
+        auto wheat_field = market_.drawCard(CardName::WHEAT_FIELD);
+        if (!wheat_field)
+        {
+            event->set_status(StatusCode::BadRequest);
+            event->set_message("Failed to init game because cannot draw wheat field card !");
+            log_->error(event->message());
+            return event;
+        }
+        player->hand().gainCard(std::move(*wheat_field));
+
+        auto bakery = market_.drawCard(CardName::BAKERY);
+        if (!bakery)
+        {
+            event->set_status(StatusCode::BadRequest);
+            event->set_message("Failed to init game because cannot draw bakery card !");
+            log_->error(event->message());
+            return event;
+        }
+        player->hand().gainCard(std::move(*bakery));
+    }
+
+    log_->info("Bank's total coin: " + std::to_string(bank_->totalCoin()));
+    if (bank_->totalCoin() != 282 - 12)
+    {
+        event->set_status(StatusCode::BadRequest);
+        event->set_message("Failed to init game because bank's total coin is not 270 !");
+        log_->error(event->message());
+        return event;
     }
 
     // Choose one player to be the player for the first round.
@@ -54,7 +104,7 @@ std::unique_ptr<Event> MachiKoroGame::initGame()
 
     event->set_status(StatusCode::Ok);
     event->set_message("Success to init game.");
-    event->set_bank(&bank_);
+    event->set_bank(bank_);
     event->set_market(&market_);
     event->set_players(&players_);
     event->set_player_name(players_[current_player_ % players_.size()]->name());

@@ -30,7 +30,7 @@ public:
 
     std::string message() const override { return message_; }
 
-    void set_bank(Bank* bank);
+    bool set_bank(std::shared_ptr<Bank> bank);
 
     int bank_balance() const { return bank_balance_; }
 

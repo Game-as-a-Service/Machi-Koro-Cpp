@@ -25,7 +25,7 @@ public:
 
     void payCoin2Bank(Bank& bank, int coin);
 
-    void gainCoinFromBank(Bank& bank, int coin);
+    bool gainCoinFromBank(std::shared_ptr<Bank> bank, int coin);
 
     void payCoin2Player(Player* other, int coin);
 

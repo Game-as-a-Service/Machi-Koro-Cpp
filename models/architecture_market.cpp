@@ -1,4 +1,5 @@
 #include "architecture_market.h"
+#include <optional>
 
 #include "models/cards/wheat_field.h"
 #include "models/cards/ranch.h"
@@ -40,21 +41,21 @@ ArchitectureMarket::ArchitectureMarket()
         generateBuildingsTemp<FruitAndVegetableMarket>(6);
 }
 
-BuildingPtr ArchitectureMarket::drawCard(const CardName& name)
+std::optional<BuildingPtr> ArchitectureMarket::drawCard(CardName name)
 {
+    if (cards_[name].empty()) return std::nullopt;
+
     auto res = std::move(cards_[name].back());
     cards_[name].pop_back();
     return res;
 }
 
-std::map<CardName, std::vector<Building*>> ArchitectureMarket::cards() const
+std::map<CardName, int> ArchitectureMarket::cards() const
 {
-    std::map<CardName, std::vector<Building*>> res;
+    std::map<CardName, int> res;
     for (const auto& card : cards_)
     {
-        std::vector<Building*> buildings;
-        for (const auto& building : card.second) buildings.push_back(building.get());
-        res[card.first] = buildings;
+        res[card.first] = card.second.size();
     }
     return res;
 }

@@ -12,14 +12,14 @@ using LandmarkPtrs = std::vector<LandmarkPtr>;
 
 class Landmark : public Card {
 public:
-    Landmark(const CardName& name, const CardType& type, int price);
+    Landmark(CardName name, CardType type, int price);
 
     ~Landmark() = default;
 
     virtual void OperateEffect(Player* owner,
                                Player* dice_roller,
                                std::vector<Player*> players,
-                               Bank* bank) = 0;
+                               std::shared_ptr<Bank> bank) = 0;
 
     void activate() { is_activated_ = true; }
 

@@ -11,6 +11,6 @@ Bakery::Bakery()
 void Bakery::OperateEffect(Player* owner,
                            Player* dice_roller,
                            std::vector<Player*> players,
-                           Bank* bank)
+                           std::shared_ptr<Bank> bank)
 {
 }

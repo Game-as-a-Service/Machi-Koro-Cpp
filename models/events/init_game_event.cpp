@@ -8,10 +8,11 @@ InitGameEvent::InitGameEvent(std::shared_ptr<UtilBase> util)
 {
 }
 
-void InitGameEvent::set_bank(Bank* bank)
+bool InitGameEvent::set_bank(std::shared_ptr<Bank> bank)
 {
-    if (!bank) return;
+    if (!bank) return false;
     bank_balance_ = bank->totalCoin();
+    return true;
 }
 
 void InitGameEvent::set_market(ArchitectureMarket* market)
@@ -19,10 +20,9 @@ void InitGameEvent::set_market(ArchitectureMarket* market)
     if (!market) return;
 
     auto cards = market->cards();
-    for (const auto& c : cards)
+    for (const auto& card : cards)
     {
-        auto& [name, buildings] = c;
-        market_cards_[util_->getStringFromCardName(name)] = buildings.size();
+        market_cards_[util_->getStringFromCardName(card.first)] = card.second;
     }
 }
 

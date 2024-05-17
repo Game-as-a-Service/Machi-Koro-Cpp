@@ -18,7 +18,7 @@ public:
 
     ~Hand() = default;
 
-    void gainCard(BuildingPtr building);
+    void gainCard(BuildingPtr&& building);
 
     std::vector<Landmark*> landmarks() const;
 

@@ -2,6 +2,7 @@
 #define MODELS_CARDS_CARD_H
 
 #include <vector>
+#include <memory>
 
 enum class CardType {
     CROP,
@@ -40,7 +41,7 @@ class Player;
 
 class Card {
 public:
-    Card(const CardName& name, const CardType& type, int price);
+    Card(CardName name, CardType type, int price);
 
     ~Card() = default;
 
@@ -48,7 +49,7 @@ public:
     virtual void OperateEffect(Player* owner,
                                Player* dice_roller,
                                std::vector<Player*> others,
-                               Bank* bank) = 0;
+                               std::shared_ptr<Bank> bank) = 0;
 
     CardName card_name() const { return card_name_; }
 

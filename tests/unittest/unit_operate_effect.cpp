@@ -17,7 +17,7 @@ public:
 protected:
     virtual void SetUp() override {
         // Ensure all players have enough coins.
-        bank = new Bank();
+        bank = std::make_shared<Bank>();
         auto dice = std::make_shared<Dice>();
         card_owner = new Player("card owner", dice);
         dice_roller = new Player("dice roller", dice);
@@ -32,8 +32,7 @@ protected:
     }
 
     virtual void TearDown() override {
-        delete bank;
-        bank = nullptr;
+        bank.reset();
 
         delete card_owner;
         card_owner = nullptr;
@@ -48,7 +47,7 @@ protected:
         player_2 = nullptr;
     }
 
-    Bank* bank = nullptr;
+    std::shared_ptr<Bank> bank = nullptr;
     Player* card_owner = nullptr;
     Player* dice_roller = nullptr;
     Player* player_1 = nullptr;

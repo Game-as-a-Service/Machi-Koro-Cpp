@@ -26,7 +26,7 @@ public:
 
     std::string game_id() const { return game_id_; }
 
-    Bank* bank() { return &bank_; }
+    std::shared_ptr<Bank> bank() { return bank_; }
 
     ArchitectureMarket* market() { return &market_; }
 
@@ -43,7 +43,7 @@ private:
     std::string game_id_;
 
     // Bank.
-    Bank bank_;
+    std::shared_ptr<Bank> bank_ = std::make_shared<Bank>();
 
     // Architecture Market.
     ArchitectureMarket market_;
