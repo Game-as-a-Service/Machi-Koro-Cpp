@@ -21,8 +21,8 @@ void InitGameEvent::set_market(ArchitectureMarket* market)
     auto cards = market->cards();
     for (const auto& c : cards)
     {
-        auto& [name, buildings] = c;
-        market_cards_[util_->getStringFromCardName(name)] = buildings.size();
+        auto& [name, count] = c;
+        market_cards_[util_->getStringFromCardName(name)] = count;
     }
 }
 

@@ -19,7 +19,7 @@ public:
 
     BuildingPtr drawCard(const CardName& name);
 
-    std::map<CardName, std::vector<Building*>> cards() const;
+    std::map<CardName, int> cards() const;
 
 private:
     // All the building cards.

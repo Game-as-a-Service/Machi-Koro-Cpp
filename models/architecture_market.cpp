@@ -47,14 +47,12 @@ BuildingPtr ArchitectureMarket::drawCard(const CardName& name)
     return res;
 }
 
-std::map<CardName, std::vector<Building*>> ArchitectureMarket::cards() const
+std::map<CardName, int> ArchitectureMarket::cards() const
 {
-    std::map<CardName, std::vector<Building*>> res;
+    std::map<CardName, int> res;
     for (const auto& card : cards_)
     {
-        std::vector<Building*> buildings;
-        for (const auto& building : card.second) buildings.push_back(building.get());
-        res[card.first] = buildings;
+        res[card.first] = card.second.size();
     }
     return res;
 }
