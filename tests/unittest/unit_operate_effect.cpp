@@ -18,11 +18,10 @@ protected:
     virtual void SetUp() override {
         // Ensure all players have enough coins.
         bank = new Bank();
-        auto dice = std::make_shared<Dice>();
-        card_owner = new Player("card owner", dice);
-        dice_roller = new Player("dice roller", dice);
-        player_1 = new Player("player 1", dice);
-        player_2 = new Player("plaeyr 2", dice);
+        card_owner = new Player("card owner");
+        dice_roller = new Player("dice roller");
+        player_1 = new Player("player 1");
+        player_2 = new Player("plaeyr 2");
 
         card_owner->gainCoin(OperateEffectTest::initial_coin);
         dice_roller->gainCoin(OperateEffectTest::initial_coin);
@@ -63,7 +62,7 @@ const int OperateEffectTest::bank_initial_coin = 282;
 TEST_F(OperateEffectTest, WheatFieldNormalCase) {
     // You can get 1 coin from the bank, if the dice value is 1.
     WheatField card;
-    card.OperateEffect(card_owner, dice_roller, players, bank);
+    card.operateEffect(card_owner, dice_roller, players, bank);
     EXPECT_EQ(card_owner->totalCoin(), OperateEffectTest::initial_coin + 1);
     EXPECT_EQ(dice_roller->totalCoin(), OperateEffectTest::initial_coin);
     EXPECT_EQ(player_1->totalCoin(), OperateEffectTest::initial_coin);

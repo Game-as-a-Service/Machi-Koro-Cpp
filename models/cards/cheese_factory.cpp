@@ -12,7 +12,7 @@ CheeseFactory::CheeseFactory()
 {
 }
 
-void CheeseFactory::OperateEffect(Player* owner,
+void CheeseFactory::operateEffect(Player* owner,
                                   Player* dice_roller,
                                   std::vector<Player*> players,
                                   Bank* bank)

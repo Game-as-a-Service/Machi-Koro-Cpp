@@ -8,7 +8,7 @@ AmusementPark::AmusementPark()
 {
 }
 
-void AmusementPark::OperateEffect(Player* owner,
+void AmusementPark::operateEffect(Player* owner,
                                   Player* dice_roller,
                                   std::vector<Player*> players,
                                   Bank* bank)

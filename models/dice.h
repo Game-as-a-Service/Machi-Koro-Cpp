@@ -5,7 +5,9 @@
 
 class Dice : public DiceBase {
 public:
-    int roll() const override;
+    ~Dice() override = default;
+
+    int generatePoint() const final;
 };
 
 #endif  // MODELS_DICE_H

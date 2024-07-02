@@ -8,7 +8,7 @@ ShoppingMall::ShoppingMall()
 {
 }
 
-void ShoppingMall::OperateEffect(Player* owner,
+void ShoppingMall::operateEffect(Player* owner,
                                  Player* dice_roller,
                                  std::vector<Player*> players,
                                  Bank* bank)

@@ -12,7 +12,7 @@ FurnitureFactory::FurnitureFactory()
 {
 }
 
-void FurnitureFactory::OperateEffect(Player* owner,
+void FurnitureFactory::operateEffect(Player* owner,
                                      Player* dice_roller,
                                      std::vector<Player*> players,
                                      Bank* bank)

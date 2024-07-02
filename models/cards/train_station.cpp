@@ -8,7 +8,7 @@ TrainStation::TrainStation()
 {
 }
 
-void TrainStation::OperateEffect(Player* owner,
+void TrainStation::operateEffect(Player* owner,
                                  Player* dice_roller,
                                  std::vector<Player*> players,
                                  Bank* bank)

@@ -35,7 +35,7 @@ public:
 
     ~Building() = default;
 
-    virtual void OperateEffect(Player* owner,
+    virtual void operateEffect(Player* owner,
                                Player* dice_roller,
                                std::vector<Player*> others,
                                Bank* bank) = 0;

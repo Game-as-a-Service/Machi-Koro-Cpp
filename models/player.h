@@ -3,6 +3,7 @@
 
 #include <string>
 #include <memory>
+#include <utility>
 #include <vector>
 
 #include "hand.h"
@@ -15,7 +16,7 @@ using PlayerPtrs = std::vector<PlayerPtr>;
 
 class Player {
 public:
-    Player(const std::string& name, std::shared_ptr<DiceBase> dice);
+    Player(const std::string& name);
 
     // Non copyable.
     Player(const Player& other) = delete;
@@ -41,15 +42,14 @@ public:
 
     Hand& hand() { return hand_; }
 
+    std::pair<int, int> rollDice(DiceBase& dice, int dice_count);
+
 private:
     // Player name.
     std::string name_;
 
     // Coin.
     int coin_ = 0;
-
-    // Dice.
-    std::shared_ptr<DiceBase> dice_ = nullptr;
 
     // Hand.
     Hand hand_;

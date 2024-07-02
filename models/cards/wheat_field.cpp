@@ -8,7 +8,7 @@ WheatField::WheatField()
 {
 }
 
-void WheatField::OperateEffect(Player* owner,
+void WheatField::operateEffect(Player* owner,
                                Player* dice_roller,
                                std::vector<Player*> players,
                                Bank* bank)

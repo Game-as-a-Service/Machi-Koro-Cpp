@@ -5,12 +5,14 @@
 #include <string>
 #include <vector>
 
-#include "utils/util_base.h"
-#include "loggers/logger_base.h"
-#include "events/event.h"
-#include "player.h"
-#include "bank.h"
 #include "architecture_market.h"
+#include "bank.h"
+#include "cards/building.h"
+#include "dice_base.h"
+#include "events/event.h"
+#include "loggers/logger_base.h"
+#include "player.h"
+#include "utils/util_base.h"
 
 class MachiKoroGame {
 public:
@@ -32,7 +34,23 @@ public:
 
     PlayerPtrs* players() { return &players_; }
 
+    void set_dice(std::unique_ptr<DiceBase>&& dice) { dice_ = std::move(dice); }
+
+    // For testing purpose only
+    void set_current_player(int current_player) { current_player_ = current_player; }
+
+    std::unique_ptr<Event> rollDice(const std::string& player_name, int dice_count);
+
 private:
+    int getPlayerIndex(const std::string& player_name);
+
+    // Follow the order according to the IndustryType of each card in hand
+    // e.g. IndustryType::RESTAURANT (player2(p2) -> p3 -> p4 -> p1) ->
+    //      IndustryType::SECONDARY_INDUSTRY (p2 -> p3 -> p4 -> p1) ->
+    //      IndustryType::PRIMARY_INDUSTRY (p2 -> p3 -> p4 -> p1) ->
+    //      IndustryType::IMPORTANT_BUILDING (p2 -> p3 -> p4 -> p1)
+    void operateEffect(int dice_point);
+
     // Logger.
     std::shared_ptr<LoggerBase> log_ = nullptr;
 
@@ -55,6 +73,8 @@ private:
     // Mod by the number of players to know
     // the players currently playing that round.
     int current_player_ = 0;
+
+    std::unique_ptr<DiceBase> dice_ = nullptr;
 };
 
 #endif  // MODELS_MACHIKORO_GAME_H

@@ -8,7 +8,7 @@ Bakery::Bakery()
 {
 }
 
-void Bakery::OperateEffect(Player* owner,
+void Bakery::operateEffect(Player* owner,
                            Player* dice_roller,
                            std::vector<Player*> players,
                            Bank* bank)

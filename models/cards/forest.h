@@ -9,7 +9,7 @@ public:
 
     ~Forest() = default;
 
-    void OperateEffect(Player* owner,
+    void operateEffect(Player* owner,
                        Player* dice_roller,
                        std::vector<Player*> players,
                        Bank* bank) override;

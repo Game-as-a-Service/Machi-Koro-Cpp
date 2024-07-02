@@ -16,7 +16,7 @@ public:
 
     ~Landmark() = default;
 
-    virtual void OperateEffect(Player* owner,
+    virtual void operateEffect(Player* owner,
                                Player* dice_roller,
                                std::vector<Player*> players,
                                Bank* bank) = 0;
