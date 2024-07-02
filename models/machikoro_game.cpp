@@ -3,8 +3,8 @@
 #include <vector>
 #include <string>
 
-#include "events/create_game_event.h"
-#include "events/init_game_event.h"
+#include "models/events/create_game_event.h"
+#include "models/events/init_game_event.h"
 
 MachiKoroGame::MachiKoroGame(std::shared_ptr<LoggerBase> logger, std::shared_ptr<UtilBase> util)
     : log_(logger)
@@ -37,7 +37,7 @@ std::unique_ptr<Event> MachiKoroGame::createGame(std::vector<PlayerPtr>&& player
 
 std::unique_ptr<Event> MachiKoroGame::initGame()
 {
-    auto event = std::make_unique<InitGameEvent>();
+    auto event = std::make_unique<InitGameEvent>(util_);
 
     // Allocate money.
     for (auto& player : players_) player->gainCoinFromBank(bank_, 3);

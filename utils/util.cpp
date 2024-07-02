@@ -75,14 +75,13 @@ std::string Util::getStringFromCardName(const CardName& name)
         { CardName::FAMILY_RESTAURANT, "Family Restaurant" },
         { CardName::APPLE_ORCHARD, "Apple Orchard" },
         { CardName::FRUIT_AND_VEGETABLE_MARKET, "Fruit and Vegetable Market" },
-        { CardName::TRAIN_STATION, "Train Station"},
-        { CardName::SHOPPING_MALL, "Shopping Mall"},
-        { CardName::AMUSEMENT_PARK, "Amusement Park"},
-        { CardName::RADIO_TOWER, "Radio Tower"}
+        { CardName::TRAIN_STATION, "Train Station" },
+        { CardName::SHOPPING_MALL, "Shopping Mall" },
+        { CardName::AMUSEMENT_PARK, "Amusement Park" },
+        { CardName::RADIO_TOWER, "Radio Tower" }
     };
 
     auto it = cardNameStrings.find(name);
-    if (it != cardNameStrings.end())
-        return it->second;
+    if (it != cardNameStrings.end()) return it->second;
     return "Unknown CardName";
 }
