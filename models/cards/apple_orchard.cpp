@@ -8,7 +8,7 @@ AppleOrchard::AppleOrchard()
 {
 }
 
-void AppleOrchard::operateEffect(Player* owner,
+void AppleOrchard::doOperateEffect(Player* owner,
                                  Player* dice_roller,
                                  std::vector<Player*> players,
                                  Bank* bank)

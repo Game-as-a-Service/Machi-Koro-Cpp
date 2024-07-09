@@ -25,7 +25,7 @@ void RollDiceUsecase::execute(RollDiceRequest& req, Repository& repo, Presenter&
     // Find.
     auto game = repo.findById(req.id());
 
-    // TODO(Issue #25): Can we reuse this code for every usecase?
+    // TODO: Can we reuse this code for every usecase?
     if (!game)
     {
         auto err_event = std::make_shared<RollDiceEvent>();

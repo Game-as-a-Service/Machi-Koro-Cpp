@@ -35,16 +35,46 @@ public:
 
     ~Building() = default;
 
+    /**
+     * @brief Operate the effect of the building card
+     * @param owner The player who owns the building card
+     * @param dice_roller The player who rolls the dice in this round
+     * @param point The point of the dice
+     * @param players All the players in the game
+     * @note This method checks whether the effect should be operated according
+     *       to the industry type, owner, point, and dice_roller.
+     *       E.g. For SECONDARY_INDUSTRY, the owner and the dice_roller should
+     *       be the same person.
+     */
     virtual void operateEffect(Player* owner,
-                               Player* dice_roller,
-                               std::vector<Player*> others,
-                               Bank* bank) = 0;
+                       Player* dice_roller,
+                       int point,
+                       std::vector<Player*> players,
+                       Bank* bank,
+                       IndustryType curr_industry_type) override;
 
     IndustryType industryType() const { return ind_type_; }
 
     std::vector<int> points() const { return points_; }
 
+protected:
+    /**
+     * @brief The actual effect of the building card
+     * @note This method will not perform any check.
+     */
+    virtual void doOperateEffect(Player* owner, Player* dice_roller,
+                         std::vector<Player*> players, Bank* bank) = 0;
+
 private:
+    /**
+     * Verify if the effect should be operated based on the IndustryType
+     * and the point of the dice.
+     * The industry type of this building card should be the same as the
+     * current industry type.
+     * @param curr_industry_type The current industry type that should do operation
+     */
+    bool verify(Player* owner, Player* dice_roller, int point, IndustryType curr_industry_type);
+
     IndustryType ind_type_;
 
     std::vector<int> points_;

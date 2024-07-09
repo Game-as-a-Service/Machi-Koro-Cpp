@@ -12,7 +12,7 @@ FruitAndVegetableMarket::FruitAndVegetableMarket()
 {
 }
 
-void FruitAndVegetableMarket::operateEffect(Player* owner,
+void FruitAndVegetableMarket::doOperateEffect(Player* owner,
                                             Player* dice_roller,
                                             std::vector<Player*> players,
                                             Bank* bank)

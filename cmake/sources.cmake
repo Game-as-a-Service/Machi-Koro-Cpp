@@ -14,11 +14,13 @@ set(PRESENTER_HEADERS
     ${CMAKE_SOURCE_DIR}/presenters/create_game_present.h
     ${CMAKE_SOURCE_DIR}/presenters/clear_game_present.h
     ${CMAKE_SOURCE_DIR}/presenters/presenter.h
+    ${CMAKE_SOURCE_DIR}/presenters/roll_dice_present.h
     ${CMAKE_SOURCE_DIR}/presenters/init_game_present.h
 )
 set(PRESENTER_SOURCES
     ${CMAKE_SOURCE_DIR}/presenters/create_game_present.cpp
     ${CMAKE_SOURCE_DIR}/presenters/init_game_present.cpp
+    ${CMAKE_SOURCE_DIR}/presenters/roll_dice_present.cpp
     ${CMAKE_SOURCE_DIR}/presenters/clear_game_present.cpp
 )
 set(LOGGER_HEADERS
@@ -62,6 +64,7 @@ set(MODEL_HEADERS
     ${CMAKE_SOURCE_DIR}/models/dice_base.h
     ${CMAKE_SOURCE_DIR}/models/player.h
     ${CMAKE_SOURCE_DIR}/models/tests/mock_dice.h
+    ${CMAKE_SOURCE_DIR}/models/events/roll_dice_event.h
     ${CMAKE_SOURCE_DIR}/models/events/event_player.h
     ${CMAKE_SOURCE_DIR}/models/events/init_game_event.h
     ${CMAKE_SOURCE_DIR}/models/events/create_game_event.h
@@ -97,6 +100,7 @@ set(MODEL_SOURCES
     ${CMAKE_SOURCE_DIR}/models/bank.cpp
     ${CMAKE_SOURCE_DIR}/models/player.cpp
     ${CMAKE_SOURCE_DIR}/models/hand.cpp
+    ${CMAKE_SOURCE_DIR}/models/events/roll_dice_event.cpp
     ${CMAKE_SOURCE_DIR}/models/events/init_game_event.cpp
     ${CMAKE_SOURCE_DIR}/models/cards/convenient_store.cpp
     ${CMAKE_SOURCE_DIR}/models/cards/landmark.cpp

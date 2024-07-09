@@ -9,8 +9,10 @@ ShoppingMall::ShoppingMall()
 }
 
 void ShoppingMall::operateEffect(Player* owner,
-                                 Player* dice_roller,
-                                 std::vector<Player*> players,
-                                 Bank* bank)
+                       Player* dice_roller,
+                       int point,
+                       std::vector<Player*> players,
+                       Bank* bank,
+                       IndustryType curr_industry_type)
 {
 }

@@ -12,7 +12,7 @@ Forest::Forest()
 {
 }
 
-void Forest::operateEffect(Player* owner,
+void Forest::doOperateEffect(Player* owner,
                            Player* dice_roller,
                            std::vector<Player*> players,
                            Bank* bank)

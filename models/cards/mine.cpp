@@ -8,7 +8,7 @@ Mine::Mine()
 {
 }
 
-void Mine::operateEffect(Player* owner,
+void Mine::doOperateEffect(Player* owner,
                          Player* dice_roller,
                          std::vector<Player*> players,
                          Bank* bank)

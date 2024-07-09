@@ -8,10 +8,10 @@ WheatField::WheatField()
 {
 }
 
-void WheatField::operateEffect(Player* owner,
+void WheatField::doOperateEffect(Player* owner,
                                Player* dice_roller,
                                std::vector<Player*> players,
                                Bank* bank)
 {
-    owner->gainCoinFromBank(*bank, 1);
+
 }

@@ -21,7 +21,7 @@ void RollDice::rollDice(const HttpRequestPtr& req,
 
     RollDiceRequest roll_req(game_id, player_name, dice_count);
     RollDiceUsecase uc(log_, util_);
-    RollDicePresenter presenter;
+    RollDicePresenter presenter(util_);
 
     uc.execute(roll_req, MemoryRepository::self(), presenter);
 

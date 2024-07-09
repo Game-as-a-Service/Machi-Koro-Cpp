@@ -12,7 +12,7 @@ ConvenientStore::ConvenientStore()
 {
 }
 
-void ConvenientStore::operateEffect(Player* owner,
+void ConvenientStore::doOperateEffect(Player* owner,
                                     Player* dice_roller,
                                     std::vector<Player*> players,
                                     Bank* bank)

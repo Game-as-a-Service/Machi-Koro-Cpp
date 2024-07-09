@@ -9,7 +9,7 @@ public:
 
     ~Bakery() = default;
 
-    void operateEffect(Player* owner,
+    void doOperateEffect(Player* owner,
                        Player* dice_roller,
                        std::vector<Player*> players,
                        Bank* bank) override;

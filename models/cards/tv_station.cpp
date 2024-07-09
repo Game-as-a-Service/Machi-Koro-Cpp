@@ -12,7 +12,7 @@ TvStation::TvStation()
 {
 }
 
-void TvStation::operateEffect(Player* owner,
+void TvStation::doOperateEffect(Player* owner,
                               Player* dice_roller,
                               std::vector<Player*> players,
                               Bank* bank)
