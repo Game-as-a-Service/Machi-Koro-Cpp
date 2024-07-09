@@ -1,5 +1,7 @@
 #include "bakery.h"
 
+#include <iostream>
+
 #include "models/bank.h"
 #include "models/player.h"
 
@@ -13,4 +15,8 @@ void Bakery::operateEffect(Player* owner,
                            std::vector<Player*> players,
                            Bank* bank)
 {
+    if (owner == dice_roller)
+    {
+        owner->gainCoinFromBank(*bank, 1);
+    }
 }

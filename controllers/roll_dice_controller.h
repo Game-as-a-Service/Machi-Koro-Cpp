@@ -15,7 +15,7 @@ using namespace drogon;
 class RollDice : public drogon::HttpController<RollDice> {
 public:
     METHOD_LIST_BEGIN
-    METHOD_ADD(RollDice::RollDice, "/{game_id}", Post);
+    METHOD_ADD(RollDice::rollDice, "/{game_id}", Post);
     METHOD_LIST_END
 
     void rollDice(const HttpRequestPtr& req,

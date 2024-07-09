@@ -1,5 +1,7 @@
 #include "player.h"
 
+#include <algorithm>
+
 #include "bank.h"
 #include "dice_base.h"
 
@@ -34,28 +36,22 @@ void Player::gainCoinFromPlayer(Player* other, int coin)
 
 std::pair<int, int> Player::rollDice(DiceBase& dice, int dice_count)
 {
-    //TODO(Issue #25): Add the logic to check if the player has TrainStation.
-    //
-    // auto it = std::find_if(
-    //     hand_->get_landmarks().begin(),
-    //     hand_->get_landmarks().end(),
-    //     [](Landmark* landmark) {
-    //         return landmark->get_name() == CardName::TRAIN_STATION &&
-    //                landmark->IsActivate();
-    //     }
-    // );
-
-    // If have TrainStation and want to roll 2 dice,
-    // then let it roll 2 dice.
-    // if (it != hand_->get_landmarks().end() && dice_count == 2)
-    //     dice_count = 2;
-    // else
-    //     dice_count = 1;
-
     int pt1 = 0, pt2 = 0;
-    pt1 = dice.GeneratePoint();
+    pt1 = dice.generatePoint();
     if (dice_count == 2)
-        pt2 = dice.GeneratePoint();
+        pt2 = dice.generatePoint();
 
     return std::make_pair(pt1, pt2);
+}
+
+void Player::operateEffect(Player* dice_roller, std::vector<Player*> others, int dice_point, IndustryType industry_type, Bank* bank) {
+    // Follow the order according to the IndustryType of each card in hand
+    auto buildings = hand_.buildings();
+    for (auto building : buildings) {
+        const std::vector<int>& points = building->points();
+        if (building->industryType() == industry_type &&
+            std::find(points.begin(), points.end(), dice_point) != points.end()) {
+            building->operateEffect(this, dice_roller, others, bank);
+        }
+    }
 }

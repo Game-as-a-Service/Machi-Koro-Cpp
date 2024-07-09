@@ -38,7 +38,7 @@ enum class CardName {
 class Bank;
 class Player;
 
-// TODO(Issue #25): Discuss: Maybe we don't need to use the Card base class,
+// TODO: Discuss: Maybe we don't need to use the Card base class,
 // since Building and Landmard subtypes don't share any common methods.
 // Landmark doesn't need operateEffect Method.
 class Card {

@@ -6,7 +6,8 @@
 #include <utility>
 #include <vector>
 
-#include "hand.h"
+#include "models/hand.h"
+#include "models/cards/building.h"
 
 class Bank;
 class DiceBase;
@@ -43,6 +44,14 @@ public:
     Hand& hand() { return hand_; }
 
     std::pair<int, int> rollDice(DiceBase& dice, int dice_count);
+
+    /**
+     * @brief Operate the effect of the card.
+     * @param dice_roller The player who rolls the dice.
+     * @param others The other players.
+     * @param industry_type Only the cards with the same IndustryType will be operated.
+     */
+    void operateEffect(Player* dice_roller, std::vector<Player*> others, int dice_point, IndustryType industry_type, Bank* bank);
 
 private:
     // Player name.
