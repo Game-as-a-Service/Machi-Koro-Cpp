@@ -1,5 +1,7 @@
 #include "player.h"
 
+#include <algorithm>
+
 #include "bank.h"
 #include "dice_base.h"
 
