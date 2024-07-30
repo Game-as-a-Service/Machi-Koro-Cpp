@@ -86,6 +86,8 @@ protected:
             req->setMethod(drogon::HttpMethod::Delete);
             req->setPath("/ClearGame/" + game_id_);
             client_->sendRequest(req);
+
+            game_id_.clear();
         }
     }
 
