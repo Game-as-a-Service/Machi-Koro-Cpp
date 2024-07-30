@@ -77,3 +77,57 @@ TEST_F(TestInitGame, GivenCreateGame_WhenInitGame_ThenPlayerBandArchitectureMark
 
     // TODO: Verify other results.
 }
+
+// TODO(Issue #43): check this test case is passed after issue 43 is fixed.
+// TEST_F(TestInitGame, GivenGameIdNonExist_WhenInitGame_ThenFailedToInit)
+// {
+//     Json::Value req_body;
+
+//     auto req = drogon::HttpRequest::newHttpJsonRequest(req_body);
+//     req->setMethod(drogon::HttpMethod::Post);
+//     req->setPath("/InitGame/123123");
+
+//     auto res = client_->sendRequest(req);
+//     ASSERT_THAT(res.first, Eq(drogon::ReqResult::Ok));
+//     ASSERT_THAT(res.second, NotNull());
+
+//     auto res_status = (*res.second).getStatusCode();
+//     ASSERT_THAT(res_status, Eq(drogon::HttpStatusCode::k400BadRequest));
+
+//     auto& res_body = *((*res.second).getJsonObject());
+//     ASSERT_THAT(res_body["Message"].asString(), StrNe(""));
+// }
+
+// TODO(Issue #43): check this test case is passed after issue 43 is fixed.
+// TEST_F(TestInitGame, GivenGameIdAlreadyInit_WhenInitGame_ThenFailedToInit)
+// {
+    // Json::Value req_body;
+
+    // auto req = drogon::HttpRequest::newHttpJsonRequest(req_body);
+    // req->setMethod(drogon::HttpMethod::Post);
+    // req->setPath("/InitGame/" + game_id_);
+
+    // auto res = client_->sendRequest(req);
+    // ASSERT_THAT(res.first, Eq(drogon::ReqResult::Ok));
+    // ASSERT_THAT(res.second, NotNull());
+
+    // auto res_status = (*res.second).getStatusCode();
+    // ASSERT_THAT(res_status, Eq(drogon::HttpStatusCode::k200OK));
+
+    // auto& res_body = *((*res.second).getJsonObject());
+    // ASSERT_THAT(res_body["NextPlayerName"].asString(), StrNe(""));
+
+    // auto req2 = drogon::HttpRequest::newHttpJsonRequest(req_body);
+    // req2->setMethod(drogon::HttpMethod::Post);
+    // req2->setPath("/InitGame/" + game_id_);
+
+    // auto res2 = client_->sendRequest(req2);
+    // ASSERT_THAT(res2.first, Eq(drogon::ReqResult::Ok));
+    // ASSERT_THAT(res2.second, NotNull());
+
+    // auto res2_status = (*res2.second).getStatusCode();
+    // ASSERT_THAT(res2_status, Eq(drogon::HttpStatusCode::k400BadRequest));
+
+    // auto& res2_body = *((*res2.second).getJsonObject());
+    // ASSERT_THAT(res2_body["Message"].asString(), StrNe(""));
+// }

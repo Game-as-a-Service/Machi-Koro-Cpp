@@ -20,8 +20,7 @@ std::vector<PlayerPtr> CreateGameRequest::players()
 {
     // TODO: 有關骰子的部分，到底要在哪裡塞進遊戲裡（為了假骰子、做測試），待商確。
     std::vector<PlayerPtr> players;
-    auto dice = std::make_shared<Dice>();
-    for (const auto& name : names_) players.emplace_back(std::make_unique<Player>(name, dice));
+    for (const auto& name : names_) players.emplace_back(std::make_unique<Player>(name));
     return players;
 }
 

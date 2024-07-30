@@ -24,14 +24,14 @@ void Hand::gainCard(BuildingPtr card)
     buildings_.push_back(std::move(card));
 }
 
-std::vector<Landmark*> Hand::landmarks() const
+std::vector<Landmark*> Hand::landmarks()
 {
     std::vector<Landmark*> res;
     for (auto& card : landmarks_) res.push_back(card.get());
     return res;
 }
 
-std::vector<Building*> Hand::buildings() const
+std::vector<Building*> Hand::buildings()
 {
     std::vector<Building*> res;
     for (auto& card : buildings_) res.push_back(card.get());

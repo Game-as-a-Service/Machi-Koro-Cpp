@@ -12,7 +12,7 @@ Stadium::Stadium()
 {
 }
 
-void Stadium::OperateEffect(Player* owner,
+void Stadium::doOperateEffect(Player* owner,
                             Player* dice_roller,
                             std::vector<Player*> players,
                             Bank* bank)

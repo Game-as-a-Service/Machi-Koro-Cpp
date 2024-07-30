@@ -24,9 +24,8 @@ protected:
 
         std::vector<std::string> names = {"Alice", "Bob", "Cindy", "David"};
         std::vector<PlayerPtr> players;
-        auto dice = std::make_shared<Dice>();
-        for (const auto& name : names) 
-            players.emplace_back(std::make_unique<Player>(name, dice));
+        for (const auto& name : names)
+            players.emplace_back(std::make_unique<Player>(name));
 
         game_->createGame(std::move(players));
         game_->initGame();

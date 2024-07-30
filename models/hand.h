@@ -20,9 +20,17 @@ public:
 
     void gainCard(BuildingPtr building);
 
-    std::vector<Landmark*> landmarks() const;
+    /**
+     * @brief Get the landmarks.
+     * @note Since the return values are pointers, the caller can modify the landmarks.
+     */
+    std::vector<Landmark*> landmarks();
 
-    std::vector<Building*> buildings() const;
+    /**
+     * @brief Get the buildings.
+     * @note Since the return values are pointers, the caller can modify the buildings.
+     */
+    std::vector<Building*> buildings();
 
 private:
     LandmarkPtrs landmarks_;

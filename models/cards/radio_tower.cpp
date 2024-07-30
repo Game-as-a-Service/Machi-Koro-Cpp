@@ -8,9 +8,11 @@ RadioTower::RadioTower()
 {
 }
 
-void RadioTower::OperateEffect(Player* owner,
-                               Player* dice_roller,
-                               std::vector<Player*> players,
-                               Bank* bank)
+void RadioTower::operateEffect(Player* owner,
+                       Player* dice_roller,
+                       int point,
+                       std::vector<Player*> players,
+                       Bank* bank,
+                       IndustryType curr_industry_type)
 {
 }

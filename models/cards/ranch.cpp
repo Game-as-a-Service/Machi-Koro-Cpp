@@ -12,7 +12,7 @@ Ranch::Ranch()
 {
 }
 
-void Ranch::OperateEffect(Player* owner,
+void Ranch::doOperateEffect(Player* owner,
                           Player* dice_roller,
                           std::vector<Player*> players,
                           Bank* bank)

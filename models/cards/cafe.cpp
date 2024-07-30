@@ -8,7 +8,7 @@ Cafe::Cafe()
 {
 }
 
-void Cafe::OperateEffect(Player* owner,
+void Cafe::doOperateEffect(Player* owner,
                          Player* dice_roller,
                          std::vector<Player*> players,
                          Bank* bank)
