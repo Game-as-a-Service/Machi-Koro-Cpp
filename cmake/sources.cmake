@@ -63,7 +63,6 @@ set(MODEL_HEADERS
     ${CMAKE_SOURCE_DIR}/models/architecture_market.h
     ${CMAKE_SOURCE_DIR}/models/dice_base.h
     ${CMAKE_SOURCE_DIR}/models/player.h
-    ${CMAKE_SOURCE_DIR}/models/tests/mock_dice.h
     ${CMAKE_SOURCE_DIR}/models/events/roll_dice_event.h
     ${CMAKE_SOURCE_DIR}/models/events/event_player.h
     ${CMAKE_SOURCE_DIR}/models/events/init_game_event.h
@@ -136,4 +135,7 @@ set(E2E_SOURCES
 set(UNIT_SOURCES
     ${CMAKE_SOURCE_DIR}/tests/unittest/unit_operate_effect.cpp
     ${CMAKE_SOURCE_DIR}/tests/unittest/unit_game.cpp
+)
+set(MOCK_OBJECTS_HEADERS
+    ${CMAKE_SOURCE_DIR}/tests/mock_objects/mock_dice.h
 )

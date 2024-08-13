@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(MachiKoroCPP 
+project(MachiKoroCPP
     VERSION 0.0.1
     LANGUAGES CXX
 )
@@ -55,8 +55,6 @@ target_sources(Model
 target_include_directories(Model
     PRIVATE
     ${CMAKE_SOURCE_DIR}/models
-    ${CMAKE_SOURCE_DIR}/models/card
-    ${CMAKE_SOURCE_DIR}/models/events
 )
 
 # Controller2Usecase Library
@@ -101,7 +99,7 @@ target_link_libraries(${PROJECT_NAME}_app
     Controller2Usecase
 )
 
-# drogon_create_views(${PROJECT_NAME} 
+# drogon_create_views(${PROJECT_NAME}
 #     ${CMAKE_CURRENT_SOURCE_DIR}/views
 #     ${CMAKE_CURRENT_BINARY_DIR}
 # )
@@ -127,6 +125,7 @@ target_include_directories(${PROJECT_NAME}_e2e
     PRIVATE
     ${CMAKE_SOURCE_DIR}/usecases
     ${CMAKE_SOURCE_DIR}/models
+    ${CMAKE_SOURCE_DIR}/tests/mock_objects
 )
 target_link_libraries(${PROJECT_NAME}_e2e
     PRIVATE

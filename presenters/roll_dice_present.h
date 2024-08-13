@@ -1,6 +1,7 @@
 #ifndef PRESENTERS_ROLL_DICE_PRESENT_H
 #define PRESENTERS_ROLL_DICE_PRESENT_H
 
+#include <utility>
 #include <string>
 #include <memory>
 
@@ -23,7 +24,8 @@ class RollDicePresenter : public Presenter {
         ViewModel(std::shared_ptr<UtilBase> util,
                   const std::string& msg,
                   int bank_balance,
-                  const std::vector<EventPlayer>& players);
+                  const std::vector<EventPlayer>& players,
+                  std::pair<int, int> dice_points);
 
         ~ViewModel() = default;
 
@@ -40,6 +42,8 @@ class RollDicePresenter : public Presenter {
 
         // Players.
         std::vector<EventPlayer> players_;
+
+        std::pair<int, int> dice_points_;
     };
 
 public:

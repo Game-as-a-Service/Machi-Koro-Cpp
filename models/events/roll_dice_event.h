@@ -1,6 +1,7 @@
 #ifndef MODELS_EVENTS_ROLL_DICE_EVENT_H
 #define MODELS_EVENTS_ROLL_DICE_EVENT_H
 
+#include <utility>
 #include <string>
 #include <vector>
 #include <map>
@@ -35,6 +36,10 @@ public:
 
     void set_players(PlayerPtrs* players);
 
+    void set_points(int pt1, int pt2) {pt1_ = pt1; pt2_ = pt2; }
+
+    std::pair<int, int> dice_points() const {return {pt1_, pt2_};}
+
     std::vector<EventPlayer> players() const { return players_; }
 
 private:
@@ -44,11 +49,15 @@ private:
 
     std::string message_;
 
-    // // Bank's balance.
+    // Bank's balance.
     int bank_balance_ = 0;
 
-    // // Players.
+    // Players.
     std::vector<EventPlayer> players_;
+
+    // Roll dice points
+    int pt1_ = 0;
+    int pt2_ = 0;
 };
 
 #endif  // MODELS_EVENTS_ROLL_DICE_EVENT_H

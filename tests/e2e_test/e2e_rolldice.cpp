@@ -9,7 +9,7 @@
 #include "repos/repository.h"
 #include "repos/memory_repository.h"
 #include "models/machikoro_game.h"
-#include "models/tests/mock_dice.h"
+#include "tests/mock_objects/mock_dice.h"
 
 using ::testing::Eq;
 using ::testing::NotNull;

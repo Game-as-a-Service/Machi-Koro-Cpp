@@ -85,14 +85,15 @@ std::unique_ptr<Event> MachiKoroGame::rollDice(const std::string& player_name, i
         return err_event;
     }
 
-    auto [ptr1, ptr2] = players_[player_order]->rollDice(*dice_, dice_count);
-    operateEffect(ptr1 + ptr2);
+    auto [pt1, pt2] = players_[player_order]->rollDice(*dice_, dice_count);
+    operateEffect(pt1 + pt2);
 
     auto event = std::make_unique<RollDiceEvent>(util_);
     event->set_status(StatusCode::Ok);
     event->set_message("Success to roll dice.");
     event->set_bank(&bank_);
     event->set_players(&players_);
+    event->set_points(pt1, pt2);
     log_->info(event->message() + "Game ID: " + game_id_);
 
     return event;

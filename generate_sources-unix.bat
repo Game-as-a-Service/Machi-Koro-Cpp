@@ -93,3 +93,10 @@ echo ")" >> $OUTPUT_FILE
 echo "set(UNIT_SOURCES" >> $OUTPUT_FILE
 find $ROOT_DIR/tests/unittest -type f \( -name "*.cc" -o -name "*.cpp" \) | sed "s|$ROOT_DIR|\\\${CMAKE_SOURCE_DIR}|g" | sed 's/^/    /' >> $OUTPUT_FILE
 echo ")" >> $OUTPUT_FILE
+
+# tests/mock_objects/.
+
+echo "set(MOCK_OBJECTS_HEADERS" >> $OUTPUT_FILE
+find $ROOT_DIR/tests/mock_objects -type f \( -name "*.h" \) | sed "s|$ROOT_DIR|\\\${CMAKE_SOURCE_DIR}|g" | sed 's/^/    /' >> $OUTPUT_FILE
+echo ")" >> $OUTPUT_FILE
+

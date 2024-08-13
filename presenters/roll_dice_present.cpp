@@ -22,17 +22,20 @@ void RollDicePresenter::present(Event* event)
     view_model_ = std::make_unique<ViewModel>(util_,
                                               res->message(),
                                               res->bank_balance(),
-                                              res->players());
+                                              res->players(),
+                                              res->dice_points());
 }
 
 RollDicePresenter::ViewModel::ViewModel(std::shared_ptr<UtilBase> util,
                                         const std::string& msg,
                                         int bank_balance,
-                                        const std::vector<EventPlayer>& players)
+                                        const std::vector<EventPlayer>& players,
+                                        std::pair<int, int> dice_points)
     : util_(util)
     , message_(msg)
     , bank_balance_(bank_balance)
     , players_(players)
+    , dice_points_(dice_points)
 {
 }
 
@@ -52,6 +55,11 @@ Json::Value RollDicePresenter::ViewModel::getJson() const
         players_json.append(player_json);
     }
     res["Players"] = players_json;
+
+    Json::Value dice_points(Json::arrayValue);
+    dice_points.append(dice_points_.first);
+    dice_points.append(dice_points_.second);
+    res["DicePoints"] = dice_points;
 
     return res;
 }
