@@ -16,10 +16,12 @@ public:
 
     ~Landmark() = default;
 
-    virtual void OperateEffect(Player* owner,
-                               Player* dice_roller,
-                               std::vector<Player*> players,
-                               Bank* bank) = 0;
+    virtual void operateEffect(Player* owner,
+                       Player* dice_roller,
+                       int point,
+                       std::vector<Player*> players,
+                       Bank* bank,
+                       IndustryType curr_industry_type) = 0;
 
     void activate() { is_activated_ = true; }
 

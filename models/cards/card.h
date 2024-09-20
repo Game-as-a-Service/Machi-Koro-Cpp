@@ -37,18 +37,24 @@ enum class CardName {
 
 class Bank;
 class Player;
+enum class IndustryType; //TODO: remove this
 
+// TODO(issue#48): Discuss: Maybe we don't need to use the Card base class,
+// since Building and Landmard subtypes don't share any common methods.
+// Landmark doesn't need operateEffect Method.
 class Card {
 public:
     Card(const CardName& name, const CardType& type, int price);
 
     ~Card() = default;
 
-    // TODO: Resolve this dependency relationship.
-    virtual void OperateEffect(Player* owner,
-                               Player* dice_roller,
-                               std::vector<Player*> others,
-                               Bank* bank) = 0;
+    // TODO: Remove this method.
+    virtual void operateEffect(Player* owner,
+                       Player* dice_roller,
+                       int point,
+                       std::vector<Player*> players,
+                       Bank* bank,
+                       IndustryType curr_industry_type) = 0;
 
     CardName card_name() const { return card_name_; }
 

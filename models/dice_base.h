@@ -6,7 +6,7 @@ public:
     virtual ~DiceBase() = default;
 
     // Let dice generate the points.
-    virtual int roll() const = 0;
+    virtual int generatePoint() const = 0;
 };
 
 #endif  // MODELS_DICE_BASE_H

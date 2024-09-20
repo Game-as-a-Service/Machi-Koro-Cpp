@@ -9,10 +9,12 @@ public:
 
     ~AmusementPark() = default;
 
-    void OperateEffect(Player* owner,
+    void operateEffect(Player* owner,
                        Player* dice_roller,
+                       int point,
                        std::vector<Player*> players,
-                       Bank* bank) override;
+                       Bank* bank,
+                       IndustryType curr_industry_type);
 };
 
 #endif

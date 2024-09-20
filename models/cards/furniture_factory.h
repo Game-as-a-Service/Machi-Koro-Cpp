@@ -9,7 +9,7 @@ public:
 
     ~FurnitureFactory() = default;
 
-    void OperateEffect(Player* owner,
+    void doOperateEffect(Player* owner,
                        Player* dice_roller,
                        std::vector<Player*> players,
                        Bank* bank) override;

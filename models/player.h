@@ -3,9 +3,11 @@
 
 #include <string>
 #include <memory>
+#include <utility>
 #include <vector>
 
-#include "hand.h"
+#include "models/hand.h"
+#include "models/cards/building.h"
 
 class Bank;
 class DiceBase;
@@ -15,7 +17,7 @@ using PlayerPtrs = std::vector<PlayerPtr>;
 
 class Player {
 public:
-    Player(const std::string& name, std::shared_ptr<DiceBase> dice);
+    Player(const std::string& name);
 
     // Non copyable.
     Player(const Player& other) = delete;
@@ -41,15 +43,22 @@ public:
 
     Hand& hand() { return hand_; }
 
+    std::pair<int, int> rollDice(DiceBase& dice, int dice_count);
+
+    /**
+     * @brief Operate the effect of the card.
+     * @param dice_roller The player who rolls the dice.
+     * @param players All the players.
+     * @param industry_type Only the cards with the same IndustryType will be operated.
+     */
+    void operateEffect(Player* dice_roller, std::vector<Player*> players, int dice_point, IndustryType industry_type, Bank* bank);
+
 private:
     // Player name.
     std::string name_;
 
     // Coin.
     int coin_ = 0;
-
-    // Dice.
-    std::shared_ptr<DiceBase> dice_ = nullptr;
 
     // Hand.
     Hand hand_;

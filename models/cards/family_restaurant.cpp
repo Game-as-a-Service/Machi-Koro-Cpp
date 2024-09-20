@@ -12,7 +12,7 @@ FamilyRestaurant::FamilyRestaurant()
 {
 }
 
-void FamilyRestaurant::OperateEffect(Player* owner,
+void FamilyRestaurant::doOperateEffect(Player* owner,
                                      Player* dice_roller,
                                      std::vector<Player*> players,
                                      Bank* bank)
